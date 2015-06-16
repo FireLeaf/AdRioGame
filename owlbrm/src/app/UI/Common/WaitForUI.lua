@@ -11,5 +11,7 @@ function WaitForUI:ctor( ... )
 end
 
 function WaitForUI:OnInit()
-	
+
 end
+
+return WaitForUI

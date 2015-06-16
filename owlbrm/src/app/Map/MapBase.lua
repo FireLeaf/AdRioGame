@@ -8,6 +8,7 @@ end)
 
 function MapBase:ctor(mapname)
 	self.mapname_ = mapname
+	self.piles_ = {}
 end
 
 function MapBase:Init()
@@ -17,3 +18,10 @@ end
 function MapBase:LoadMap()
 	-- body
 end
+
+--触摸事件
+function MapBase:OnTouchEvent(pile)
+	
+end
+
+return MapBase
