@@ -4,9 +4,8 @@
 --
 PacketHandler = PacketHandler or {}
 
-PacketHandler.RegisterAccountHandler = function (http)
-	-- body
-	if http.readStata == 4 then
-			print("....")
-		end
+PacketHandler.RegisterAccountHandler = function (packet_data)
+
 end
+
+PacketHandler[RSC.REGISTER_ACCOUNT_RE] = PacketHandler.RegisterAccountHandler
