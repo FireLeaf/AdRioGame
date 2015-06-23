@@ -6,7 +6,9 @@ Instance_Config =
 {
 	[0] = 
 	{
-		map_name = ,
-		piles_num = ,
+		map_name = "测试地图",
+		--piles_num = ,
+		base_ui_path = "test.ccb",
+		
 	},
 }

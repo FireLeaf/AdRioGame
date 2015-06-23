@@ -15,7 +15,8 @@ function HttpRequest:SendPostRequest(url, data, responseType)
 	http_post:registerScriptHandler(function ()
 		NetHandler:HanderHttp(http_post)
 	end)
-	http_post:send(data)
+	local packet = json.encode(data)
+	http_post:send(packet)
 end
 
 return HttpRequest

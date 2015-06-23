@@ -11,5 +11,6 @@ SSC =
 --recv server code
 RSC = 
 {
-	REGISTER_ACCOUNT_RE = 0,--注册返回客户端通知
+	SERVER_ERROR_CODE = 0,--服务器错误代码
+	REGISTER_ACCOUNT_RE = 1,--注册返回客户端通知
 }

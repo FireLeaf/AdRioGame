@@ -5,6 +5,7 @@
 SendPacket = SendPacket or {}
 
 SendPacket.RegisterAccount = function (username, passwd, email)
-	local data = string.format("user_name = %s&passwd = %s&email = %s", username, passwd, email)
-	HttpRequest:SendPostRequest(UrlGen(urlLoginRegister), data)
+	local data = {username = username, passwd = passwd, email = email}
+	local packet = {id = SSC.REGISTER_ACCOUNT, data = data}
+	HttpRequest:SendPostRequest(UrlGen(urlLoginRegister), packet)
 end

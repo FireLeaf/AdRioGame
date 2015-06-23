@@ -10,9 +10,18 @@ function NetHandler:ctor()
 end
 
 function NetHandler:HanderHttp(http_post)
-	local response = http_post.response
-	local packet = json.decode(response, 1)
-	self:DistpatchPacket(packet)
+	if http_post then
+		return
+	end
+
+	local ready_state = http_post.readyState
+	local status = http_post.status
+
+	if ready_state == 4 and status == 200 then
+		local response = http_post.response
+		local packet = json.decode(response, 1)
+		self:DistpatchPacket(packet)
+	end
 end
 
 function NetHandler:DistpatchPacket(packet)
