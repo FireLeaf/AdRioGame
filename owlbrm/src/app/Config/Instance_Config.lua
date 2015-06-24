@@ -8,7 +8,7 @@ Instance_Config =
 	{
 		map_name = "测试地图",
 		--piles_num = ,
-		base_ui_path = "test.ccb",
+		base_ui_path = "test",
 		
 	},
 }

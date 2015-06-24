@@ -23,6 +23,8 @@ function MapBase:LoadEntities()
 		return
 	end
 	self:addChild(self.entities_)
+
+	
 end
 
 function MapBase:GetControl(name)
