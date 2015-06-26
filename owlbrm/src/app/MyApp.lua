@@ -13,6 +13,9 @@ function MyApp:run()
     cc.FileUtils:getInstance():addSearchPath("res/")
     --cc.FileUtils:getInstance():addSearchPath("res/Login/")
     import("app.Init")
+
+    HttpDownload = import("app.Patcher.HttpDownload").new()
+    HttpDownload:Download()
     self:enterScene("LoginScene")
 end
 

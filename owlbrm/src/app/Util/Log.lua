@@ -22,7 +22,7 @@ function Log:Print(format, ...)
 	end
 
 	if self.fp_ then
-		self:fp_:write(out_string)
+		self.fp_:write(out_string)
 	end
 end
 
