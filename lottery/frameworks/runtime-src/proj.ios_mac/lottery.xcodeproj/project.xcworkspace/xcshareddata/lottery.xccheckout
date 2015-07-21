@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>6A2C5D1E-B826-484E-923C-712E08EB191A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>lottery</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>61FD28167BBCB693A43D0BEF100C3E0F1D3F676E</key>
+		<string>http://github.com/FireLeaf/AdRioGame</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>lottery/frameworks/runtime-src/proj.ios_mac/lottery.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>61FD28167BBCB693A43D0BEF100C3E0F1D3F676E</key>
+		<string>../../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://github.com/FireLeaf/AdRioGame</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>61FD28167BBCB693A43D0BEF100C3E0F1D3F676E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>61FD28167BBCB693A43D0BEF100C3E0F1D3F676E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>OwlProject</string>
+		</dict>
+	</array>
+</dict>
+</plist>
