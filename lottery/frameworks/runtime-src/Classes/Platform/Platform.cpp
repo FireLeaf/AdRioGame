@@ -15,5 +15,5 @@ OGPlatform* OGPlatform::GetInstance()
 #ifdef _PLATFORM_IOS_US_
 	return new OGPlatformIOSUS;
 #endif
-	return NULL;
+	return 0;
 }

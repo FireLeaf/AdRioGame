@@ -17,7 +17,7 @@ public:
 	OGPlatformIOSUS(){m_iPlatform = PLATFORM_US_IOS;}
 public:
 	virtual void Login(const char* szCommand);
-	virtual void LoginOut(const char* szCommand);
+	virtual void Logout(const char* szCommand);
 };
 
 #endif // PlatformIOS_US

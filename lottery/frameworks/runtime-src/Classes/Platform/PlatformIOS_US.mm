@@ -6,4 +6,35 @@
 /*		CopyRight: yc 
 /*************************************************************************/
 
-#include "Platform.h"
+#include "PlatformIOS_US.h"
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
+void OGPlatformIOSUS::Login(const char *szCommand)
+{
+    if (!szCommand) {
+        return;
+    }
+    
+    if (strcmp(szCommand, "facebook") == 0) {
+        FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+        login.loginBehavior = FBSDKLoginBehaviorWeb;
+        [login logInWithReadPermissions:nil handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+            if (error) {
+                
+            }
+            else if (result.isCancelled)
+            {
+                [login logOut];
+            }
+            else
+            {
+                
+            }
+        }];
+    }
+}
+
+void OGPlatformIOSUS::Logout(const char* szCommand)
+{
+
+}
