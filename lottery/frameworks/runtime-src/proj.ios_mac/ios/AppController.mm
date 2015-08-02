@@ -30,6 +30,7 @@
 #import "AppDelegate.h"
 #import "RootViewController.h"
 #import "platform/ios/CCEAGLView-ios.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @implementation AppController
 
@@ -86,7 +87,10 @@ static AppDelegate s_sharedApplication;
     cocos2d::Director::getInstance()->setOpenGLView(glview);
 
     app->run();
-    return YES;
+    
+    [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+            didFinishLaunchingWithOptions:launchOptions];
 }
 
 
@@ -102,6 +106,8 @@ static AppDelegate s_sharedApplication;
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+    //[FBAppCall handleDidBecomeActive];
+    [FBSDKAppEvents activateApp];
     cocos2d::Director::getInstance()->resume();
 }
 
@@ -127,6 +133,17 @@ static AppDelegate s_sharedApplication;
      */
 }
 
+- (BOOL)application:(UIApplication*)application
+                    openURL:(NSURL*)url
+                    sourceApplication:(NSString *)sourceApplication
+                    annotation:(id)annotation
+{
+   // return [FBSession.activeSession handleOpenURL:url];
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
+}
 
 #pragma mark -
 #pragma mark Memory management
