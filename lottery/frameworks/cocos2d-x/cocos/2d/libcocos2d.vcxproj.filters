@@ -1828,6 +1828,9 @@
     <ClCompile Include="..\owl\XSys.cpp">
       <Filter>owl</Filter>
     </ClCompile>
+    <ClCompile Include="..\owl\XPatcher.cpp">
+      <Filter>owl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\physics\CCPhysicsBody.h">
