@@ -12,7 +12,8 @@
 #include "XFilePackManager.h"
 #include "zlib.h"
 #include <assert.h>
-const char* g_pSandBoxDir;
+#include "XSys.h"
+const char* g_WritablePath;
 
 #define PATCH_MAGIC 0x8d6f7a55
 #define PATCH_VERSION 1
@@ -139,9 +140,9 @@ bool XPathcherFile::ApplyPatch(XFilePackManage* pFilePackMan)
 // 		return false;
 // 	}
 
-	std::string strUpdateDir = std::string(g_pSandBoxDir) + "/";
+	std::string strUpdateDir = std::string(g_WritablePath) + "/";
 	strUpdateDir += "PatchAsset";
-
+	XSys::XCreateDirectory(strUpdateDir.c_str());
 	int iDelItemSize = 0;
 	QuickReadValue<int>(iDelItemSize);
 	for (int i = 0; i < iDelItemSize; i++)
@@ -211,6 +212,11 @@ bool XPathcherFile::ApplyPatch(XFilePackManage* pFilePackMan)
 		else
 		{
 			std::string filePath = strUpdateDir + addItem.path;
+			size_t pt = filePath.find_last_of('/');
+			if (pt != std::string::npos)
+			{
+				XSys::XCreateDirectory(filePath.substr(0, pt).c_str());
+			}
 			XFile fp;
 			if (fp.OpenFile(filePath.c_str(), "wb"))
 			{

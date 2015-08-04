@@ -9,6 +9,14 @@
 #ifndef __XPATCHER__H
 #define __XPATCHER__H
 
+#include "XSys.h"
+#include <string>
+#include "cocos2d.h"
+
+using namespace std;
+using namespace cocos2d;
+using namespace XSys;
+
 enum PATCHER_EVENT
 {
 	PE_DNS_RESLOVE,//DNS½âÎö
@@ -115,11 +123,16 @@ public:
 	void DownloadFile(const char* url, const char* dest_file);
 	void DownloadFile(const char* url, const char* dest_file, pfnDownloadCallback func);
 	void UploadFile(const char* src_file, const char* url, pfnUploadCallback func);
+	bool IsInited(){return is_inited;}
+	void SetInited(){is_inited = true;}
+protected:
+	bool Init();
 protected:
 	PatcherState patch_state;
 	XMutex* status_mutex;
 	XThread* patch_thread;
 	std::string patch_url;
+	bool is_inited;
 };
 
 #endif // XPatcher

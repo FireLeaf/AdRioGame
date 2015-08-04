@@ -291,6 +291,9 @@ public:
      *  @lua NA
      */
     virtual const std::vector<std::string>& getSearchPaths() const;
+	
+	//Get bundle path
+	virtual std::string getBundlePath(){return _defaultResRootPath;}
 
     /**
      *  Gets the writable path.

@@ -9,6 +9,9 @@
 *******************************************************************************/
 
 #include "XPatcher.h"
+#include "XLog.h"
+extern std::string g_WritablePath;//ios上是document目录
+extern std::string g_BundlePath;//资源打包的目录
 
 XPatcher::XPatcher()
 {
@@ -24,9 +27,21 @@ XPatcher::~XPatcher()
 	}
 }
 
+bool XPatcher::Init()
+{
+	g_WritablePath = FileUtils::getInstance()->getWritablePath();
+	g_BundlePath = FileUtils::getInstance()->getBundlePath();
+	SetInited();
+	return true;
+}
+
 XPatcher& XPatcher::GetInstance()
 {
 	static XPatcher inst;
+	if (!inst.IsInited())
+	{
+		inst.Init();
+	}
 	return inst;
 }
 
@@ -39,7 +54,7 @@ void XPatcher::StartPatch(const char* patch_url)
 		//...
 	}
 
-	patch_thread = XCreateThread();
+	//patch_thread = XCreateThread();
 }
 
 PatcherState XPatcher::QueryPatcherState()

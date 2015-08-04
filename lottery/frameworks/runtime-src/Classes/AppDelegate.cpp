@@ -3,6 +3,7 @@
 #include "SimpleAudioEngine.h"
 #include "cocos2d.h"
 #include "lua_module_register.h"
+#include "owl/XPatcher.h"
 
 using namespace CocosDenshion;
 
@@ -58,7 +59,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     {
         return false;
     }
-    
+    XPatcher::GetInstance().IsInited();
     return true;
 }
 
