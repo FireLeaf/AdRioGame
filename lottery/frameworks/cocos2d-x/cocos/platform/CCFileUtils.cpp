@@ -32,7 +32,7 @@ THE SOFTWARE.
 #include "base/CCDirector.h"
 #include "platform/CCSAXParser.h"
 #include "base/ccUtils.h"
-
+#include "owl/XFileGroup.h"
 #include "tinyxml2.h"
 #ifdef MINIZIP_FROM_SYSTEM
 #include <minizip/unzip.h>
@@ -561,7 +561,14 @@ static Data getData(const std::string& filename, bool forString)
         mode = "rt";
     else
         mode = "rb";
-    
+	
+	buffer = XFileGroup::getFileData(filename, mode, (int*)&size);
+	if (buffer)
+	{
+		ret.fastSet(buffer, size);
+		return ret;
+	}
+
     do
     {
         // Read the file from hardware
@@ -623,8 +630,15 @@ Data FileUtils::getDataFromFile(const std::string& filename)
 unsigned char* FileUtils::getFileData(const std::string& filename, const char* mode, ssize_t *size)
 {
     unsigned char * buffer = nullptr;
-    CCASSERT(!filename.empty() && size != nullptr && mode != nullptr, "Invalid parameters.");
+	CCASSERT(!filename.empty() && size != nullptr && mode != nullptr, "Invalid parameters.");
     *size = 0;
+
+	buffer = XFileGroup::getFileData(filename, mode, (int*)size);
+	if (buffer)
+	{
+		return buffer;
+	}
+
     do
     {
         // read the file from hardware
