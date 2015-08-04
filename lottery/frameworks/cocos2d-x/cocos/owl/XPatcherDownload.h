@@ -10,7 +10,7 @@
 #define __XPATCHERDOWNLOAD__H
 
 #include <string>
-#include "curl/curl.h"
+#include <curl/curl.h>
 #include "XType.h"
 #include <vector>
 #include "XSys.h"
@@ -50,10 +50,10 @@ public:
 	struct HttpTask 
 	{
 		FILE* fp;//文件指针
-		ULONGLONG begin;//起始点
-		ULONGLONG end;//结束点
-		ULONGLONG total;
-		ULONGLONG cur;//当前指针
+		xint64 begin;//起始点
+		xint64 end;//结束点
+		xint64 total;
+		xint64 cur;//当前指针
 		CURL* http_handle;
 		CURLM* multi_handle;
 		int status;//当前状态
@@ -79,7 +79,7 @@ protected:
 	std::string local_path;
 	int thread_num;
 	bool running;
-	ULONGLONG file_size;
+	xint64 file_size;
 	int failed_count;
 };
 
@@ -90,7 +90,7 @@ public:
 	~XPatcherDownload();
 public:
 	//获取文件大小
-	static bool GetFileSize(const char* url, ULONGLONG& file_size, int& response_code);
+	static bool GetFileSize(const char* url, xint64& file_size, int& response_code);
 
 	bool DownloadFile(const char* url, const char* local_path, int thread_num);
 	bool DownloadFileBackgroud(const char* url, const char* local_path, int thread_num);//异步下载

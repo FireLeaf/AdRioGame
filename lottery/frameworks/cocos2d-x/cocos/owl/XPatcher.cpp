@@ -31,7 +31,7 @@ bool XPatcher::Init()
 {
 	g_WritablePath = FileUtils::getInstance()->getWritablePath();
 	g_BundlePath = FileUtils::getInstance()->getBundlePath();
-	SetInited();
+    SetInited();
 	return true;
 }
 

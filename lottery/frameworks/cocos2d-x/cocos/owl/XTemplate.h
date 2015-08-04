@@ -39,7 +39,7 @@ public:
 	XBufferData() : buffer(NULL), count(0){}
 	~XBufferData()
 	{
-		Assert(!buffer);//这里提倡程序释放
+		assert(!buffer);//这里提倡程序释放
 		Release();
 	}
 public:
@@ -53,7 +53,7 @@ public:
 		if (!buffer)
 		{
 			return false;
-			Assert(0);
+			assert(0);
 		}
 
 		return true;
@@ -69,7 +69,7 @@ public:
 	}
 	xuint32 Count(){return count;}
 protected:
-	typename T* buffer;
+	T* buffer;
 	xuint32 count;
 };
 

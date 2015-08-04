@@ -334,6 +334,13 @@ FileUtils* FileUtils::getInstance()
     return s_sharedFileUtils;
 }
 
+std::string FileUtilsApple::getBundlePath()
+{
+    NSString* path = [[NSBundle mainBundle] resourcePath];
+    std::string ret = [path UTF8String];
+    return ret;
+}
+
 
 std::string FileUtilsApple::getWritablePath() const
 {

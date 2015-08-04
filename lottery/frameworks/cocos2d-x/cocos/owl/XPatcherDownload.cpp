@@ -22,7 +22,7 @@ XPatcherDownload::~XPatcherDownload()
 	}
 }
 
-bool XPatcherDownload::GetFileSize(const char* url, ULONGLONG& file_size, int& response_code)
+bool XPatcherDownload::GetFileSize(const char* url, xint64& file_size, int& response_code)
 {
 	CURL* http_handle = curl_easy_init();
 	file_size = 0;
@@ -62,7 +62,7 @@ bool XPatcherDownload::GetFileSize(const char* url, ULONGLONG& file_size, int& r
 		res = curl_easy_getinfo( http_handle, CURLINFO_CONTENT_LENGTH_DOWNLOAD, &db );
 		if ( CURLE_OK != res ) break;
 
-		file_size = static_cast<ULONGLONG>(db);
+		file_size = static_cast<xint64>(db);
 
 		isOk = true;
 	}while ( false );
@@ -209,7 +209,6 @@ XHttpDownload::~XHttpDownload()
 
 size_t WriteData( void* data, size_t size, size_t nmemb, void* pClientData )
 {
-	size_t dwWriten = size * nmemb;
 	int statusCode = 0;
 	XHttpDownload::HttpTask* http_task = (XHttpDownload::HttpTask*)pClientData;
 	if (!http_task)
@@ -222,7 +221,7 @@ size_t WriteData( void* data, size_t size, size_t nmemb, void* pClientData )
 	{
 		return 0;
 	}
-
+    size_t dwWriten = size * nmemb;
 	http_task->cur += dwWriten;
 	http_task->hd->cur_size += dwWriten;
 
@@ -242,7 +241,7 @@ size_t WriteData( void* data, size_t size, size_t nmemb, void* pClientData )
 		int writed = fwrite(data, 1, dwWriten, http_task->fp);
 		char buf[64] = {'\0'};
 		count += writed;
-		sprintf(buf, "Ð´Èë:%d,%d ", writed, count);
+		sprintf(buf, "write:%d,%d ", writed, count);
 		printf(buf);
 		return writed;
 	}
@@ -266,7 +265,7 @@ bool XHttpDownload::InitDownload()
 	{
 		thread_num = 1;
 	}
-	ULONGLONG each_size = file_size / thread_num;
+	xint64 each_size = file_size / thread_num;
 	if(!XSys::XCreateFile(local_path.c_str()))
 	{
 		return false;
@@ -293,7 +292,7 @@ bool XHttpDownload::InitDownload()
 		http_task->http_handle = curl_easy_init();
 		CURLcode code = curl_easy_setopt( http_task->http_handle, CURLOPT_URL, url.c_str() );
 		char opt_range[100] = { 0 };
-		sprintf_s( opt_range, 100, "%lld-%lld", http_task->begin, http_task->end - 1 );
+		snprintf( opt_range, 100, "%lld-%lld", http_task->begin, http_task->end - 1 );
 		code = curl_easy_setopt( http_task->http_handle, CURLOPT_RANGE, opt_range );
 		code = curl_easy_setopt( http_task->http_handle, CURLOPT_WRITEFUNCTION, WriteData );
 		code = curl_easy_setopt( http_task->http_handle, CURLOPT_WRITEDATA, http_task );
@@ -349,7 +348,7 @@ void XHttpDownload::UpdateDownload()
 		int rc = select( maxfd + 1, &fdread, &fdwrite, &fdexcep, &timeout );
 		switch(rc)
 		{
-		case SOCKET_ERROR:
+        case -1://SOCKET_ERROR:
 			http_tasks[i]->status = STASTUS_DISCONNECT;
 			break;
 		case 0://timeout
