@@ -1,0 +1,11 @@
+$#include "XFileGroup.h"
+
+class XFileGroup
+{
+public:
+
+	static unsigned char* getFileData(const std::string& filename, const char* mode, int *size);
+
+	static XFilePackManage& GetBundlePackMan();
+	static XFilePackManage& GetUpdatePackMan();
+};

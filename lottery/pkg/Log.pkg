@@ -1,0 +1,19 @@
+$#include "XLog.h"
+class XLog
+{
+public:
+	struct LogItem 
+	{
+		std::string tag;
+		std::string file_name;
+		XFile file;
+	};
+public:
+	XLog();
+	~XLog();
+	static XLog& Get();
+public:
+	void SetLogDir(const char* path){log_path = path;}
+	void LogOutput(bool device_print, const char* tag, const char* szMsg, ...);
+	bool AddLogItem(const char* tag, const char* file_name);
+};

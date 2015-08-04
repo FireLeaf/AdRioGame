@@ -262,6 +262,9 @@
     <Filter Include="ui\shaders">
       <UniqueIdentifier>{e6eaa24a-a21e-4c1d-b6b2-19326d129af2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="owl">
+      <UniqueIdentifier>{ea815939-1fd4-4dcf-8a09-2723cdca0884}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\physics\CCPhysicsBody.cpp">
@@ -1788,6 +1791,42 @@
     </ClCompile>
     <ClCompile Include="..\editor-support\cocostudio\CCObjectExtensionData.cpp">
       <Filter>cocostudio\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\owl\XFile.cpp">
+      <Filter>owl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\owl\XFileGroup.cpp">
+      <Filter>owl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\owl\XFileMapping.cpp">
+      <Filter>owl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\owl\XFilePackage.cpp">
+      <Filter>owl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\owl\XLog.cpp">
+      <Filter>owl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\owl\XMD5.cpp">
+      <Filter>owl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\owl\XPatcherDownload.cpp">
+      <Filter>owl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\owl\XPathcherFile.cpp">
+      <Filter>owl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\owl\XFilePackManager.cpp">
+      <Filter>owl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\owl\XC11Sys.cpp">
+      <Filter>owl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\owl\XC11SysThread.cpp">
+      <Filter>owl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\owl\XSys.cpp">
+      <Filter>owl</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3501,6 +3540,48 @@
     </ClInclude>
     <ClInclude Include="..\editor-support\cocostudio\CCObjectExtensionData.h">
       <Filter>cocostudio\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XFile.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XFileFunc.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XFileGroup.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XFileMapping.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XFilePackage.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XLog.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XMD5.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XPatcher.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XPatcherDownload.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XPatcherFile.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XFilePackManager.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XType.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XBufferStream.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XTemplate.h">
+      <Filter>owl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
