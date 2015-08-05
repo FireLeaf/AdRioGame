@@ -12,7 +12,9 @@
 #include "XType.h"
 #include <algorithm>
 #include <map>
-class XFile
+#include "XPreDefine.h"
+
+class X_DLL XFile
 {
 public:
 	enum

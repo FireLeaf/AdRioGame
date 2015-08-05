@@ -571,7 +571,9 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\release-lib\*.*
     <ClCompile Include="..\owl\XPatcher.cpp" />
     <ClCompile Include="..\owl\XPatcherDownload.cpp" />
     <ClCompile Include="..\owl\XPathcherFile.cpp" />
+    <ClCompile Include="..\owl\XPathMonitor.cpp" />
     <ClCompile Include="..\owl\XSys.cpp" />
+    <ClCompile Include="..\owl\XUtil.cpp" />
     <ClCompile Include="..\physics\CCPhysicsBody.cpp" />
     <ClCompile Include="..\physics\CCPhysicsContact.cpp" />
     <ClCompile Include="..\physics\CCPhysicsJoint.cpp" />
@@ -1148,8 +1150,12 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\release-lib\*.*
     <ClInclude Include="..\owl\XPatcher.h" />
     <ClInclude Include="..\owl\XPatcherDownload.h" />
     <ClInclude Include="..\owl\XPatcherFile.h" />
+    <ClInclude Include="..\owl\XPathMonitor.h" />
+    <ClInclude Include="..\owl\XPreDefine.h" />
+    <ClInclude Include="..\owl\XSys.h" />
     <ClInclude Include="..\owl\XTemplate.h" />
     <ClInclude Include="..\owl\XType.h" />
+    <ClInclude Include="..\owl\XUtil.h" />
     <ClInclude Include="..\physics\CCPhysicsBody.h" />
     <ClInclude Include="..\physics\CCPhysicsContact.h" />
     <ClInclude Include="..\physics\CCPhysicsHelper.h" />

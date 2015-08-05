@@ -8,7 +8,7 @@
 
 #ifndef __XTYPE__H
 #define __XTYPE__H
-
+#include "XPreDefine.h"
 #ifdef _WIN32
 typedef char xchar;
 typedef unsigned char xbyte;

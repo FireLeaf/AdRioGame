@@ -15,7 +15,7 @@
 #include <string>
 
 #define FPK_COUNT 2
-class XFilePackManage
+class X_DLL XFilePackManage
 {
 public:
 	struct FilePackItem 

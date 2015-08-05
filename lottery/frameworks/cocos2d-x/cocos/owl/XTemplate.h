@@ -9,6 +9,7 @@
 #ifndef __XTEMPLATE__H
 #define __XTEMPLATE__H
 #include <assert.h>
+
 template<typename T>
 class Singleton
 {

@@ -14,7 +14,8 @@
 #include <string>
 #include "XFile.h"
 #include <vector>
-class XLog
+#include "XPreDefine.h"
+class X_DLL XLog
 {
 public:
 	struct LogItem 

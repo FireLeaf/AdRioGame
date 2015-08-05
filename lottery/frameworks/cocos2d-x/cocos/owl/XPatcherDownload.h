@@ -16,6 +16,7 @@
 #include "XSys.h"
 
 typedef void (*pfnCallBack)(const void* buffer, int length);
+typedef void (*pfnDownloadProgress)(void* data, int downloaded, int total, int speed);
 
 enum 
 {
@@ -23,21 +24,25 @@ enum
 	MAX_THREAD_NUM = 4,
 };
 
-struct DownloadFileTask : public XJobDesc
+struct X_DLL DownloadFileTask : public XJobDesc
 {
 	std::string url;
 	std::string local_path;
 	int thread_num;
+	pfnDownloadProgress func;
+	void* data;
 
-	DownloadFileTask(const char* url, const char* dest, int thread_num) 
+	DownloadFileTask(const char* url, const char* dest, int thread_num, pfnDownloadProgress func, void* data) 
 	{
 		this->url = url;
 		this->local_path = dest;
 		this->thread_num = thread_num;
+		this->func = func;
+		this->data = data;
 	}
 };
 
-class XHttpDownload
+class X_DLL XHttpDownload
 {
 public:
 	enum DOWNLOAD_STATUS
@@ -65,14 +70,14 @@ public:
 public:
 	XHttpDownload(const char* url, const char* local_path, int thread_num);
 	~XHttpDownload();
-	bool Run();
+	bool Run(pfnDownloadProgress cb = nullptr, void* data = nullptr);
 protected:
 	bool InitDownload();//初始化下载
 	void UpdateDownload();//更新下载
-	void EndDownload();
+	bool EndDownload();
 	void Release();
 public:
-	ULONGLONG cur_size;
+	xint64 cur_size;
 protected:
 	std::vector<HttpTask*> http_tasks;//下载任务
 	std::string url;
@@ -81,9 +86,11 @@ protected:
 	bool running;
 	xint64 file_size;
 	int failed_count;
+	xint64 last_time;
+	xint64 delta_download_size;
 };
 
-class XPatcherDownload
+class X_DLL XPatcherDownload
 {
 public:
 	XPatcherDownload();
@@ -92,8 +99,8 @@ public:
 	//获取文件大小
 	static bool GetFileSize(const char* url, xint64& file_size, int& response_code);
 
-	bool DownloadFile(const char* url, const char* local_path, int thread_num);
-	bool DownloadFileBackgroud(const char* url, const char* local_path, int thread_num);//异步下载
+	bool DownloadFile(const char* url, const char* local_path, int thread_num, pfnDownloadProgress cb = nullptr, void* data = nullptr);
+	bool DownloadFileBackgroud(const char* url, const char* local_path, int thread_num, pfnDownloadProgress cb = nullptr, void* data = nullptr);//异步下载
 protected:
 	bool HttpRequestFile(const char* url);
 private:

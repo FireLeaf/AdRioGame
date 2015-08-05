@@ -58,7 +58,7 @@ struct UploadFileBlock
 	int use_seconds;
 };
 
-class DownloadWatcher//下载监听者
+class X_DLL DownloadWatcher//下载监听者
 {
 public:
 	virtual void OnDownloadBegin(int ) = 0;//开始下载
@@ -72,12 +72,15 @@ typedef void (*pfnUploadCallback)(UploadFileBlock ufb);
 
 enum 
 {
+	PS_UNKONW,
+	PS_ASSET_BROKEN,// asset broke
 	PS_NETWORK_EXCEPTION,
+	PS_APPVER_ERROR,// application error
 	PS_CHECK_NETOWRK,
 	PS_CHECK_VERSION,
 	PS_DOWNLOAD_PATCH,
 	PS_APPLY_PATCH,
-	PATCH_FINISH,
+	PS_FINISH,
 };
 
 struct AssetVersion 
@@ -85,6 +88,7 @@ struct AssetVersion
 	int main_version;
 	int sub_version;
 	int asset_version;
+	AssetVersion():main_version(0), sub_version(0), asset_version(0){}
 };
 
 struct PatcherEvent
@@ -97,23 +101,35 @@ struct PatcherEvent
 
 struct PatcherState 
 {
-	int state;
 	AssetVersion cur_version;
 	AssetVersion target_version;
+	int state;
 	bool is_complete;
 	int total_length;
 	int getted_length;
 	int cur_index;
 	int total_count;
-	int real_speed;
+	float real_speed;
+	PatcherState() : cur_version(), target_version()
+	{
+		state = PS_UNKONW;
+		is_complete = false;
+		total_length = 0;
+		getted_length = 0;
+		cur_index = 0;
+		total_length = 0;
+		real_speed = 0.0f;
+	}
 };
 
-class XPatcher
+class X_DLL XPatcher
 {
 public:
 	XPatcher();
 	~XPatcher();
+
 	static XPatcher& GetInstance();
+	bool Init(const char* writable_path, const char* bundle_path);
 
 	void TrigEvent(const PatcherEvent& pe);
 
@@ -123,16 +139,18 @@ public:
 	void DownloadFile(const char* url, const char* dest_file);
 	void DownloadFile(const char* url, const char* dest_file, pfnDownloadCallback func);
 	void UploadFile(const char* src_file, const char* url, pfnUploadCallback func);
-	bool IsInited(){return is_inited;}
-	void SetInited(){is_inited = true;}
+	
+	void PatchProc();
+	void DownloadPathCallBack(void* data, int downloaded, int total, int speed);
 protected:
-	bool Init();
+	bool LoadLocalAssetVersion(const std::string& asset_update_path, const std::string& bundle_path);
+	bool DownloadServerAssetVersion(const std::string& tmp_path);
+	bool DowloadPathAndApplay(const std::string& asset_update_path, const std::string& tmp_path);
 protected:
 	PatcherState patch_state;
 	XMutex* status_mutex;
 	XThread* patch_thread;
 	std::string patch_url;
-	bool is_inited;
 };
 
 #endif // XPatcher

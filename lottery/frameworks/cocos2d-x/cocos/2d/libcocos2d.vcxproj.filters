@@ -1831,6 +1831,12 @@
     <ClCompile Include="..\owl\XPatcher.cpp">
       <Filter>owl</Filter>
     </ClCompile>
+    <ClCompile Include="..\owl\XPathMonitor.cpp">
+      <Filter>owl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\owl\XUtil.cpp">
+      <Filter>owl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\physics\CCPhysicsBody.h">
@@ -3584,6 +3590,18 @@
       <Filter>owl</Filter>
     </ClInclude>
     <ClInclude Include="..\owl\XTemplate.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XPreDefine.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XSys.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XPathMonitor.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XUtil.h">
       <Filter>owl</Filter>
     </ClInclude>
   </ItemGroup>

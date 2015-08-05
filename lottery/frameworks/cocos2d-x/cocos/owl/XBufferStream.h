@@ -10,13 +10,15 @@
 #define __XBUFFERSTREAM__H
 #include "XTemplate.h"
 #include <assert.h>
-class XBufferStream
+#include "XPreDefine.h"
+
+class X_DLL XBufferStream
 {
 
 };
 
 template<typename T>
-class XSimpleVectorStream
+class X_DLL XSimpleVectorStream
 {
 	enum
 	{

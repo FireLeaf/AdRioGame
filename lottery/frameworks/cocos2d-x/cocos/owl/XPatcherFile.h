@@ -11,7 +11,7 @@
 
 #include "XFilePackage.h"
 #include "XFilePackManager.h"
-class XPathcherFile : public XFile
+class X_DLL XPathcherFile : public XFile
 {
 	enum PatcherAction
 	{
@@ -55,7 +55,7 @@ class XPathcherFile : public XFile
 	};
 public:
 	bool LoadPatch(const char* path);
-	bool ApplyPatch(XFilePackManage* pFilePackMan);
+	bool ApplyPatch(XFilePackManage& pFilePackMan, const char* updatadir);
 	bool AddFile(const char* src_file, const char* file, const char* package = NULL);
 	bool AddFile(const void* buf, int len, const char* file, const char* package = NULL);
 	bool DelFiles(std::vector<DeleteItem>& vecDelItems);

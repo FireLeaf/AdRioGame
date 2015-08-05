@@ -172,26 +172,25 @@ xint32 _HttpDownloadProc(XJobDesc* parm)
 	if (task)
 	{
 		XHttpDownload hd(task->url.c_str(), task->local_path.c_str(), task->thread_num);
+		hd.Run(task->func, task->data);
 		delete task;
-		hd.Run();
 		return 1;
 	}
 
 	return 0;
 }
 
-bool XPatcherDownload::DownloadFileBackgroud(const char* url, const char* local_path, int thread_num)
+bool XPatcherDownload::DownloadFileBackgroud(const char* url, const char* local_path, int thread_num, pfnDownloadProgress cb/* = nullptr*/, void* data/* = nullptr*/)
 {
-	DownloadFileTask* dft = new DownloadFileTask(url, local_path, thread_num);
+	DownloadFileTask* dft = new DownloadFileTask(url, local_path, thread_num, cb, data);
 	thread_handle = XSys::XCreateThread(_HttpDownloadProc, dft);
 	return (thread_handle != NULL);
 }
 
-bool XPatcherDownload::DownloadFile(const char* url, const char* local_path, int thread_num)
+bool XPatcherDownload::DownloadFile(const char* url, const char* local_path, int thread_num, pfnDownloadProgress cb/* = nullptr*/, void* data/* = nullptr*/)
 {
 	XHttpDownload hd(url, local_path, thread_num);
-	hd.Run();
-	return true;
+	return hd.Run();
 }
 
 XHttpDownload::XHttpDownload(const char* url, const char* local_path, int thread_num)
@@ -406,12 +405,22 @@ void XHttpDownload::Release()
 	http_tasks.clear();
 }
 
-void XHttpDownload::EndDownload()
+bool XHttpDownload::EndDownload()
 {
+	bool bIsFinish = true;
+	for (int i = 0; i < (int)http_tasks.size(); i++)
+	{
+		if (http_tasks[i] || http_tasks[i]->status != STATUS_FINISH)
+		{
+			bIsFinish = false;
+			break;
+		}
+	}
 	Release();
+	return bIsFinish;
 }
 
-bool XHttpDownload::Run()
+bool XHttpDownload::Run(pfnDownloadProgress cb/* = nullptr*/, void* data/* = nullptr*/)
 {
 	
 	if (!InitDownload())
@@ -421,10 +430,9 @@ bool XHttpDownload::Run()
 	
 	while(running)
 	{
+		if(cb) cb(data, cur_size, file_size, 0);
 		UpdateDownload();
 	}
 
-	EndDownload();
-
-	return true;
+	return EndDownload();
 }

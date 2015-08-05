@@ -13,12 +13,12 @@
 #include<set>
 #include <vector>
 
-class XFileImageBase : public XFile
+class X_DLL XFileImageBase : public XFile
 {
 
 };
 
-struct XFilePackageHeader 
+struct X_DLL XFilePackageHeader 
 {
 	xint64 magic;//魔法数字
 	xint32 version;//版本号
@@ -32,32 +32,32 @@ struct XFilePackageHeader
 // 	}sub_package_desc[1];
 };
 
-struct XFileRecord
+struct X_DLL XFileRecord
 {
 	std::string name;//文件名
 	xint64 offset;//起始偏移
 	xint64 length;//该文件长度
 };
 
-struct XDirRecord 
+struct X_DLL XDirRecord 
 {
 	std::string name;//目录名
 	std::vector<XFileRecord> file_records;
 	std::vector<XDirRecord> dir_records;
 };
 
-struct XSubPackageRecord : public XDirRecord
+struct X_DLL XSubPackageRecord : public XDirRecord
 {
 	//name为子包名
 };
 
-struct XPackageRecord
+struct X_DLL XPackageRecord
 {
 	std::string name;
 	std::vector<XSubPackageRecord> sub_packages;
 };
 
-class XFileMemory//在内存中的文件
+class X_DLL XFileMemory//在内存中的文件
 {
 public:
 	bool OpenFile(const char* path);
@@ -67,7 +67,7 @@ protected:
 };
 
 
-struct PackageCmp
+struct X_DLL PackageCmp
 {
 public:
 	PackageCmp(const char* name){this->name = name;}
@@ -83,7 +83,7 @@ protected:
 	std::string name;
 };
 
-class XFilePackage : public XFile
+class X_DLL XFilePackage : public XFile
 {
 public:
 	xbool InitPackage(const char* path);
@@ -97,7 +97,7 @@ protected:
 	std::vector<XPackageRecord> packages;
 };
 
-class XFilePackageEasy : public XFile//简版
+class X_DLL XFilePackageEasy : public XFile//简版
 {
 public:
 	//每个文件写入的格式

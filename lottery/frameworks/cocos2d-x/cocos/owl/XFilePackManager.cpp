@@ -11,8 +11,6 @@
 #include "XFilePackManager.h"
 
 const char* g_FpkName[64] = {"app", "res",};
-std::string g_WritablePath = "";//ios上是document目录
-std::string g_BundlePath = "";//资源打包的目录
 
 XFilePackManage::XFilePackManage()
 {

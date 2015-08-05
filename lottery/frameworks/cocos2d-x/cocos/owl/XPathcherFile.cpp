@@ -13,7 +13,6 @@
 #include "zlib.h"
 #include <assert.h>
 #include "XSys.h"
-const char* g_WritablePath;
 
 #define PATCH_MAGIC 0x8d6f7a55
 #define PATCH_VERSION 1
@@ -123,13 +122,8 @@ bool XPathcherFile::AddFile(const char* src_file, const char* file, const char* 
 	return false;
 }
 
-bool XPathcherFile::ApplyPatch(XFilePackManage* pFilePackMan)
+bool XPathcherFile::ApplyPatch(XFilePackManage& filePackMan, const char* updatadir)
 {
-	if (pFilePackMan)
-	{
-		return false;
-	}
-
 // 	int iMagicNumber = 0;
 // 	int iVersion = 0;
 // 	QuickReadValue<int>(iMagicNumber);
@@ -140,9 +134,7 @@ bool XPathcherFile::ApplyPatch(XFilePackManage* pFilePackMan)
 // 		return false;
 // 	}
 
-	std::string strUpdateDir = std::string(g_WritablePath) + "/";
-	strUpdateDir += "PatchAsset";
-	XSys::XCreateDirectory(strUpdateDir.c_str());
+	std::string strUpdateDir = updatadir;
 	int iDelItemSize = 0;
 	QuickReadValue<int>(iDelItemSize);
 	for (int i = 0; i < iDelItemSize; i++)
@@ -152,7 +144,7 @@ bool XPathcherFile::ApplyPatch(XFilePackManage* pFilePackMan)
 		QuickReadString(item.package);
 		if (item.package != "")
 		{
-			XFilePackageEasy* pack = pFilePackMan->FindPack(item.package.c_str());
+			XFilePackageEasy* pack = filePackMan.FindPack(item.package.c_str());
 			if (pack)
 			{
 				pack->RemoveFile(item.path.c_str());
@@ -199,7 +191,7 @@ bool XPathcherFile::ApplyPatch(XFilePackManage* pFilePackMan)
 
 		if (addItem.package != "")
 		{
-			XFilePackageEasy* pack = pFilePackMan->FindPack(addItem.package.c_str());
+			XFilePackageEasy* pack = filePackMan.FindPack(addItem.package.c_str());
 			if (pack)
 			{
 				pack->AppendFileFromData(addItem.path.c_str(), (const unsigned char*)buf, addItem.org_len);

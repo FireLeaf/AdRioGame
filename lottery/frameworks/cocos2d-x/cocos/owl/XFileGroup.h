@@ -11,7 +11,7 @@
 
 #include "XFilePackManager.h"
 
-class XFileGroup
+class X_DLL XFileGroup
 {
 public:
 
