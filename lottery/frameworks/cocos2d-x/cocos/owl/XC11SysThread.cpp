@@ -47,7 +47,7 @@ public:
 
 	bool ReleaseThread()
 	{
-		Join();
+		if(Joinable()) Join();
 		return true;
 	}
 
@@ -60,6 +60,13 @@ public:
 		{
 			stdthread->join();
 		}
+	}
+
+	virtual bool Joinable()
+	{
+		if(stdthread) 
+			return stdthread->joinable();
+		return false;
 	}
 
 	virtual void Run()

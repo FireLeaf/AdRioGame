@@ -281,8 +281,25 @@ std::string FileUtilsWin32::getFullPathForDirectoryAndFilename(const std::string
     return FileUtils::getFullPathForDirectoryAndFilename(unixDirectory, unixFilename);
 }
 
+string FileUtilsWin32::getBundlePath() const
+{
+	char exe_path[CC_MAX_PATH + 1];
+	::GetModuleFileNameA(nullptr, exe_path, CC_MAX_PATH + 1);
+	string tmp_path = exe_path;
+	string bundle_path = tmp_path.substr(0, string(exe_path).find_last_of('\\'));
+	bundle_path += "/init_asset/";
+	return bundle_path;
+}
+
 string FileUtilsWin32::getWritablePath() const
 {
+	char exe_path[CC_MAX_PATH + 1];
+	::GetModuleFileNameA(nullptr, exe_path, CC_MAX_PATH + 1);
+	string tmp_path = exe_path;
+	string doc_path = tmp_path.substr(0, string(exe_path).find_last_of('\\'));
+	doc_path += "/document/";
+	return doc_path;
+
     if (_writablePath.length())
     {
         return _writablePath;

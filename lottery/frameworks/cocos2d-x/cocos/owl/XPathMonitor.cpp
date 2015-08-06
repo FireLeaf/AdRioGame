@@ -8,6 +8,7 @@
 
 #include "XPathMonitor.h"
 #include "XSys.h"
+#include "XLog.h"
 
 XPathMon& XPathMon::GetInstance()
 {

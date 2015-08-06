@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "lua_module_register.h"
 #include "owl/XPatcher.h"
+#include "owl/XLog.h"
 
 using namespace CocosDenshion;
 
@@ -51,15 +52,22 @@ bool AppDelegate::applicationDidFinishLaunching()
     lua_module_register(L);
 
     register_all_packages();
-
-    LuaStack* stack = engine->getLuaStack();
+	
+	XLog::Get().SetLogDir("E:\\AdRioGame\\lottery\\Log");
+	XLog::Get().AddLogItem("debug", "OwlDebug.log");
+	XLog::Get().LogOutput(true, "debug", "XPatcher::Init");
+    XPatcher::GetInstance().Init(FileUtils::getInstance()->getWritablePath().c_str(), FileUtils::getInstance()->getBundlePath().c_str());
+	XPatcher::GetInstance().StartPatch("http://127.0.0.1/patch_us/0.0.1/");
+	FileUtils::getInstance()->addSearchPath(FileUtils::getInstance()->getWritablePath());
+	FileUtils::getInstance()->addSearchPath(FileUtils::getInstance()->getBundlePath());
+	LuaStack* stack = engine->getLuaStack();
     stack->setXXTEAKeyAndSign("2dxLua", strlen("2dxLua"), "XXTEA", strlen("XXTEA"));
     
     if (engine->executeScriptFile("src/main.lua"))
     {
         return false;
     }
-    XPatcher::GetInstance().IsInited();
+	
     return true;
 }
 

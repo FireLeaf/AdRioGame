@@ -29,7 +29,7 @@ public:
 	~XLog();
 	static XLog& Get();
 public:
-	void SetLogDir(const char* path){log_path = path;}
+	void SetLogDir(const char* path);
 	void LogOutput(bool device_print, const char* tag, const char* szMsg, ...);
 	bool AddLogItem(const char* tag, const char* file_name);
 protected:

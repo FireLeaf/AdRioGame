@@ -117,23 +117,16 @@ bool XPathcherFile::AddFile(const char* src_file, const char* file, const char* 
 	fp.SafeRead(buffer, 1, iLength, PATCH_SAFE_SIZE);
 	if (!AddFile(buffer, iLength, file, package))
 	{
+		assert(0);
+		delete buffer;
+		return false;
 	}
 	delete buffer;
-	return false;
+	return true;
 }
 
-bool XPathcherFile::ApplyPatch(XFilePackManage& filePackMan, const char* updatadir)
+bool XPathcherFile::ApplyPatch(XFilePackManage& filePackMan, const char* updatadir, pfnApplyPatchCallBack func/* = NULL*/)
 {
-// 	int iMagicNumber = 0;
-// 	int iVersion = 0;
-// 	QuickReadValue<int>(iMagicNumber);
-// 	QuickReadValue<int>(iVersion);
-// 
-// 	if (iMagicNumber != PATCH_MAGIC || iVersion != PATCH_VERSION)
-// 	{
-// 		return false;
-// 	}
-
 	std::string strUpdateDir = updatadir;
 	int iDelItemSize = 0;
 	QuickReadValue<int>(iDelItemSize);
@@ -165,12 +158,20 @@ bool XPathcherFile::ApplyPatch(XFilePackManage& filePackMan, const char* updatad
 		}
 	}
 
-	while (true)
+	long cur_pos = Tell();
+	//load add file size
+	Seek(Length() - 4, SEEK_SET);
+	int add_file_count = 0;
+	QuickReadValue(add_file_count);
+
+	for ( int i = 0; i < add_file_count; i++)
 	{
 		if(feof( GetFileHandle()))
 		{
 			break;
 		}
+		if (func) func(i, add_file_count);
+
 		AddItem addItem;
 		QuickReadValue(addItem.compress_type);
 		QuickReadString(addItem.path);

@@ -73,6 +73,7 @@ typedef void (*pfnUploadCallback)(UploadFileBlock ufb);
 enum 
 {
 	PS_UNKONW,
+	PS_LOCAL_ASSET_BROKEN,
 	PS_ASSET_BROKEN,// asset broke
 	PS_NETWORK_EXCEPTION,
 	PS_APPVER_ERROR,// application error
@@ -101,15 +102,17 @@ struct PatcherEvent
 
 struct PatcherState 
 {
-	AssetVersion cur_version;
-	AssetVersion target_version;
-	int state;
-	bool is_complete;
-	int total_length;
-	int getted_length;
-	int cur_index;
-	int total_count;
-	float real_speed;
+	AssetVersion cur_version; //current version
+	AssetVersion target_version;// target version
+	int state;//current status
+	bool is_complete;// is complete not use
+	int total_length;// downloading currrent file total length
+	int getted_length;// dowloaded current file currrent length
+	int cur_index;// download current file index
+	int total_count; // total need download file
+	float real_speed;// current download speed
+	int apply_index; // current patch apply current index
+	int total_apply; // total patch need to be applied
 	PatcherState() : cur_version(), target_version()
 	{
 		state = PS_UNKONW;
@@ -119,6 +122,8 @@ struct PatcherState
 		cur_index = 0;
 		total_length = 0;
 		real_speed = 0.0f;
+		apply_index = 0;
+		total_apply = 0;
 	}
 };
 
@@ -142,6 +147,8 @@ public:
 	
 	void PatchProc();
 	void DownloadPathCallBack(void* data, int downloaded, int total, int speed);
+	void ApplyPatchCallBack(int cur_apply, int total_apply);
+	void Clean();
 protected:
 	bool LoadLocalAssetVersion(const std::string& asset_update_path, const std::string& bundle_path);
 	bool DownloadServerAssetVersion(const std::string& tmp_path);

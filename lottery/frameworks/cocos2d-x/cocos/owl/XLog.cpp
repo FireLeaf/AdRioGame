@@ -35,6 +35,12 @@ XLog& XLog::Get()
 	return inst;
 }
 
+void XLog::SetLogDir(const char* path)
+{
+	log_path = path;
+	XSys::XCreateDirectory(log_path.c_str());
+}
+
 XLog::LogItem* XLog::FindLogItem(const char* tag)
 {
 	if (!tag)
@@ -106,7 +112,7 @@ void XLog::LogOutput(bool device_print, const char* tag, const char* msg, ...)
 	{
 		time_t tt = time(NULL);
 		struct tm* t = gmtime(&tt);
-		fprintf(log_item->file.GetFileHandle(), "%d-%d-%d %d:%d:%d %s\n", t->tm_year, t->tm_mon, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec, msg_buf);
+		fprintf(log_item->file.GetFileHandle(), "%d-%d-%d %d:%d:%d %s\n", t->tm_year + 1900, t->tm_mon, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec, msg_buf);
 		log_item->file.Flush();
 	}
 }

@@ -32,6 +32,7 @@ XPatcher::~XPatcher()
 
 bool XPatcher::Init(const char* writable_path, const char* bundle_path)
 {
+	XLog::Get().LogOutput(true, "debug", "writeable path: %s; bundle_path: %s", writable_path, bundle_path);
 	if (!XPathMon::GetInstance().Init(writable_path, bundle_path))
 	{
 		return false;
@@ -46,9 +47,20 @@ XPatcher& XPatcher::GetInstance()
 	return inst;
 }
 
+void XPatcher::Clean()
+{
+	if (patch_thread)
+	{
+		if(patch_thread->Joinable()) patch_thread->Join();
+		delete patch_thread;
+		patch_thread = NULL;
+	}
+}
+
 xint32 _PatchProc(XJobDesc* parm)
 {
 	XPatcher::GetInstance().PatchProc();
+	XPatcher::GetInstance().Clean();
 	return 0;
 }
 
@@ -95,6 +107,12 @@ bool XPatcher::LoadLocalAssetVersion(const std::string& asset_update_path, const
 					patch_state.state = PS_ASSET_BROKEN;
 					return false;
 				}
+			}
+			else
+			{
+				XWrapMutex mtx(status_mutex);
+				patch_state.state = PS_LOCAL_ASSET_BROKEN;
+				return false;
 			}
 		}
 	}
@@ -147,12 +165,24 @@ void _DownloadPathCallBack(void* data, int downloaded, int total, int speed)
 	}
 }
 
+void _ApplyPatchCallBack(int cur_apply, int total_apply)
+{
+	XPatcher::GetInstance().ApplyPatchCallBack(cur_apply, total_apply);
+}
+
 void XPatcher::DownloadPathCallBack(void* data, int downloaded, int total, int speed)
 {
 	XWrapMutex mtx(status_mutex);
 	patch_state.real_speed = speed;
 	patch_state.total_length = total;
 	patch_state.getted_length = downloaded;
+}
+
+void XPatcher::ApplyPatchCallBack(int cur_apply, int total_apply)
+{
+	XWrapMutex mtx(status_mutex);
+	patch_state.apply_index = cur_apply;
+	patch_state.total_apply = total_apply;
 }
 
 bool XPatcher::DowloadPathAndApplay(const std::string& asset_update_path, const std::string& tmp_path)
@@ -213,7 +243,7 @@ bool XPatcher::DowloadPathAndApplay(const std::string& asset_update_path, const 
 		XPathcherFile pf;
 		if (pf.LoadPatch(patch_local_path.c_str()))
 		{
-			if(!pf.ApplyPatch(XFileGroup::GetUpdatePackMan(), asset_update_path.c_str()))
+			if(!pf.ApplyPatch(XFileGroup::GetUpdatePackMan(), asset_update_path.c_str(), _ApplyPatchCallBack))
 			{
 				//patch breaken
 				XWrapMutex mtx(status_mutex);

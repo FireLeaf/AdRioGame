@@ -70,6 +70,7 @@ public:
 	virtual void Resume() = 0;
 	virtual void Run() = 0;
 	virtual void Join() = 0;
+	virtual bool Joinable() = 0;
 protected:
 	//std::vector<XJob> jobs[PRIORITY_NUM];
 	XJob job;
