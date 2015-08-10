@@ -1,4 +1,4 @@
-$#include "XFileGroup.h"
+$#include "owl/XFileGroup.h"
 
 class XFileGroup
 {

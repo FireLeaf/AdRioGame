@@ -34,6 +34,11 @@ protected:
 
 namespace XSys
 {
+	XThreadPool* XCreateThreadPool(int thread_count){return NULL;}
+	void XReleaseThreadPool(XThreadPool*){}
+	bool XDeleteFile(const char* path){return true;}
+	bool XDeleteDirectory(const char* path, bool bIsSubDelAll){return true;}
+
 	void XLogOutput(const char* log)
 	{
 		CCLog(log);

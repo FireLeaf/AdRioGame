@@ -1,5 +1,4 @@
 $include"XMD5.h"
-
 void MD5Init (MD5_CTX *context);
 void MD5Update (MD5_CTX *context, unsigned char *input, unsigned int inputLen);
 void MD5UpdaterString(MD5_CTX *context,const char *string);

@@ -1,11 +1,11 @@
-$#include"XSys.h"
+$#include "owl/XSys.h"
 class XMutex
 {
 public:
-	virtual ~XMutex(){}
+	virtual ~XMutex();
 public:
-	virtual void Lock() = 0;
-	virtual void Unlock() = 0;
+	virtual void Lock();
+	virtual void Unlock();
 };
 
 class XEvent
@@ -41,7 +41,6 @@ public:
 		PRIORITY_NUM,
 	};
 public:
-	XThread():job(), job_mutex(nullptr){}
 	virtual ~XThread(){}
 public:
 	virtual void Suppend();
@@ -49,10 +48,6 @@ public:
 	virtual void Resume();
 	virtual void Run();
 	virtual void Join();
-protected:
-	//std::vector<XJob> jobs[PRIORITY_NUM];
-	XJob job;
-	XMutex* job_mutex;//
 };
 
 class XThreadPool
@@ -66,7 +61,7 @@ public:
 		EVENT_NUM,
 	};
 public:
-	virtual ~XThreadPool(){}
+	virtual ~XThreadPool();
 
 	virtual bool CreateThreadPool(int thread_count);//
 	virtual void ReleaseThreadPool();

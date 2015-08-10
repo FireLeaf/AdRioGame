@@ -35,6 +35,12 @@
     <ClInclude Include="..\Classes\Platform\PlatformIOS_US.h">
       <Filter>Platform</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\lua_owl_auto.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\lua_module_register.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -49,6 +55,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Platform\Platform.cpp">
       <Filter>Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\lua_owl_auto.cpp">
+      <Filter>Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

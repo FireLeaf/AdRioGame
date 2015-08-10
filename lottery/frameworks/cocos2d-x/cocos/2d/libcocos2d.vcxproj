@@ -566,6 +566,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\release-lib\*.*
     <ClCompile Include="..\owl\XFileMapping.cpp" />
     <ClCompile Include="..\owl\XFilePackage.cpp" />
     <ClCompile Include="..\owl\XFilePackManager.cpp" />
+    <ClCompile Include="..\owl\XInit.cpp" />
     <ClCompile Include="..\owl\XLog.cpp" />
     <ClCompile Include="..\owl\XMD5.cpp" />
     <ClCompile Include="..\owl\XPatcher.cpp" />
@@ -1145,6 +1146,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\release-lib\*.*
     <ClInclude Include="..\owl\XFileMapping.h" />
     <ClInclude Include="..\owl\XFilePackage.h" />
     <ClInclude Include="..\owl\XFilePackManager.h" />
+    <ClInclude Include="..\owl\XInit.h" />
     <ClInclude Include="..\owl\XLog.h" />
     <ClInclude Include="..\owl\XMD5.h" />
     <ClInclude Include="..\owl\XPatcher.h" />

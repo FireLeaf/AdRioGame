@@ -1,5 +1,5 @@
 $pfile "FileGroup.pkg"
 $pfile "FilePackManager.pkg"
 $pfile "Log.pkg"
-$pfile "md5.pkg"
 $pfile "Sys.pkg"
+$pfile "Patcher.pkg"

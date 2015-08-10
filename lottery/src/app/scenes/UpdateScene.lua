@@ -7,11 +7,13 @@ local UpdateScene = class("UpdateScene", function ()
 end)
 
 function UpdateScene:ctor()
-	
+	local back = display.newSprite("patch_background.jpg")
+	self:addChild(back)
+	back:setPosition({x = display.width / 2, y = display.height / 2})
 end
 
 function UpdateScene:onEnter()
-	patcher.Start()--start patcher
+	XPatcher:GetInstance():StartPatch("http://127.0.0.1/patch_us/0.0.1/")--start patcher
 	self:scheduleUpdate()  
 	self:addNodeEventListener(cc.NODE_ENTER_FRAME_EVENT, function(dt)  
        return self:Tick(dt)
@@ -19,11 +21,9 @@ function UpdateScene:onEnter()
 end
 
 function UpdateScene:Tick( dt )
-	local status = patcher.GetStatus()
-	if status.state == UPDATE_OK then
+	local status = XPatcher:GetInstance():QueryPatcherState()
+	if status.state == PS_FINISH then
 		app:enterScene("LoginScene")
-	else if then
-
 	end
 end
 

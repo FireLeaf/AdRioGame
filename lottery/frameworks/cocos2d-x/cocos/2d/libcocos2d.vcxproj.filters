@@ -1837,6 +1837,9 @@
     <ClCompile Include="..\owl\XUtil.cpp">
       <Filter>owl</Filter>
     </ClCompile>
+    <ClCompile Include="..\owl\XInit.cpp">
+      <Filter>owl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\physics\CCPhysicsBody.h">
@@ -3602,6 +3605,9 @@
       <Filter>owl</Filter>
     </ClInclude>
     <ClInclude Include="..\owl\XUtil.h">
+      <Filter>owl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\owl\XInit.h">
       <Filter>owl</Filter>
     </ClInclude>
   </ItemGroup>

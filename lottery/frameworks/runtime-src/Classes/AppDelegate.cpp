@@ -3,8 +3,9 @@
 #include "SimpleAudioEngine.h"
 #include "cocos2d.h"
 #include "lua_module_register.h"
-#include "owl/XPatcher.h"
 #include "owl/XLog.h"
+#include "owl/XInit.h"
+#include "lua_owl_auto.h"
 
 using namespace CocosDenshion;
 
@@ -40,6 +41,12 @@ static int register_all_packages()
 	return 0; //flag for packages manager
 }
 
+int register_owl_module(lua_State* L)
+{
+	luaopen_owl(L);
+	return 1;
+}
+
 bool AppDelegate::applicationDidFinishLaunching()
 {
     // set default FPS
@@ -50,16 +57,14 @@ bool AppDelegate::applicationDidFinishLaunching()
     ScriptEngineManager::getInstance()->setScriptEngine(engine);
     lua_State* L = engine->getLuaStack()->getLuaState();
     lua_module_register(L);
-
+	register_owl_module(L);
     register_all_packages();
 	
-	XLog::Get().SetLogDir("E:\\AdRioGame\\lottery\\Log");
-	XLog::Get().AddLogItem("debug", "OwlDebug.log");
-	XLog::Get().LogOutput(true, "debug", "XPatcher::Init");
-    XPatcher::GetInstance().Init(FileUtils::getInstance()->getWritablePath().c_str(), FileUtils::getInstance()->getBundlePath().c_str());
-	XPatcher::GetInstance().StartPatch("http://127.0.0.1/patch_us/0.0.1/");
-	FileUtils::getInstance()->addSearchPath(FileUtils::getInstance()->getWritablePath());
-	FileUtils::getInstance()->addSearchPath(FileUtils::getInstance()->getBundlePath());
+	if(!XInit::Init())
+	{
+		XLog::Get().LogOutput(true, "error", "XInit::init failed(%s)", __FUNCTION__ /*, __LINE__*/);
+	}
+	
 	LuaStack* stack = engine->getLuaStack();
     stack->setXXTEAKeyAndSign("2dxLua", strlen("2dxLua"), "XXTEA", strlen("XXTEA"));
     

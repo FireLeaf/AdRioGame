@@ -9,8 +9,10 @@
 *******************************************************************************/
 
 #include "XFilePackManager.h"
+#include "XLog.h"
+#include "XSys.h"
 
-const char* g_FpkName[64] = {"app", "res",};
+const char* g_FpkName[64] = {"src", "res",};
 
 XFilePackManage::XFilePackManage()
 {
@@ -60,9 +62,36 @@ const char* XFilePackManage::FindPackByFilePath(const char* path, std::string& p
 	return NULL;
 }
 
+bool XFilePackManage::InitPackMan(const char* asset_path)
+{
+	for (int i = 0; i < FPK_COUNT; i++)
+	{
+		std::string pck_path = std::string(asset_path) + g_FpkName[i];
+		pck_path += ".fpk";
+		if (!XSys::XIsFileExist(pck_path.c_str()))
+		{
+			XFilePackageEasy fpe;
+			if (!fpe.CreatePackage(pck_path.c_str()))
+			{
+				XLog::Get().LogOutput(true, "debug", "CreatePackage %s.fpk failed in directory %s!", g_FpkName, asset_path);
+				return false;
+			}
+			fpe.SavePackageRecords();
+			fpe.CloseFile();
+		}
+
+		if( !AddPack(g_FpkName[i], asset_path))
+		{
+			XLog::Get().LogOutput(true, "debug", "AddPack %s to package failed! directory is asset_path");
+			return false;
+		}
+	}
+	return true;
+}
+
 bool XFilePackManage::AddPack(const char* pack_name, const char* pack_dir)
 {
-	std::string strpackname = pack_name;
+	std::string strpackname = std::string(pack_name) + ".fpk";
 	std::string strpackpath = std::string(pack_dir) + strpackname;
 	XFilePackageEasy* new_fpe = new XFilePackageEasy;
 	if (new_fpe->InitPackage(strpackpath.c_str()))

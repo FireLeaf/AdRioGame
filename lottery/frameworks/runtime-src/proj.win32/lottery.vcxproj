@@ -184,6 +184,8 @@ xcopy "$(ProjectDir)..\..\..\src" "$(ProjectDir)..\..\..\runtime\win32\src" /D /
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\lua_module_register.h" />
+    <ClInclude Include="..\Classes\lua_owl_auto.h" />
     <ClInclude Include="..\Classes\Platform\Platform.h" />
     <ClInclude Include="..\Classes\Platform\PlatformIOS_US.h" />
     <ClInclude Include="main.h" />
@@ -194,6 +196,7 @@ xcopy "$(ProjectDir)..\..\..\src" "$(ProjectDir)..\..\..\runtime\win32\src" /D /
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\lua_owl_auto.cpp" />
     <ClCompile Include="..\Classes\Platform\Platform.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SimulatorWin.cpp" />

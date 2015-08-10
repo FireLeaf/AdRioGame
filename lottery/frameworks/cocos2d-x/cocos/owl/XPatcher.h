@@ -73,6 +73,7 @@ typedef void (*pfnUploadCallback)(UploadFileBlock ufb);
 enum 
 {
 	PS_UNKONW,
+	PS_NDS_ERROR,// dns reslove failed
 	PS_LOCAL_ASSET_BROKEN,
 	PS_ASSET_BROKEN,// asset broke
 	PS_NETWORK_EXCEPTION,
@@ -136,14 +137,14 @@ public:
 	static XPatcher& GetInstance();
 	bool Init(const char* writable_path, const char* bundle_path);
 
-	void TrigEvent(const PatcherEvent& pe);
+	void TrigEvent(const PatcherEvent& pe){}
 
 	void StartPatch(const char* patch_url);//传入更新服务器地址
 	PatcherState QueryPatcherState();
 
-	void DownloadFile(const char* url, const char* dest_file);
-	void DownloadFile(const char* url, const char* dest_file, pfnDownloadCallback func);
-	void UploadFile(const char* src_file, const char* url, pfnUploadCallback func);
+	void DownloadFile(const char* url, const char* dest_file){}
+	void DownloadFile(const char* url, const char* dest_file, pfnDownloadCallback func){}
+	void UploadFile(const char* src_file, const char* url, pfnUploadCallback func){}
 	
 	void PatchProc();
 	void DownloadPathCallBack(void* data, int downloaded, int total, int speed);

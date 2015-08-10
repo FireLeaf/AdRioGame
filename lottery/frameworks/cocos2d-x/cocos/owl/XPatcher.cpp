@@ -32,12 +32,11 @@ XPatcher::~XPatcher()
 
 bool XPatcher::Init(const char* writable_path, const char* bundle_path)
 {
-	XLog::Get().LogOutput(true, "debug", "writeable path: %s; bundle_path: %s", writable_path, bundle_path);
 	if (!XPathMon::GetInstance().Init(writable_path, bundle_path))
 	{
 		return false;
 	}
-	
+	//XLog::Get().LogOutput(true, "debug", "writeable path: %s; bundle_path: %s", writable_path, bundle_path);
 	return true;
 }
 
@@ -292,6 +291,18 @@ void XPatcher::PatchProc()
 	std::string tmp_path = XPathMon::GetInstance().GetTmpPath();
 	{
 		XWrapMutex mtx(status_mutex);
+		patch_state.state = PS_CHECK_NETOWRK;
+	}
+	hostent* host = gethostbyname(patch_url.c_str());
+	if (!host)
+	{
+		XWrapMutex mtx(status_mutex);
+		patch_state.state = PS_NDS_ERROR;
+		return;
+	}
+	XLog::Get().LogOutput(true, "debug", "DNS reslove success");
+	{
+		XWrapMutex mtx(status_mutex);
 		patch_state.state = PS_CHECK_VERSION;
 	}
 	// load local asset version
@@ -299,19 +310,19 @@ void XPatcher::PatchProc()
 	{
 		return;
 	}
-
+	XLog::Get().LogOutput(true, "debug", "load local asset version success");
 	//download server asset version
 	if (!DownloadServerAssetVersion(tmp_path))
 	{
 		return;
 	}
-
+	XLog::Get().LogOutput(true, "debug", "download server asset version success");
 	//download and apply patch 
 	if (!DowloadPathAndApplay(asset_update_path, tmp_path))
 	{
 		return;
 	}
-
+	XLog::Get().LogOutput(true, "debug", "download patch and apply success");
 	{
 		XWrapMutex mtx(status_mutex);
 		patch_state.state = PS_FINISH;
