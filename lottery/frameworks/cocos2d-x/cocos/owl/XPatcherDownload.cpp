@@ -21,6 +21,10 @@ XPatcherDownload::~XPatcherDownload()
 		XSys::XReleaseThread(thread_handle);
 	}
 }
+size_t tmp_data(void *buffer, size_t size, size_t nmemb, void *user_p)
+{
+	return size * nmemb;
+}
 
 bool XPatcherDownload::GetFileSize(const char* url, xint64& file_size, int& response_code)
 {
@@ -32,6 +36,9 @@ bool XPatcherDownload::GetFileSize(const char* url, xint64& file_size, int& resp
 		std::string url_a = url;
 		char* url_c = const_cast<char*> ( url_a.c_str() );
 		res = curl_easy_setopt( http_handle, CURLOPT_URL, url_c );
+		if ( CURLE_OK != res ) break;
+
+		res = curl_easy_setopt(http_handle, CURLOPT_WRITEFUNCTION, &tmp_data);   // »Øµ÷º¯Êý
 		if ( CURLE_OK != res ) break;
 
 		res = curl_easy_setopt( http_handle, CURLOPT_HEADER, 1 );

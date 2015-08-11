@@ -40,9 +40,11 @@ bool XPatcher::Init(const char* writable_path, const char* bundle_path)
 	return true;
 }
 
-XPatcher& XPatcher::GetInstance()
+XPatcher* XPatcher::GetInstance()
 {
-	static XPatcher inst;
+	static XPatcher* inst;
+	if (!inst)
+		inst = new XPatcher;
 	return inst;
 }
 
@@ -58,8 +60,8 @@ void XPatcher::Clean()
 
 xint32 _PatchProc(XJobDesc* parm)
 {
-	XPatcher::GetInstance().PatchProc();
-	XPatcher::GetInstance().Clean();
+	XPatcher::GetInstance()->PatchProc();
+	XPatcher::GetInstance()->Clean();
 	return 0;
 }
 
@@ -166,7 +168,7 @@ void _DownloadPathCallBack(void* data, int downloaded, int total, int speed)
 
 void _ApplyPatchCallBack(int cur_apply, int total_apply)
 {
-	XPatcher::GetInstance().ApplyPatchCallBack(cur_apply, total_apply);
+	XPatcher::GetInstance()->ApplyPatchCallBack(cur_apply, total_apply);
 }
 
 void XPatcher::DownloadPathCallBack(void* data, int downloaded, int total, int speed)
@@ -293,13 +295,24 @@ void XPatcher::PatchProc()
 		XWrapMutex mtx(status_mutex);
 		patch_state.state = PS_CHECK_NETOWRK;
 	}
-	hostent* host = gethostbyname(patch_url.c_str());
-	if (!host)
-	{
-		XWrapMutex mtx(status_mutex);
-		patch_state.state = PS_NDS_ERROR;
-		return;
-	}
+#ifdef _WIN32
+	WORD wVersionRequested;
+	WSADATA wsaData;
+	int err;
+
+	wVersionRequested = MAKEWORD( 2, 2 );
+
+	err = WSAStartup( wVersionRequested, &wsaData );
+#endif // _WIN32
+
+// 	hostent* host = gethostbyname(patch_url.c_str());
+// 	if (!host)
+// 	{
+// 		int ierror = WSAGetLastError();
+// 		XWrapMutex mtx(status_mutex);
+// 		patch_state.state = PS_NDS_ERROR;
+// 		return;
+// 	}
 	XLog::Get().LogOutput(true, "debug", "DNS reslove success");
 	{
 		XWrapMutex mtx(status_mutex);

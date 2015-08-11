@@ -1,6 +1,6 @@
 /*
 ** Lua binding: owl
-** Generated automatically by tolua++-1.0.92 on 08/10/15 23:52:12.
+** Generated automatically by tolua++-1.0.92 on 08/11/15 21:47:20.
 */
 
 #ifndef __cplusplus
@@ -2600,8 +2600,8 @@ static int tolua_owl_XPatcher_GetInstance00(lua_State* tolua_S)
 #endif
  {
   {
-   XPatcher& tolua_ret = (XPatcher&)  XPatcher::GetInstance();
-    tolua_pushusertype(tolua_S,(void*)&tolua_ret,"XPatcher");
+   XPatcher* tolua_ret = (XPatcher*)  XPatcher::GetInstance();
+    tolua_pushusertype(tolua_S,(void*)tolua_ret,"XPatcher");
   }
  }
  return 1;

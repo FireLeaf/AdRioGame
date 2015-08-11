@@ -4,5 +4,6 @@ extern "C" {
 #include "tolua++.h"
 #ifdef __cplusplus
 }
+#endif
 
-int register_all_owl(lua_State* tolua_S);
+int luaopen_owl(lua_State* tolua_S);

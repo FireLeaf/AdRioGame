@@ -13,6 +13,10 @@ function UpdateScene:ctor()
 end
 
 function UpdateScene:onEnter()
+	print("PS_NDS_ERROR = " .. PS_NDS_ERROR)
+	XSys.XLogOutput("Hello World")
+	--local pch = XPatcher:new()
+	--XLog.Get():SetLogDir("")
 	XPatcher:GetInstance():StartPatch("http://127.0.0.1/patch_us/0.0.1/")--start patcher
 	self:scheduleUpdate()  
 	self:addNodeEventListener(cc.NODE_ENTER_FRAME_EVENT, function(dt)  
@@ -22,9 +26,13 @@ end
 
 function UpdateScene:Tick( dt )
 	local status = XPatcher:GetInstance():QueryPatcherState()
-	if status.state == PS_FINISH then
+	
+	if status.state == PS_NDS_ERROR then
+		print("DNS resolve failed")
+	elseif status.state == PS_FINISH then
 		app:enterScene("LoginScene")
 	end
+
 end
 
 function UpdateScene:onExit()
