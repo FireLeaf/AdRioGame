@@ -11,11 +11,6 @@
 
 #include "XSys.h"
 #include <string>
-#include "cocos2d.h"
-
-using namespace std;
-using namespace cocos2d;
-using namespace XSys;
 
 enum PATCHER_EVENT
 {
@@ -82,6 +77,7 @@ enum
 	PS_CHECK_VERSION,
 	PS_DOWNLOAD_PATCH,
 	PS_APPLY_PATCH,
+	PS_PATCH_ERROR,
 	PS_FINISH,
 };
 

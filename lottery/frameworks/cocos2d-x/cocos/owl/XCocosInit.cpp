@@ -1,8 +1,8 @@
 /**************************************************************************
-/*		FileName: XInit.cpp
+/*		FileName: XCocosInit.cpp
 /*		FileDesc: 
 /*		FileAuthor: YangCao
-/*		CreateTime: 2015/08/10 22:10:26
+/*		CreateTime: 2015/08/17 0:21:25
 /*		CopyRight: yc 
 /*************************************************************************/
 
@@ -12,6 +12,11 @@
 #include "XFilePackManager.h"
 #include "XFileGroup.h"
 #include "XPathMonitor.h"
+#include "cocos2d.h"
+
+using namespace std;
+using namespace cocos2d;
+using namespace XSys;
 
 extern const char* g_FpkName[64];
 

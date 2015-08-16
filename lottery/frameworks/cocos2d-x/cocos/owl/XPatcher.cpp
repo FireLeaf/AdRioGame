@@ -15,7 +15,7 @@
 #include "XUtil.h"
 #include "XPatcherFile.h"
 #include "XFileGroup.h"
-
+using namespace XSys;
 XPatcher::XPatcher()
 {
 	status_mutex = XCreateMutex();
@@ -216,15 +216,15 @@ bool XPatcher::DowloadPathAndApplay(const std::string& asset_update_path, const 
 			patch_state.total_count = total_count;
 			patch_state.getted_length = 0;
 			patch_state.total_length = 1;// prevent div 0
-			FormatString(patch_p_url, "%s/patch_%d_%d_%d.p", patch_url, patch_state.cur_version.main_version, patch_state.cur_version.sub_version, patch_state.cur_version.asset_version + 1);
-			FormatString(patch_local_path, "%s/patch_%d_%d_%d.p", tmp_path,  patch_state.cur_version.main_version, patch_state.cur_version.sub_version, patch_state.cur_version.asset_version + 1);
+			FormatString(patch_p_url, "%spatch_%d_%d_%d.p", patch_url.c_str(), patch_state.cur_version.main_version, patch_state.cur_version.sub_version, patch_state.cur_version.asset_version + 1);
+			FormatString(patch_local_path, "%spatch_%d_%d_%d.p", tmp_path.c_str(),  patch_state.cur_version.main_version, patch_state.cur_version.sub_version, patch_state.cur_version.asset_version + 1);
 		}
 
 		//download patch
 		{
 			XWrapMutex mtx(status_mutex);
 			patch_state.state = PS_DOWNLOAD_PATCH;
-			return false;
+			//return false;
 		}
 
 		XPatcherDownload pd;
@@ -239,7 +239,7 @@ bool XPatcher::DowloadPathAndApplay(const std::string& asset_update_path, const 
 		{
 			XWrapMutex mtx(status_mutex);
 			patch_state.state = PS_APPLY_PATCH;
-			return false;
+			//return false;
 		}
 		XPathcherFile pf;
 		if (pf.LoadPatch(patch_local_path.c_str()))
@@ -248,7 +248,7 @@ bool XPatcher::DowloadPathAndApplay(const std::string& asset_update_path, const 
 			{
 				//patch breaken
 				XWrapMutex mtx(status_mutex);
-				patch_state.state = PS_NETWORK_EXCEPTION;
+				patch_state.state = PS_PATCH_ERROR;
 				return false;
 			}
 		}
@@ -256,7 +256,7 @@ bool XPatcher::DowloadPathAndApplay(const std::string& asset_update_path, const 
 		{
 			//patch breaken
 			XWrapMutex mtx(status_mutex);
-			patch_state.state = PS_NETWORK_EXCEPTION;
+			patch_state.state = PS_PATCH_ERROR;
 			return false;
 		}
 		pf.CloseFile();

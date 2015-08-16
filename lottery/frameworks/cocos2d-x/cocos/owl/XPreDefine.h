@@ -19,6 +19,12 @@
 	#endif
 #endif
 
+#ifdef _WIN32
+#ifndef snprintf
+#define snprintf _snprintf
+#endif
+#endif
+
 #endif // XPreDefine
 
 

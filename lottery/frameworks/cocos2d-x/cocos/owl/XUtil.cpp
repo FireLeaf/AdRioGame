@@ -11,9 +11,9 @@
 
 std::string& FormatString(std::string& str,const char* format, ...)
 {
+	char buf[1024] = {'\0'};
 	va_list ap;
 	va_start(ap, format);
-	char buf[1024] = {'\0'};
 	vsnprintf(buf, 1023, format, ap);
 	va_end(ap);
 
