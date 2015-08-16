@@ -146,3 +146,5 @@
 /lottery/frameworks/runtime-src/proj.win32/Debug/*.lib
 /lottery/frameworks/runtime-src/proj.win32/*.sdf
 /lottery/frameworks/runtime-src/proj.win32/*.suo
+/lottery/frameworks/runtime-src/proj.win32/*.opensdf
+/lottery/Log/*.log
