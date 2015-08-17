@@ -155,6 +155,7 @@ protected:
 	XMutex* status_mutex;
 	XThread* patch_thread;
 	std::string patch_url;
+	bool has_change;
 };
 
 #endif // XPatcher

@@ -226,7 +226,7 @@ bool XPatcherDownload::DownloadFileBackgroud(const char* url, const char* local_
 bool XPatcherDownload::DownloadFile(const char* url, const char* local_path, int thread_num, pfnDownloadProgress cb/* = nullptr*/, void* data/* = nullptr*/)
 {
 	XHttpDownload hd(url, local_path, thread_num);
-	return hd.Run();
+	return hd.Run(cb, data);
 }
 
 XHttpDownload::XHttpDownload(const char* url, const char* local_path, int thread_num)

@@ -36,6 +36,14 @@ function UIBase:Show(show_ui)
 	self:setVisible(show_ui)
 end
 
+function UIBase:IsShow()
+	return self:isVisible()
+end
+
+function UIBase:OnTick(dt)
+
+end
+
 function UIBase:SwitchToShowUI(name)
 	print("switch to :" ..  name)
 	local other = self:GetUI(name)

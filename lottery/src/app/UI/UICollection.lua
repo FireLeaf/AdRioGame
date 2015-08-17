@@ -39,6 +39,16 @@ function UICollection:PeekUI(uiname, vest)
 	return nil
 end
 
+function UICollection:Tick(dt)
+	for class_name, inst_table in pairs(self.ui_inst_tbl_) do
+		for i_t, inst in pairs(inst_table) do
+			if inst ~= nil and inst:IsShow() then
+				inst:OnTick(dt)
+			end
+		end
+	end
+end
+
 function UICollection:GetUI(uiname, vest)--ui文件名，以及创建的马甲名
     if uiname == nil then
         return nil

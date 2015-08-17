@@ -62,6 +62,20 @@ const char* XFilePackManage::FindPackByFilePath(const char* path, std::string& p
 	return NULL;
 }
 
+bool XFilePackManage::SaveAll()
+{
+	for (int i = 0; i < file_pack_items.size(); i++)
+	{
+		FilePackItem* pPackItem = file_pack_items[i];
+		if (pPackItem && pPackItem->file_pack_easy)
+		{
+			pPackItem->file_pack_easy->SavePackageRecords();
+			pPackItem->file_pack_easy->Flush();
+		}
+	}
+	return true;
+}
+
 bool XFilePackManage::InitPackMan(const char* asset_path)
 {
 	for (int i = 0; i < FPK_COUNT; i++)

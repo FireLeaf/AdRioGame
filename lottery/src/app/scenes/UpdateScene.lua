@@ -6,18 +6,18 @@ local UpdateScene = class("UpdateScene", function ()
 	return display.newScene("UpdateScene")
 end)
 
+local UpdateUICollection = import("app.UI.Update.UpdateUICollection")
+
 function UpdateScene:ctor()
-	local back = display.newSprite("patch_background.jpg")
+	--[[local back = display.newSprite("patch_background.jpg")
 	self:addChild(back)
 	back:setPosition({x = display.width / 2, y = display.height / 2})
+	]]
+	self.uicollection = UpdateUICollection.new("UpdateUICollection")
+	self:addChild(self.uicollection)
 end
 
 function UpdateScene:onEnter()
-	print("PS_NDS_ERROR = " .. PS_NDS_ERROR)
-	XSys.XLogOutput("Hello World")
-	--local pch = XPatcher:new()
-	--XLog.Get():SetLogDir("")
-	XPatcher:GetInstance():StartPatch("http://127.0.0.1/patch_us/0.0.1/")--start patcher
 	self:scheduleUpdate()  
 	self:addNodeEventListener(cc.NODE_ENTER_FRAME_EVENT, function(dt)  
        return self:Tick(dt)
@@ -25,14 +25,9 @@ function UpdateScene:onEnter()
 end
 
 function UpdateScene:Tick( dt )
-	local status = XPatcher:GetInstance():QueryPatcherState()
-	
-	if status.state == PS_NDS_ERROR then
-		print("DNS resolve failed")
-	elseif status.state == PS_FINISH then
-		app:enterScene("LoginScene")
+	if self.uicollection then
+		self.uicollection:Tick(dt)
 	end
-
 end
 
 function UpdateScene:onExit()

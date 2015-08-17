@@ -20,6 +20,7 @@ XPatcher::XPatcher()
 {
 	status_mutex = XCreateMutex();
 	patch_thread = NULL;
+	has_change = false;
 }
 
 XPatcher::~XPatcher()
@@ -55,6 +56,13 @@ void XPatcher::Clean()
 		if(patch_thread->Joinable()) patch_thread->Join();
 		delete patch_thread;
 		patch_thread = NULL;
+	}
+
+	if(has_change)
+	{
+		has_change = false;
+		XFilePackManage& updatePckMan = XFileGroup::GetUpdatePackMan();
+		updatePckMan.SaveAll();
 	}
 }
 
@@ -251,6 +259,7 @@ bool XPatcher::DowloadPathAndApplay(const std::string& asset_update_path, const 
 				patch_state.state = PS_PATCH_ERROR;
 				return false;
 			}
+			has_change = true;
 		}
 		else
 		{
@@ -282,6 +291,20 @@ bool XPatcher::DowloadPathAndApplay(const std::string& asset_update_path, const 
 			return false;
 		}
 		file_ver.CloseFile();
+	}
+
+	if(has_change)
+	{
+		has_change = false;
+		XFilePackManage& updatePckMan = XFileGroup::GetUpdatePackMan();
+		updatePckMan.SaveAll();
+	}
+
+	{
+		//patch breaken
+		XWrapMutex mtx(status_mutex);
+		patch_state.state = PS_FINISH;
+		return false;
 	}
 	return true;
 }
@@ -344,13 +367,15 @@ void XPatcher::PatchProc()
 
 void XPatcher::StartPatch(const char* patch_url)
 {
+	XSys::XDeleteDirectory(XPathMon::GetInstance().GetTmpPath().c_str(), true);//先删除tmp下的文件
+	XSys::XCreateDirectory(XPathMon::GetInstance().GetTmpPath().c_str());
 	this->patch_url = patch_url;
 	if (!status_mutex)
 	{
 		XLog::Get().LogOutput(true, "patch", "dddd");
 		//...
 	}
-
+	has_change = false;
 	patch_thread = XCreateThread(_PatchProc, NULL);
 }
 

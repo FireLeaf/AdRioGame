@@ -1,6 +1,6 @@
 /*
 ** Lua binding: owl
-** Generated automatically by tolua++-1.0.92 on 08/11/15 21:47:20.
+** Generated automatically by tolua++-1.0.92 on 08/17/15 22:06:20.
 */
 
 #ifndef __cplusplus
@@ -3146,6 +3146,7 @@ TOLUA_API int tolua_owl_open (lua_State* tolua_S)
   tolua_constant(tolua_S,"PS_CHECK_VERSION",PS_CHECK_VERSION);
   tolua_constant(tolua_S,"PS_DOWNLOAD_PATCH",PS_DOWNLOAD_PATCH);
   tolua_constant(tolua_S,"PS_APPLY_PATCH",PS_APPLY_PATCH);
+  tolua_constant(tolua_S,"PS_PATCH_ERROR",PS_PATCH_ERROR);
   tolua_constant(tolua_S,"PS_FINISH",PS_FINISH);
   tolua_cclass(tolua_S,"AssetVersion","AssetVersion","",NULL);
   tolua_beginmodule(tolua_S,"AssetVersion");
