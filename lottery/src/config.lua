@@ -14,6 +14,8 @@ LOAD_DEPRECATED_API = false
 -- load shortcodes API
 LOAD_SHORTCODES_API = true
 
+CONFIG_SCREEN_ORIENTATION = "portrait"
+
 -- design resolution
 CONFIG_SCREEN_WIDTH  = 768
 CONFIG_SCREEN_HEIGHT = 1024
