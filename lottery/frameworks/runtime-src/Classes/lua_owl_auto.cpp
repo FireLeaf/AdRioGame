@@ -3148,6 +3148,7 @@ TOLUA_API int tolua_owl_open (lua_State* tolua_S)
   tolua_constant(tolua_S,"PS_APPLY_PATCH",PS_APPLY_PATCH);
   tolua_constant(tolua_S,"PS_PATCH_ERROR",PS_PATCH_ERROR);
   tolua_constant(tolua_S,"PS_FINISH",PS_FINISH);
+  tolua_constant(tolua_S,"PS_START",PS_START);
   tolua_cclass(tolua_S,"AssetVersion","AssetVersion","",NULL);
   tolua_beginmodule(tolua_S,"AssetVersion");
    tolua_variable(tolua_S,"main_version",tolua_get_AssetVersion_main_version,tolua_set_AssetVersion_main_version);

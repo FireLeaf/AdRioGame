@@ -64,6 +64,8 @@ void XPatcher::Clean()
 		XFilePackManage& updatePckMan = XFileGroup::GetUpdatePackMan();
 		updatePckMan.SaveAll();
 	}
+
+	XSys::XDeleteDirectory(XPathMon::GetInstance().GetTmpPath().c_str(), true);//删除tmp下的文件
 }
 
 xint32 _PatchProc(XJobDesc* parm)
@@ -162,6 +164,10 @@ bool XPatcher::DownloadServerAssetVersion(const std::string& tmp_path)
 
 			return true;
 		}
+	}
+	{
+		XWrapMutex mtx(status_mutex);
+		patch_state.state = PS_NETWORK_EXCEPTION;
 	}
 	return false;
 }
@@ -287,7 +293,7 @@ bool XPatcher::DowloadPathAndApplay(const std::string& asset_update_path, const 
 		{
 			//patch breaken
 			XWrapMutex mtx(status_mutex);
-			patch_state.state = PS_UNKONW;
+			patch_state.state = PS_PATCH_ERROR;
 			return false;
 		}
 		file_ver.CloseFile();
@@ -311,13 +317,13 @@ bool XPatcher::DowloadPathAndApplay(const std::string& asset_update_path, const 
 
 void XPatcher::PatchProc()
 {
-	std::string asset_update_path = XPathMon::GetInstance().GetAssetUpdatePath();
-	std::string bundle_path = XPathMon::GetInstance().GetBundlePath();
-	std::string tmp_path = XPathMon::GetInstance().GetTmpPath();
 	{
 		XWrapMutex mtx(status_mutex);
 		patch_state.state = PS_CHECK_NETOWRK;
 	}
+	std::string asset_update_path = XPathMon::GetInstance().GetAssetUpdatePath();
+	std::string bundle_path = XPathMon::GetInstance().GetBundlePath();
+	std::string tmp_path = XPathMon::GetInstance().GetTmpPath();
 #ifdef _WIN32
 	WORD wVersionRequested;
 	WSADATA wsaData;
@@ -367,7 +373,14 @@ void XPatcher::PatchProc()
 
 void XPatcher::StartPatch(const char* patch_url)
 {
-	XSys::XDeleteDirectory(XPathMon::GetInstance().GetTmpPath().c_str(), true);//先删除tmp下的文件
+	{
+		XWrapMutex mtx(status_mutex);
+		if (patch_state.state <= PS_FINISH)
+		{
+			return;
+		}
+		patch_state.state = PS_START;
+	}
 	XSys::XCreateDirectory(XPathMon::GetInstance().GetTmpPath().c_str());
 	this->patch_url = patch_url;
 	if (!status_mutex)

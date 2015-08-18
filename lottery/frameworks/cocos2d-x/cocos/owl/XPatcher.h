@@ -67,18 +67,19 @@ typedef void (*pfnUploadCallback)(UploadFileBlock ufb);
 
 enum 
 {
+	PS_START,
+	PS_CHECK_NETOWRK,
+	PS_CHECK_VERSION,
+	PS_DOWNLOAD_PATCH,
+	PS_APPLY_PATCH,
+	PS_FINISH,
 	PS_UNKONW,
 	PS_NDS_ERROR,// dns reslove failed
 	PS_LOCAL_ASSET_BROKEN,
 	PS_ASSET_BROKEN,// asset broke
 	PS_NETWORK_EXCEPTION,
 	PS_APPVER_ERROR,// application error
-	PS_CHECK_NETOWRK,
-	PS_CHECK_VERSION,
-	PS_DOWNLOAD_PATCH,
-	PS_APPLY_PATCH,
 	PS_PATCH_ERROR,
-	PS_FINISH,
 };
 
 struct AssetVersion 
