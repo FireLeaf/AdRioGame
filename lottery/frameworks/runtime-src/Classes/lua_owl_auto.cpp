@@ -984,7 +984,7 @@ static int tolua_owl_pfnJobProc00(lua_State* tolua_S)
  {
   XJobDesc* parm = ((XJobDesc*)  tolua_tousertype(tolua_S,1,0));
   {
-   xint32 tolua_ret = (xint32)  pfnJobProc(parm);
+      xint32 tolua_ret = 0;//pfnJobProc(parm);
    {
 #ifdef __cplusplus
     void* tolua_obj = Mtolua_new((xint32)(tolua_ret));

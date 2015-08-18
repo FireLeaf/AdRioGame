@@ -104,13 +104,13 @@ bool XPatcher::LoadLocalAssetVersion(const std::string& asset_update_path, const
 		// if no update version then check bundle path version
 		if(!is_get_version)
 		{
-			std::string bundle_version_path = bundle_path + "/InitAsset/asset_ver.ver";
+			std::string bundle_version_path = bundle_path + "/init_asset/asset_ver.ver";
 			XFile bdver_file;
 			if (bdver_file.OpenFile(bundle_version_path.c_str(), "rt"))
 			{
 				XWrapMutex mtx(status_mutex);
 				// if parser this failed. it may be asset broken
-				if (3 != fscanf(upver_file.GetFileHandle(), "%d.%d.%d", 
+				if (3 != fscanf(bdver_file.GetFileHandle(), "%d.%d.%d",
 					&patch_state.cur_version.main_version, 
 					&patch_state.cur_version.sub_version, 
 					&patch_state.cur_version.asset_version) )
@@ -389,7 +389,10 @@ void XPatcher::StartPatch(const char* patch_url)
 		//...
 	}
 	has_change = false;
-	patch_thread = XCreateThread(_PatchProc, NULL);
+	if ( !(patch_thread = XCreateThread(_PatchProc, NULL)) )
+    {
+        return;
+    }
 }
 
 PatcherState XPatcher::QueryPatcherState()

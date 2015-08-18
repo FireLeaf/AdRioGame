@@ -12,6 +12,7 @@
 #include "XType.h"
 #include <algorithm>
 #include <map>
+#include <string>
 #include "XPreDefine.h"
 
 class X_DLL XFile
