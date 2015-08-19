@@ -50,6 +50,10 @@
 		521A8E7019F0C3D200D177D7 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6E19F0C3D200D177D7 /* Default-667h@2x.png */; };
 		521A8E7119F0C3D200D177D7 /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 521A8E6F19F0C3D200D177D7 /* Default-736h@3x.png */; };
 		8C0810601B458DA600B74431 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C08105F1B458DA600B74431 /* Images.xcassets */; };
+		8C6042231B84D92200DC089D /* res.fpk in Resources */ = {isa = PBXBuildFile; fileRef = 8C6042211B84D92200DC089D /* res.fpk */; };
+		8C6042241B84D92200DC089D /* res.fpk in Resources */ = {isa = PBXBuildFile; fileRef = 8C6042211B84D92200DC089D /* res.fpk */; };
+		8C6042251B84D92200DC089D /* src.fpk in Resources */ = {isa = PBXBuildFile; fileRef = 8C6042221B84D92200DC089D /* src.fpk */; };
+		8C6042261B84D92200DC089D /* src.fpk in Resources */ = {isa = PBXBuildFile; fileRef = 8C6042221B84D92200DC089D /* src.fpk */; };
 		8C70CE531B627A6100DC3275 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C70CE521B627A6100DC3275 /* StoreKit.framework */; };
 		8CA479A51B69197400419D88 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA479A21B69197400419D88 /* FBSDKCoreKit.framework */; };
 		8CA479A61B69197400419D88 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA479A21B69197400419D88 /* FBSDKCoreKit.framework */; };
@@ -306,6 +310,8 @@
 		521A8E6E19F0C3D200D177D7 /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-667h@2x.png"; sourceTree = "<group>"; };
 		521A8E6F19F0C3D200D177D7 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-736h@3x.png"; sourceTree = "<group>"; };
 		8C08105F1B458DA600B74431 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = "lottery iOS/Images.xcassets"; sourceTree = SOURCE_ROOT; };
+		8C6042211B84D92200DC089D /* res.fpk */ = {isa = PBXFileReference; lastKnownFileType = file; name = res.fpk; path = ../../../runtime/IOS/res.fpk; sourceTree = "<group>"; };
+		8C6042221B84D92200DC089D /* src.fpk */ = {isa = PBXFileReference; lastKnownFileType = file; name = src.fpk; path = ../../../runtime/IOS/src.fpk; sourceTree = "<group>"; };
 		8C70CE521B627A6100DC3275 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		8CA479A21B69197400419D88 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = 3rd/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		8CA479A31B69197400419D88 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = 3rd/FBSDKLoginKit.framework; sourceTree = "<group>"; };
@@ -645,6 +651,8 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8C6042211B84D92200DC089D /* res.fpk */,
+				8C6042221B84D92200DC089D /* src.fpk */,
 				8CC355901B83871F00ACE872 /* init_asset */,
 				8C08105F1B458DA600B74431 /* Images.xcassets */,
 				C05D1C111923449100B808A4 /* config.json */,
@@ -865,6 +873,7 @@
 				8CF4D1DB1B6682440013B75F /* Icon-58.png in Resources */,
 				8CF4D1DC1B6682440013B75F /* Icon-152.png in Resources */,
 				8CF4D1DD1B6682440013B75F /* Icon-57.png in Resources */,
+				8C6042261B84D92200DC089D /* src.fpk in Resources */,
 				8CF4D1DE1B6682440013B75F /* Default-667h@2x.png in Resources */,
 				8CF4D1E01B6682440013B75F /* Icon-76.png in Resources */,
 				8CF4D1E11B6682440013B75F /* Icon-80.png in Resources */,
@@ -875,6 +884,7 @@
 				8CF4D1E71B6682440013B75F /* Icon-50.png in Resources */,
 				8CF4D1E81B6682440013B75F /* Icon-72.png in Resources */,
 				8CF4D1E91B6682440013B75F /* config.json in Resources */,
+				8C6042241B84D92200DC089D /* res.fpk in Resources */,
 				8CF4D1EA1B6682440013B75F /* Default-736h@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -893,6 +903,7 @@
 				5091733917ECE17A00D62437 /* Icon-58.png in Resources */,
 				5023811F17EBBCAC00990C9B /* Icon-152.png in Resources */,
 				5023812017EBBCAC00990C9B /* Icon-57.png in Resources */,
+				8C6042251B84D92200DC089D /* src.fpk in Resources */,
 				521A8E7019F0C3D200D177D7 /* Default-667h@2x.png in Resources */,
 				5023812217EBBCAC00990C9B /* Icon-76.png in Resources */,
 				5091733A17ECE17A00D62437 /* Icon-80.png in Resources */,
@@ -903,6 +914,7 @@
 				5091733817ECE17A00D62437 /* Icon-50.png in Resources */,
 				5023812117EBBCAC00990C9B /* Icon-72.png in Resources */,
 				C05D1C121923449100B808A4 /* config.json in Resources */,
+				8C6042231B84D92200DC089D /* res.fpk in Resources */,
 				521A8E7119F0C3D200D177D7 /* Default-736h@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
