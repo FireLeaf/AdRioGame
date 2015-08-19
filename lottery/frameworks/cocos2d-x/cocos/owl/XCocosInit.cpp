@@ -54,11 +54,13 @@ bool XInit::Init()
 	for (int i = 0; i < FPK_COUNT; i++)
 	{
 		FileUtils::getInstance()->addSearchPath(XPathMon::GetInstance().GetAssetUpdatePath() + std::string(g_FpkName[i]) + "/");
+		FileUtils::getInstance()->addSearchPath(XPathMon::GetInstance().GetInitAssetPath() + std::string(g_FpkName[i]) + "/");
 	}
 
 	//XPatcher::GetInstance().StartPatch("http://127.0.0.1/patch_us/0.0.1/");
 	FileUtils::getInstance()->addSearchPath(XPathMon::GetInstance().GetWritablePath());
 	FileUtils::getInstance()->addSearchPath(XPathMon::GetInstance().GetBundlePath());
+	FileUtils::getInstance()->addSearchPath(XPathMon::GetInstance().GetInitAssetPath());
 	FileUtils::getInstance()->addSearchPath(XPathMon::GetInstance().GetGameDataPath());
 	FileUtils::getInstance()->addSearchPath(XPathMon::GetInstance().GetAssetUpdatePath());
 

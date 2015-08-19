@@ -29,6 +29,7 @@ public:
 	std::string GetPathByTag(const char* tag) const;
 	std::string GetWritablePath() const {return writable_path;}
 	std::string GetBundlePath() const {return bundle_path;}
+	std::string GetInitAssetPath() const {return init_asset_path;}
 	std::string GetAssetUpdatePath() const {return asset_update_path;}
 	std::string GetTmpPath() const {return tmp_path;}
 	std::string GetGameDataPath() const {return game_data_path;}
@@ -36,6 +37,7 @@ public:
 protected:
 	std::string writable_path;
 	std::string bundle_path;
+	std::string init_asset_path;
 	std::string asset_update_path;
 	std::string tmp_path;
 	std::string game_data_path;

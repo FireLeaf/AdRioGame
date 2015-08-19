@@ -287,7 +287,7 @@ string FileUtilsWin32::getBundlePath() const
 	::GetModuleFileNameA(nullptr, exe_path, CC_MAX_PATH + 1);
 	string tmp_path = exe_path;
 	string bundle_path = tmp_path.substr(0, string(exe_path).find_last_of('\\'));
-	bundle_path += "/init_asset/";
+	bundle_path += "/";
 	return bundle_path;
 }
 
