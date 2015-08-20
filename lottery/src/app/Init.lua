@@ -6,3 +6,4 @@
 UIBase = import("app.UI.UIBase")
 UICollection = import("app.UI.UICollection")
 import("app.Net.InitNet")
+import("app.i18n.Init")

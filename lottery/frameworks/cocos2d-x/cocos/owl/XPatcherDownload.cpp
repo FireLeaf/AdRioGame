@@ -235,6 +235,7 @@ XHttpDownload::XHttpDownload(const char* url, const char* local_path, int thread
 	this->local_path = local_path;
 	this->thread_num = thread_num;
 	running = true;
+	cur_size = 0;
 }
 
 XHttpDownload::~XHttpDownload()

@@ -21,6 +21,11 @@ function UIBase:LoadUI()
 	-- body
 	self.ui_ = cc.uiloader:load(self.uifile_ .. ".csb")--:addTo(self)
 	--print("x : " .. ui:getPositionX() .. " y : " .. ui:getPositionY())
+	if self.ui_ then
+		print("load" .. self.uifile_ .. ".csb" .. " successful")
+	else
+		print("load" .. self.uifile_ .. ".csb" .. " failed")
+	end
 	self:addChild(self.ui_)
 end
 
