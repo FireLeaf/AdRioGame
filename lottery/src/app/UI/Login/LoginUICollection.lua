@@ -18,6 +18,11 @@ function LoginUICollection:OnInit()
     print("Login UI Collection Init")
     self:AddTemplate("LoginUI", LoginUI)
 	self:AddTemplate("LoginRegUI", LoginRegUI)
+
+	local loginUI = self:GetUI("LoginUI")
+    if loginUI then
+    	loginUI:Show(true)
+    end
 end
 
 return LoginUICollection

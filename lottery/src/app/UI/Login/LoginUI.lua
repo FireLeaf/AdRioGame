@@ -8,16 +8,20 @@ end)
 
 function LoginUI:ctor()
 	print("LoginUI ctor")
+
+	self.btn_login_ = nil
+	self.btn_fblogin_ = nil
+
 	self:OnInit()
 end
 
 function LoginUI:OnInit()
 	-- body
-	local btnLogin = self.ui_:getChildByName("Button_Login")
-	local btnRegister = self:GetControl("Button_Register")
-	btnRegister:addTouchEventListener(function ( event )
+	self.btn_login_ = self:GetControl("Button_Login")
+	self.btn_fblogin_ = self:GetControl("Button_FBLogin")
+	--[[btnRegister:addTouchEventListener(function ( event )
 		self:OnBtnRegister(event)
-	end)
+	end)]]
 end
 
 function LoginUI:OnBtnRegister( event )
