@@ -37,6 +37,7 @@ public:
 	//bool RepFile(const char* pack_name, const char*);
 	XFilePackageEasy* FindPack(const char* pack_name);
 	static const char* FindPackByFilePath(const char* path, std::string& pathkey);
+	bool SaveAll();
 protected:
 	std::vector<FilePackItem*> file_pack_items;
 };

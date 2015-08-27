@@ -1,8 +1,8 @@
 /**************************************************************************
-/*		FileName: XInit.cpp
+/*		FileName: XCocosInit.cpp
 /*		FileDesc: 
 /*		FileAuthor: YangCao
-/*		CreateTime: 2015/08/10 22:10:26
+/*		CreateTime: 2015/08/17 0:21:25
 /*		CopyRight: yc 
 /*************************************************************************/
 
@@ -12,13 +12,18 @@
 #include "XFilePackManager.h"
 #include "XFileGroup.h"
 #include "XPathMonitor.h"
+#include "cocos2d.h"
+
+using namespace std;
+using namespace cocos2d;
+using namespace XSys;
 
 extern const char* g_FpkName[64];
 
 bool XInit::Init()
 {
 	// init path
-	if (!XPatcher::GetInstance().Init(FileUtils::getInstance()->getWritablePath().c_str(), FileUtils::getInstance()->getBundlePath().c_str()))
+	if (!XPatcher::GetInstance()->Init(FileUtils::getInstance()->getWritablePath().c_str(), FileUtils::getInstance()->getBundlePath().c_str()))
 	{
 		return false;
 	}
@@ -49,11 +54,13 @@ bool XInit::Init()
 	for (int i = 0; i < FPK_COUNT; i++)
 	{
 		FileUtils::getInstance()->addSearchPath(XPathMon::GetInstance().GetAssetUpdatePath() + std::string(g_FpkName[i]) + "/");
+		FileUtils::getInstance()->addSearchPath(XPathMon::GetInstance().GetInitAssetPath() + std::string(g_FpkName[i]) + "/");
 	}
 
 	//XPatcher::GetInstance().StartPatch("http://127.0.0.1/patch_us/0.0.1/");
 	FileUtils::getInstance()->addSearchPath(XPathMon::GetInstance().GetWritablePath());
 	FileUtils::getInstance()->addSearchPath(XPathMon::GetInstance().GetBundlePath());
+	FileUtils::getInstance()->addSearchPath(XPathMon::GetInstance().GetInitAssetPath());
 	FileUtils::getInstance()->addSearchPath(XPathMon::GetInstance().GetGameDataPath());
 	FileUtils::getInstance()->addSearchPath(XPathMon::GetInstance().GetAssetUpdatePath());
 

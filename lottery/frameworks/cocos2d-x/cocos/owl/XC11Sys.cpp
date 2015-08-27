@@ -37,7 +37,7 @@ namespace XSys
 	XThreadPool* XCreateThreadPool(int thread_count){return NULL;}
 	void XReleaseThreadPool(XThreadPool*){}
 	bool XDeleteFile(const char* path){return true;}
-	bool XDeleteDirectory(const char* path, bool bIsSubDelAll){return true;}
+	bool XDeleteDirectory(const char* path, bool bIsSubDelAll){return  FileUtils::getInstance()->removeDirectory(path);}
 
 	void XLogOutput(const char* log)
 	{

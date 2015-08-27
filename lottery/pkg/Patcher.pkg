@@ -11,6 +11,7 @@ enum
 	PS_CHECK_VERSION,
 	PS_DOWNLOAD_PATCH,
 	PS_APPLY_PATCH,
+	PS_PATCH_ERROR,
 	PS_FINISH,
 };
 
@@ -50,7 +51,7 @@ public:
 	XPatcher();
 	~XPatcher();
 
-	static XPatcher& GetInstance();
+	static XPatcher* GetInstance();
 	bool Init(const char* writable_path, const char* bundle_path);
 
 	void TrigEvent(const PatcherEvent& pe);

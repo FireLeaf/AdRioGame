@@ -41,8 +41,12 @@ public:
 //		job.thread = this;
 		job.desc = desc;
 		stdthread = new std::thread(ThreadProc, (void*)this);
-		stdthread->detach();
-		return (stdthread->native_handle() != NULL);
+        if (stdthread->joinable()) {
+            stdthread->detach();
+            return true;
+        }
+		
+		return false;
 	}
 
 	bool ReleaseThread()

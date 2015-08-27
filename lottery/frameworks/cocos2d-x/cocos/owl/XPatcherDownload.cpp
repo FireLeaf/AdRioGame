@@ -8,6 +8,8 @@
 #include "XPatcherDownload.h"
 #include "XPatcher.h"
 #include "XTemplate.h"
+#include "XFile.h"
+#include <stdio.h>
 
 XPatcherDownload::XPatcherDownload()
 {
@@ -21,57 +23,91 @@ XPatcherDownload::~XPatcherDownload()
 		XSys::XReleaseThread(thread_handle);
 	}
 }
+size_t tmp_data(void *buffer, size_t size, size_t nmemb, void *user_p)
+{
+	return size * nmemb;
+}
+
+size_t get_size_struct(void* ptr, size_t size, size_t nmemb, void* data){
+	return (size_t)(size * nmemb);
+}
 
 bool XPatcherDownload::GetFileSize(const char* url, xint64& file_size, int& response_code)
 {
-	CURL* http_handle = curl_easy_init();
-	file_size = 0;
-	CURLcode res = CURLE_OK;
-	bool isOk = false;
-	do{
-		std::string url_a = url;
-		char* url_c = const_cast<char*> ( url_a.c_str() );
-		res = curl_easy_setopt( http_handle, CURLOPT_URL, url_c );
-		if ( CURLE_OK != res ) break;
+	CURL* curl;
+	CURLcode res;
+	double size = 0.0;
 
-		res = curl_easy_setopt( http_handle, CURLOPT_HEADER, 1 );
-		if ( CURLE_OK != res ) break;
+	curl = curl_easy_init();
+	if (!curl)
+		return false;
+	curl_easy_setopt(curl, CURLOPT_URL, url);
+	curl_easy_setopt(curl, CURLOPT_NOBODY, 1L);
+	curl_easy_setopt(curl, CURLOPT_HEADERFUNCTION, get_size_struct);
+	curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
 
-		res = curl_easy_setopt( http_handle, CURLOPT_NOBODY, 1 );
-		if ( CURLE_OK != res ) break;
-
-		res = curl_easy_setopt( http_handle, CURLOPT_MAXREDIRS, -1);
-		if ( CURLE_OK != res ) break;
-
-		res = curl_easy_setopt( http_handle, CURLOPT_FOLLOWLOCATION, 1);
-		if ( CURLE_OK != res ) break;
-
-		res = curl_easy_perform( http_handle );
-		if ( CURLE_OK != res ) break;
-
-		res = curl_easy_getinfo(http_handle, CURLINFO_RESPONSE_CODE, &response_code);
-		if ( CURLE_OK != res ) break;
-
-		if ( 200 != response_code )
-		{
-			//LOG_V_W( _T("HttpCode:%d"), nResponseCode );
-			break;
-		}
-
-		double db = 0.0f;
-		res = curl_easy_getinfo( http_handle, CURLINFO_CONTENT_LENGTH_DOWNLOAD, &db );
-		if ( CURLE_OK != res ) break;
-
-		file_size = static_cast<xint64>(db);
-
-		isOk = true;
-	}while ( false );
-
-	if ( CURLE_OK !=  res )
-	{
-		response_code = res;
+	res = curl_easy_perform(curl);
+	res = curl_easy_getinfo(curl, CURLINFO_CONTENT_LENGTH_DOWNLOAD, &size);
+	if(res != CURLE_OK){
+		fprintf(stderr, "curl_easy_getinfo() failed: %s\n", curl_easy_strerror(res));
+		return false;
 	}
-	return isOk;
+	curl_easy_cleanup(curl);
+	file_size = size;
+	return true;
+
+// 	CURL* http_handle = curl_easy_init();
+// 	file_size = 0;
+// 	CURLcode res = CURLE_OK;
+// 	bool isOk = false;
+// 	do{
+// 		std::string url_a = url;
+// 		char* url_c = const_cast<char*> ( url_a.c_str() );
+// 		res = curl_easy_setopt( http_handle, CURLOPT_URL, url_c );
+// 		if ( CURLE_OK != res ) break;
+// 
+// 		res = curl_easy_setopt(http_handle, CURLOPT_HEADERFUNCTION, &tmp_data);   // »Øµ÷º¯Êý
+// 		if ( CURLE_OK != res ) break;
+// 
+// 		res = curl_easy_setopt( http_handle, CURLOPT_HEADER, 1 );
+// 		if ( CURLE_OK != res ) break;
+// 
+// 		res = curl_easy_setopt( http_handle, CURLOPT_NOBODY, 1 );
+// 		if ( CURLE_OK != res ) break;
+// 
+// 		res = curl_easy_setopt( http_handle, CURLOPT_MAXREDIRS, -1);
+// 		if ( CURLE_OK != res ) break;
+// 
+// 		res = curl_easy_setopt( http_handle, CURLOPT_FOLLOWLOCATION, 1);
+// 		if ( CURLE_OK != res ) break;
+// 
+// 		res = curl_easy_perform( http_handle );
+// 		if ( CURLE_OK != res ) break;
+// 
+// 		res = curl_easy_getinfo(http_handle, CURLINFO_RESPONSE_CODE, &response_code);
+// 		if ( CURLE_OK != res ) break;
+// 
+// 		if ( 200 != response_code )
+// 		{
+// 			//LOG_V_W( _T("HttpCode:%d"), nResponseCode );
+// 			break;
+// 		}
+// 
+// 		double db = 0.0f;
+// 		res = curl_easy_getinfo( http_handle, CURLINFO_CONTENT_LENGTH_DOWNLOAD, &db );
+// 		if ( CURLE_OK != res ) break;
+// 
+// 		file_size = static_cast<xint64>(db);
+// 
+// 		isOk = true;
+// 	}while ( false );
+// 
+// 	if ( CURLE_OK !=  res )
+// 	{
+// 		response_code = res;
+// 	}
+// 	curl_easy_cleanup(http_handle);
+// 	return isOk;
 }
 
 xint32 DownloadProc(XJobDesc* desc)
@@ -190,7 +226,7 @@ bool XPatcherDownload::DownloadFileBackgroud(const char* url, const char* local_
 bool XPatcherDownload::DownloadFile(const char* url, const char* local_path, int thread_num, pfnDownloadProgress cb/* = nullptr*/, void* data/* = nullptr*/)
 {
 	XHttpDownload hd(url, local_path, thread_num);
-	return hd.Run();
+	return hd.Run(cb, data);
 }
 
 XHttpDownload::XHttpDownload(const char* url, const char* local_path, int thread_num)
@@ -199,6 +235,7 @@ XHttpDownload::XHttpDownload(const char* url, const char* local_path, int thread
 	this->local_path = local_path;
 	this->thread_num = thread_num;
 	running = true;
+	cur_size = 0;
 }
 
 XHttpDownload::~XHttpDownload()
@@ -224,12 +261,12 @@ size_t WriteData( void* data, size_t size, size_t nmemb, void* pClientData )
 	http_task->cur += dwWriten;
 	http_task->hd->cur_size += dwWriten;
 
-	if ( http_task->begin + dwWriten > http_task->end )
+	if ( http_task->cur > http_task->end )
 	{
 		assert(0);
 		return 0;
 	}
-	else if (http_task->begin + dwWriten == http_task->end)
+	else if (http_task->cur == http_task->end)
 	{
 		http_task->status = XHttpDownload::STATUS_FINISH;
 	}
@@ -237,11 +274,12 @@ size_t WriteData( void* data, size_t size, size_t nmemb, void* pClientData )
 	if (http_task->fp)
 	{
 		static int count = 0;
-		int writed = fwrite(data, 1, dwWriten, http_task->fp);
+		int writed = XFile::SafeWrite(data, 1, dwWriten, DOWNLOAD_WRITE_SAFE_SIZE, http_task->fp);
 		char buf[64] = {'\0'};
 		count += writed;
 		sprintf(buf, "write:%d,%d ", writed, count);
 		printf(buf);
+		assert(dwWriten == writed);
 		return writed;
 	}
 	return 0;
@@ -257,7 +295,7 @@ bool XHttpDownload::InitDownload()
 
 	if (file_size <= 0)
 	{
-		return true;
+		return false;
 	}
 
 	if (file_size < MIN_FILE_SIZE || thread_num < 0 || thread_num > MAX_THREAD_NUM)
@@ -410,7 +448,7 @@ bool XHttpDownload::EndDownload()
 	bool bIsFinish = true;
 	for (int i = 0; i < (int)http_tasks.size(); i++)
 	{
-		if (http_tasks[i] || http_tasks[i]->status != STATUS_FINISH)
+		if (!http_tasks[i] || http_tasks[i]->status != (int)STATUS_FINISH)
 		{
 			bIsFinish = false;
 			break;

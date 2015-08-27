@@ -11,11 +11,6 @@
 
 #include "XSys.h"
 #include <string>
-#include "cocos2d.h"
-
-using namespace std;
-using namespace cocos2d;
-using namespace XSys;
 
 enum PATCHER_EVENT
 {
@@ -72,17 +67,19 @@ typedef void (*pfnUploadCallback)(UploadFileBlock ufb);
 
 enum 
 {
+	PS_START,
+	PS_CHECK_NETOWRK,
+	PS_CHECK_VERSION,
+	PS_DOWNLOAD_PATCH,
+	PS_APPLY_PATCH,
+	PS_FINISH,
 	PS_UNKONW,
 	PS_NDS_ERROR,// dns reslove failed
 	PS_LOCAL_ASSET_BROKEN,
 	PS_ASSET_BROKEN,// asset broke
 	PS_NETWORK_EXCEPTION,
 	PS_APPVER_ERROR,// application error
-	PS_CHECK_NETOWRK,
-	PS_CHECK_VERSION,
-	PS_DOWNLOAD_PATCH,
-	PS_APPLY_PATCH,
-	PS_FINISH,
+	PS_PATCH_ERROR,
 };
 
 struct AssetVersion 
@@ -134,7 +131,7 @@ public:
 	XPatcher();
 	~XPatcher();
 
-	static XPatcher& GetInstance();
+	static XPatcher* GetInstance();
 	bool Init(const char* writable_path, const char* bundle_path);
 
 	void TrigEvent(const PatcherEvent& pe){}
@@ -159,6 +156,7 @@ protected:
 	XMutex* status_mutex;
 	XThread* patch_thread;
 	std::string patch_url;
+	bool has_change;
 };
 
 #endif // XPatcher

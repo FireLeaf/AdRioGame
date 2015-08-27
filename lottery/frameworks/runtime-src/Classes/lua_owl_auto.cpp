@@ -1,6 +1,6 @@
 /*
 ** Lua binding: owl
-** Generated automatically by tolua++-1.0.92 on 08/10/15 23:52:12.
+** Generated automatically by tolua++-1.0.92 on 08/17/15 22:06:20.
 */
 
 #ifndef __cplusplus
@@ -984,7 +984,7 @@ static int tolua_owl_pfnJobProc00(lua_State* tolua_S)
  {
   XJobDesc* parm = ((XJobDesc*)  tolua_tousertype(tolua_S,1,0));
   {
-   xint32 tolua_ret = (xint32)  pfnJobProc(parm);
+      xint32 tolua_ret = 0;//pfnJobProc(parm);
    {
 #ifdef __cplusplus
     void* tolua_obj = Mtolua_new((xint32)(tolua_ret));
@@ -2600,8 +2600,8 @@ static int tolua_owl_XPatcher_GetInstance00(lua_State* tolua_S)
 #endif
  {
   {
-   XPatcher& tolua_ret = (XPatcher&)  XPatcher::GetInstance();
-    tolua_pushusertype(tolua_S,(void*)&tolua_ret,"XPatcher");
+   XPatcher* tolua_ret = (XPatcher*)  XPatcher::GetInstance();
+    tolua_pushusertype(tolua_S,(void*)tolua_ret,"XPatcher");
   }
  }
  return 1;
@@ -3146,7 +3146,9 @@ TOLUA_API int tolua_owl_open (lua_State* tolua_S)
   tolua_constant(tolua_S,"PS_CHECK_VERSION",PS_CHECK_VERSION);
   tolua_constant(tolua_S,"PS_DOWNLOAD_PATCH",PS_DOWNLOAD_PATCH);
   tolua_constant(tolua_S,"PS_APPLY_PATCH",PS_APPLY_PATCH);
+  tolua_constant(tolua_S,"PS_PATCH_ERROR",PS_PATCH_ERROR);
   tolua_constant(tolua_S,"PS_FINISH",PS_FINISH);
+  tolua_constant(tolua_S,"PS_START",PS_START);
   tolua_cclass(tolua_S,"AssetVersion","AssetVersion","",NULL);
   tolua_beginmodule(tolua_S,"AssetVersion");
    tolua_variable(tolua_S,"main_version",tolua_get_AssetVersion_main_version,tolua_set_AssetVersion_main_version);

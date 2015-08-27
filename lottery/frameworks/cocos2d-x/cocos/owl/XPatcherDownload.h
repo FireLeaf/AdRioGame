@@ -22,6 +22,7 @@ enum
 {
 	MIN_FILE_SIZE = 2 * 1024 * 1024,
 	MAX_THREAD_NUM = 4,
+	DOWNLOAD_WRITE_SAFE_SIZE = 2048,
 };
 
 struct X_DLL DownloadFileTask : public XJobDesc

@@ -29,6 +29,7 @@ public:
 	int GetPlatformType(){return m_iPlatform;}
 	virtual void Login(const char* szCommand) = 0;
 	virtual void Logout(const char* szCommand) = 0;
+    virtual void Pay(const char* szCommand) = 0;
 protected:
 	int m_iPlatform;
 };

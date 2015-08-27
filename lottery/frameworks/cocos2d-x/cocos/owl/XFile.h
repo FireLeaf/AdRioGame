@@ -12,6 +12,7 @@
 #include "XType.h"
 #include <algorithm>
 #include <map>
+#include <string>
 #include "XPreDefine.h"
 
 class X_DLL XFile
@@ -51,8 +52,8 @@ public:
 	{
 		return fwrite(buffer, size, count, m_fp);
 	}
-
-	size_t SafeRead( void* buffer, size_t size, size_t count, int safe_size)
+	
+	static size_t SafeRead( void* buffer, size_t size, size_t count, int safe_size, FILE* fp)
 	{
 		size_t read_size = 0;
 		size_t all_size = size * count;
@@ -60,7 +61,7 @@ public:
 		{
 			size_t delta_size = all_size - read_size;
 			size_t cur_read = delta_size > (size_t)safe_size ? safe_size : delta_size;
-			size_t readed = Read( (void*)((unsigned char*)buffer + read_size), 1, cur_read);
+			size_t readed = fread( (void*)((unsigned char*)buffer + read_size), 1, cur_read, fp);
 			read_size += readed;
 			if (!readed)
 			{
@@ -70,7 +71,12 @@ public:
 		return read_size;
 	}
 
-	size_t SafeWrite( const void *buffer, size_t size, size_t count, int safe_size)
+	size_t SafeRead( void* buffer, size_t size, size_t count, int safe_size)
+	{
+		return SafeRead(buffer, size, count, safe_size, m_fp);
+	}
+
+	static size_t SafeWrite(const void *buffer, size_t size, size_t count, int safe_size, FILE* fp)
 	{
 		size_t write_size = 0;
 		size_t all_size = size * count;
@@ -78,7 +84,7 @@ public:
 		{
 			size_t delta_size = all_size - write_size;
 			size_t cur_write = delta_size > (size_t)safe_size ? safe_size : delta_size;
-			size_t writed = Write( (const void*)((unsigned char*)buffer + write_size), 1, cur_write);
+			size_t writed = fwrite( (const void*)((unsigned char*)buffer + write_size), 1, cur_write, fp);
 			write_size += writed;
 			if (!writed)
 			{
@@ -87,6 +93,11 @@ public:
 			}
 		}
 		return write_size;
+	}
+
+	size_t SafeWrite( const void *buffer, size_t size, size_t count, int safe_size)
+	{
+		return SafeWrite(buffer, size, count, safe_size, m_fp);
 	}
 
 	xchar *Gets( xchar *buffer, int n)

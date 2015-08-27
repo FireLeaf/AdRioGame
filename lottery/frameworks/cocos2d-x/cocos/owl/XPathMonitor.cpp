@@ -22,13 +22,15 @@ bool XPathMon::Init(const char* writable_path, const char* bundle_path)
 	AddPath("writable", this->writable_path.c_str());
 	this->bundle_path = bundle_path;
 	AddPath("bundle", this->bundle_path.c_str());
-	asset_update_path = this->writable_path + "/AssetUpdate/";
+	this->init_asset_path = this->bundle_path + "init_asset/";
+	AddPath("init_asset", init_asset_path.c_str());
+	asset_update_path = this->writable_path + "AssetUpdate/";
 	AddPath("asset_update", asset_update_path.c_str());
-	tmp_path = this->writable_path + "/Tmp/";
+	tmp_path = this->writable_path + "Tmp/";
 	AddPath("tmp", tmp_path.c_str());
-	game_data_path = this->writable_path + "/GameData/";
+	game_data_path = this->writable_path + "GameData/";
 	AddPath("game_data", game_data_path.c_str());
-	log_path = this->writable_path + "/Log/";
+	log_path = this->writable_path + "Log/";
 	AddPath("log", log_path.c_str());
 	return true;
 }

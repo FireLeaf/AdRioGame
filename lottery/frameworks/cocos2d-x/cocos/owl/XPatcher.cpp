@@ -15,11 +15,12 @@
 #include "XUtil.h"
 #include "XPatcherFile.h"
 #include "XFileGroup.h"
-
+using namespace XSys;
 XPatcher::XPatcher()
 {
 	status_mutex = XCreateMutex();
 	patch_thread = NULL;
+	has_change = false;
 }
 
 XPatcher::~XPatcher()
@@ -40,9 +41,11 @@ bool XPatcher::Init(const char* writable_path, const char* bundle_path)
 	return true;
 }
 
-XPatcher& XPatcher::GetInstance()
+XPatcher* XPatcher::GetInstance()
 {
-	static XPatcher inst;
+	static XPatcher* inst;
+	if (!inst)
+		inst = new XPatcher;
 	return inst;
 }
 
@@ -54,12 +57,21 @@ void XPatcher::Clean()
 		delete patch_thread;
 		patch_thread = NULL;
 	}
+
+	if(has_change)
+	{
+		has_change = false;
+		XFilePackManage& updatePckMan = XFileGroup::GetUpdatePackMan();
+		updatePckMan.SaveAll();
+	}
+
+	XSys::XDeleteDirectory(XPathMon::GetInstance().GetTmpPath().c_str(), true);//删除tmp下的文件
 }
 
 xint32 _PatchProc(XJobDesc* parm)
 {
-	XPatcher::GetInstance().PatchProc();
-	XPatcher::GetInstance().Clean();
+	XPatcher::GetInstance()->PatchProc();
+	XPatcher::GetInstance()->Clean();
 	return 0;
 }
 
@@ -92,13 +104,13 @@ bool XPatcher::LoadLocalAssetVersion(const std::string& asset_update_path, const
 		// if no update version then check bundle path version
 		if(!is_get_version)
 		{
-			std::string bundle_version_path = bundle_path + "/InitAsset/asset_ver.ver";
+			std::string bundle_version_path = bundle_path + "/init_asset/asset_ver.ver";
 			XFile bdver_file;
 			if (bdver_file.OpenFile(bundle_version_path.c_str(), "rt"))
 			{
 				XWrapMutex mtx(status_mutex);
 				// if parser this failed. it may be asset broken
-				if (3 != fscanf(upver_file.GetFileHandle(), "%d.%d.%d", 
+				if (3 != fscanf(bdver_file.GetFileHandle(), "%d.%d.%d",
 					&patch_state.cur_version.main_version, 
 					&patch_state.cur_version.sub_version, 
 					&patch_state.cur_version.asset_version) )
@@ -153,6 +165,10 @@ bool XPatcher::DownloadServerAssetVersion(const std::string& tmp_path)
 			return true;
 		}
 	}
+	{
+		XWrapMutex mtx(status_mutex);
+		patch_state.state = PS_NETWORK_EXCEPTION;
+	}
 	return false;
 }
 
@@ -166,7 +182,7 @@ void _DownloadPathCallBack(void* data, int downloaded, int total, int speed)
 
 void _ApplyPatchCallBack(int cur_apply, int total_apply)
 {
-	XPatcher::GetInstance().ApplyPatchCallBack(cur_apply, total_apply);
+	XPatcher::GetInstance()->ApplyPatchCallBack(cur_apply, total_apply);
 }
 
 void XPatcher::DownloadPathCallBack(void* data, int downloaded, int total, int speed)
@@ -214,15 +230,15 @@ bool XPatcher::DowloadPathAndApplay(const std::string& asset_update_path, const 
 			patch_state.total_count = total_count;
 			patch_state.getted_length = 0;
 			patch_state.total_length = 1;// prevent div 0
-			FormatString(patch_p_url, "%s/patch_%d_%d_%d.p", patch_url, patch_state.cur_version.main_version, patch_state.cur_version.sub_version, patch_state.cur_version.asset_version + 1);
-			FormatString(patch_local_path, "%s/patch_%d_%d_%d.p", tmp_path,  patch_state.cur_version.main_version, patch_state.cur_version.sub_version, patch_state.cur_version.asset_version + 1);
+			FormatString(patch_p_url, "%spatch_%d_%d_%d.p", patch_url.c_str(), patch_state.cur_version.main_version, patch_state.cur_version.sub_version, patch_state.cur_version.asset_version + 1);
+			FormatString(patch_local_path, "%spatch_%d_%d_%d.p", tmp_path.c_str(),  patch_state.cur_version.main_version, patch_state.cur_version.sub_version, patch_state.cur_version.asset_version + 1);
 		}
 
 		//download patch
 		{
 			XWrapMutex mtx(status_mutex);
 			patch_state.state = PS_DOWNLOAD_PATCH;
-			return false;
+			//return false;
 		}
 
 		XPatcherDownload pd;
@@ -237,7 +253,7 @@ bool XPatcher::DowloadPathAndApplay(const std::string& asset_update_path, const 
 		{
 			XWrapMutex mtx(status_mutex);
 			patch_state.state = PS_APPLY_PATCH;
-			return false;
+			//return false;
 		}
 		XPathcherFile pf;
 		if (pf.LoadPatch(patch_local_path.c_str()))
@@ -246,15 +262,16 @@ bool XPatcher::DowloadPathAndApplay(const std::string& asset_update_path, const 
 			{
 				//patch breaken
 				XWrapMutex mtx(status_mutex);
-				patch_state.state = PS_NETWORK_EXCEPTION;
+				patch_state.state = PS_PATCH_ERROR;
 				return false;
 			}
+			has_change = true;
 		}
 		else
 		{
 			//patch breaken
 			XWrapMutex mtx(status_mutex);
-			patch_state.state = PS_NETWORK_EXCEPTION;
+			patch_state.state = PS_PATCH_ERROR;
 			return false;
 		}
 		pf.CloseFile();
@@ -276,30 +293,55 @@ bool XPatcher::DowloadPathAndApplay(const std::string& asset_update_path, const 
 		{
 			//patch breaken
 			XWrapMutex mtx(status_mutex);
-			patch_state.state = PS_UNKONW;
+			patch_state.state = PS_PATCH_ERROR;
 			return false;
 		}
 		file_ver.CloseFile();
+	}
+
+	if(has_change)
+	{
+		has_change = false;
+		XFilePackManage& updatePckMan = XFileGroup::GetUpdatePackMan();
+		updatePckMan.SaveAll();
+	}
+
+	{
+		//patch breaken
+		XWrapMutex mtx(status_mutex);
+		patch_state.state = PS_FINISH;
+		return false;
 	}
 	return true;
 }
 
 void XPatcher::PatchProc()
 {
-	std::string asset_update_path = XPathMon::GetInstance().GetAssetUpdatePath();
-	std::string bundle_path = XPathMon::GetInstance().GetBundlePath();
-	std::string tmp_path = XPathMon::GetInstance().GetTmpPath();
 	{
 		XWrapMutex mtx(status_mutex);
 		patch_state.state = PS_CHECK_NETOWRK;
 	}
-	hostent* host = gethostbyname(patch_url.c_str());
-	if (!host)
-	{
-		XWrapMutex mtx(status_mutex);
-		patch_state.state = PS_NDS_ERROR;
-		return;
-	}
+	std::string asset_update_path = XPathMon::GetInstance().GetAssetUpdatePath();
+	std::string bundle_path = XPathMon::GetInstance().GetBundlePath();
+	std::string tmp_path = XPathMon::GetInstance().GetTmpPath();
+#ifdef _WIN32
+	WORD wVersionRequested;
+	WSADATA wsaData;
+	int err;
+
+	wVersionRequested = MAKEWORD( 2, 2 );
+
+	err = WSAStartup( wVersionRequested, &wsaData );
+#endif // _WIN32
+
+// 	hostent* host = gethostbyname(patch_url.c_str());
+// 	if (!host)
+// 	{
+// 		int ierror = WSAGetLastError();
+// 		XWrapMutex mtx(status_mutex);
+// 		patch_state.state = PS_NDS_ERROR;
+// 		return;
+// 	}
 	XLog::Get().LogOutput(true, "debug", "DNS reslove success");
 	{
 		XWrapMutex mtx(status_mutex);
@@ -331,14 +373,26 @@ void XPatcher::PatchProc()
 
 void XPatcher::StartPatch(const char* patch_url)
 {
+	{
+		XWrapMutex mtx(status_mutex);
+		if (patch_state.state <= PS_FINISH)
+		{
+			return;
+		}
+		patch_state.state = PS_START;
+	}
+	XSys::XCreateDirectory(XPathMon::GetInstance().GetTmpPath().c_str());
 	this->patch_url = patch_url;
 	if (!status_mutex)
 	{
 		XLog::Get().LogOutput(true, "patch", "dddd");
 		//...
 	}
-
-	patch_thread = XCreateThread(_PatchProc, NULL);
+	has_change = false;
+	if ( !(patch_thread = XCreateThread(_PatchProc, NULL)) )
+    {
+        return;
+    }
 }
 
 PatcherState XPatcher::QueryPatcherState()
