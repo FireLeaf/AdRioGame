@@ -35,10 +35,14 @@ end
 
 function UIBase:Show(show_ui)
 	local is_visable = self:isVisible()
-	if is_visable then
-		--todo
-	end
 	self:setVisible(show_ui)
+	if show_ui ~= is_visable then
+		if show_ui and type(self.OnShow) == "function" then
+			self:OnShow()
+		elseif show_ui == false and type(self.OnHide) == "function" then
+			self:OnHide()
+		end
+	end
 end
 
 function UIBase:IsShow()

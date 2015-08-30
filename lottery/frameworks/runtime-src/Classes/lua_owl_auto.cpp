@@ -2617,35 +2617,7 @@ static int tolua_owl_XPatcher_GetInstance00(lua_State* tolua_S)
 #ifndef TOLUA_DISABLE_tolua_owl_XPatcher_Init00
 static int tolua_owl_XPatcher_Init00(lua_State* tolua_S)
 {
-#ifndef TOLUA_RELEASE
- tolua_Error tolua_err;
- if (
-     !tolua_isusertype(tolua_S,1,"XPatcher",0,&tolua_err) ||
-     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
-     !tolua_isstring(tolua_S,3,0,&tolua_err) ||
-     !tolua_isnoobj(tolua_S,4,&tolua_err)
- )
-  goto tolua_lerror;
- else
-#endif
- {
-  XPatcher* self = (XPatcher*)  tolua_tousertype(tolua_S,1,0);
-  const char* writable_path = ((const char*)  tolua_tostring(tolua_S,2,0));
-  const char* bundle_path = ((const char*)  tolua_tostring(tolua_S,3,0));
-#ifndef TOLUA_RELEASE
-  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'Init'", NULL);
-#endif
-  {
-   bool tolua_ret = (bool)  self->Init(writable_path,bundle_path);
-   tolua_pushboolean(tolua_S,(bool)tolua_ret);
-  }
- }
- return 1;
-#ifndef TOLUA_RELEASE
- tolua_lerror:
- tolua_error(tolua_S,"#ferror in function 'Init'.",&tolua_err);
- return 0;
-#endif
+	 return 0;
 }
 #endif //#ifndef TOLUA_DISABLE
 

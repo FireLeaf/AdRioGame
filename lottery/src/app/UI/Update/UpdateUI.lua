@@ -14,7 +14,8 @@ function UpdateUI:ctor()
 	self.progress_update_ = nil
 	self.lab_cur_status_= nil
 	self.btn_retry_ = nil
-	self:OnInit()
+	self.counter_ = nil
+	self.is_enter_scene_ = false
 end
 
 function UpdateUI:OnInit()
@@ -30,6 +31,11 @@ function UpdateUI:OnInit()
 	end)
 	self.btn_retry_:setVisible(false);
 	self:StartPatch()
+end
+
+function UpdateUI:OnShow()
+	self.is_enter_scene_ = false
+	print("UpdateUI:OnShow")
 end
 
 function UpdateUI:StartPatch()
@@ -66,12 +72,11 @@ function UpdateUI:OnTick(dt)
 	elseif state == PS_FINISH then
 		progress = 100
 		status_string = StringTable.GetString("PATCHER_FINISH")
-		--local delay_ac = cc.DelayTime:create(2)
-		--local call_ac = cc.CallFunc:create(function ()
+		if self.is_enter_scene_ == false then
 			print("replace to login scene")
+			self.is_enter_scene_ = true
 			GlobalFunc.ReplaceScene("LoginScene")
-		--end)
-		--self:runAction(cc.Sequence:create(delay_ac, call_ac))
+		end
 	elseif state == PS_UNKONW then
 	elseif state == PS_NDS_ERROR then
 		status_string = StringTable.GetString("PATCHER_DNS_ERROR")

@@ -22,8 +22,12 @@ extern const char* g_FpkName[64];
 
 bool XInit::Init()
 {
+	if (!XPathMon::GetInstance().Init(FileUtils::getInstance()->getWritablePath().c_str(), FileUtils::getInstance()->getBundlePath().c_str()))
+	{
+		return false;
+	}
 	// init path
-	if (!XPatcher::GetInstance()->Init(FileUtils::getInstance()->getWritablePath().c_str(), FileUtils::getInstance()->getBundlePath().c_str()))
+	if (!XPatcher::GetInstance()->Init())
 	{
 		return false;
 	}

@@ -12,7 +12,6 @@ function LoginUI:ctor()
 	self.btn_login_ = nil
 	self.btn_fblogin_ = nil
 
-	self:OnInit()
 end
 
 function LoginUI:OnInit()
@@ -22,6 +21,23 @@ function LoginUI:OnInit()
 	--[[btnRegister:addTouchEventListener(function ( event )
 		self:OnBtnRegister(event)
 	end)]]
+	self.btn_login_:addTouchEventListener(function ( sender, eventType )
+		return self:OnBtnLogin(eventType)
+	end)
+end
+
+function LoginUI:OnBtnLogin( event )
+	--local x, y, prevX, prevY = event.x, event.y, event.prevX, event.prevY
+	print(event)
+	--[[print(event.name)
+    if event.name == "began" then
+         print("layer began")
+    elseif event.name == "moved" then
+        print("layer moved")
+    elseif event.name == "ended" then
+         print("layer ended")
+    end]]
+    return true
 end
 
 function LoginUI:OnBtnRegister( event )

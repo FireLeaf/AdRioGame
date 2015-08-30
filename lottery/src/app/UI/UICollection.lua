@@ -10,6 +10,7 @@ function UICollection:ctor(collection_name)
 	-- body
 	self.ui_class_tbl_ = {}
 	self.ui_inst_tbl_ = {}
+	self.ui_dsb_ = nil
 	self.collection_name = collection_name
     print("ui collection ctor")
     if type(self.OnInit) == "function" then
@@ -49,8 +50,39 @@ function UICollection:Tick(dt)
 	end
 end
 
+function UICollection:AlignUI(ui, align)
+	if ui == nil or align == nil then
+		return
+	end
+
+	local posx, posy = ui:getPosition()
+	local anchor = ui:getAnchorPoint()
+	local sz = ui:getContentSize()
+	print(ui:getName() .. " Pos : (" .. posx .. "," .. posy .. ") Anchor : (" .. anchor.x .. "," .. anchor.y .. ") ContentSZ : (" .. sz.width .. "," .. sz.height .. ")")
+
+	if align.xalign == -1 then
+	elseif align.xalign == 0 then
+	elseif align.xalign == 1 then
+	else
+	end
+
+	if align.xalign == -1 then
+
+	elseif align.xalign == 0 then
+		--ui:setAnchorPoint(cc.p(0, 0.5))
+		ui:setPositionY(53)
+		local posx, posy = ui:getPosition()
+		local anchor = ui:getAnchorPoint()
+		print(ui:getName() .. " Pos : (" .. posx .. "," .. posy .. ") Anchor : (" .. anchor.x .. "," .. anchor.y .. ")")
+	elseif align.xalign == 1 then
+
+	else
+
+	end
+end
+
 function UICollection:GetUI(uiname, vest)--ui文件名，以及创建的马甲名
-    if uiname == nil then
+    if uiname == nil or self.ui_dsb_ == nil or self.ui_dsb_[uiname] == nil then
         return nil
     end
     local ui = self:PeekUI(uiname, vest)
@@ -68,11 +100,15 @@ function UICollection:GetUI(uiname, vest)--ui文件名，以及创建的马甲�
 	end
 
 	if ui then
+		if type(ui.OnInit) == "function" then
+			ui:OnInit()
+		end
 		self.ui_inst_tbl_[uiname] = self.ui_inst_tbl_[uiname] or {}
 		self.ui_inst_tbl_[uiname][nick] = ui
 		ui:SetCollection(self)
 		self:addChild(ui)
-		ui:Show(false)
+		self:AlignUI(ui, self.ui_dsb_[uiname])
+		ui:setVisible(false)
 	end
 
 	return ui
