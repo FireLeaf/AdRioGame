@@ -57,8 +57,8 @@ function UICollection:AlignUI(ui, align)
 
 	local posx, posy = ui:getPosition()
 	local anchor = ui:getAnchorPoint()
-	local sz = ui:getContentSize()
-	print(ui:getName() .. " Pos : (" .. posx .. "," .. posy .. ") Anchor : (" .. anchor.x .. "," .. anchor.y .. ") ContentSZ : (" .. sz.width .. "," .. sz.height .. ")")
+	local dlg_width, dlg_height = ui:GetDialogSize()
+	print(ui:getName() .. " Pos : (" .. posx .. "," .. posy .. ") Anchor : (" .. anchor.x .. "," .. anchor.y .. ") ContentSZ : (" .. dlg_width .. "," .. dlg_height .. ")")
 
 	if align.xalign == -1 then
 	elseif align.xalign == 0 then
@@ -66,15 +66,20 @@ function UICollection:AlignUI(ui, align)
 	else
 	end
 
-	if align.xalign == -1 then
+	if align.yalign == -1 then
 
-	elseif align.xalign == 0 then
+	elseif align.yalign == 0 then
 		--ui:setAnchorPoint(cc.p(0, 0.5))
-		ui:setPositionY(53)
+		local logic_factor = display.height / DEFAULT_DESIGN_WIDTH
+		local align_logic_factor = 1.0 - logic_factor
+		local delta_height = (display.height - dlg_height) / 2.0
+		local pixel_factor = display.height / display.heightInPixels
+		local offset_y = delta_height --/ display.contentScaleFactor --/ pixel_factor
+		ui:setPositionY(offset_y)
 		local posx, posy = ui:getPosition()
 		local anchor = ui:getAnchorPoint()
 		print(ui:getName() .. " Pos : (" .. posx .. "," .. posy .. ") Anchor : (" .. anchor.x .. "," .. anchor.y .. ")")
-	elseif align.xalign == 1 then
+	elseif align.yalign == 1 then
 
 	else
 

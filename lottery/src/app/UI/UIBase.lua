@@ -33,6 +33,15 @@ function UIBase:GetControl(name)
 	return self.ui_ and self.ui_:getChildByName(name)
 end
 
+function UIBase:GetDialogSize()
+	local dialog_frame = self:GetControl("Dialog_Frame")
+	if dialog_frame then
+		local sz = dialog_frame:getContentSize()
+		return sz.width, sz.height
+	end
+	return 0, 0
+end
+
 function UIBase:Show(show_ui)
 	local is_visable = self:isVisible()
 	self:setVisible(show_ui)
