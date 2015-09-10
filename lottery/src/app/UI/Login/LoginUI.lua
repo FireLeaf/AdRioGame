@@ -37,6 +37,9 @@ function LoginUI:OnBtnLogin( event )
     elseif event.name == "ended" then
          print("layer ended")
     end]]
+    if event == 2 then
+    	SendPacket.RegisterAccount("yangcao", "yangcao123", "yangcao@163.com")
+    end
     return true
 end
 
