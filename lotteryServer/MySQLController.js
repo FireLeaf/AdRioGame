@@ -10,15 +10,13 @@ function MySQLController()
 
 MySQLController.prototype.connect = function(server, user, passwd){
 
-}
+};
 
 MySQLController.prototype.query = function(queryInfo){
 
-}
+};
 
-module.exports = function()
+module.exports.newController = function()
 {
-    this.newController = function(){
-        return new MySQLController();
-    }
-}
+    return new MySQLController();
+};

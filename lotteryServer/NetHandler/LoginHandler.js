@@ -3,7 +3,7 @@
  */
 
  function loginResponse(req, res, packet){
-
+    console.log("Login Response");
 }
 
 exports.RegisterHandler = function(registerHandler){
