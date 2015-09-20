@@ -14,13 +14,13 @@ function LoginInfo(){
     this.login_time_stamp = 0;
 }
 
-function Customer(){
+function Client(){
     this.uid = 0;
     this.session_id = "";
     this.last_time_stamp = 0;
     this.remote_address = "";
 }
 
-Customer.prototype.
+Client.prototype.
 
 module.exports = Customer;

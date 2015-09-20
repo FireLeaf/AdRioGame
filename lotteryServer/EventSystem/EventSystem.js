@@ -21,28 +21,33 @@ EventSystem.prototype.tickSchedule = function(tickTime, handler){
 };
 
 EventSystem.prototype.registerHandler = function(eventName, handler){
-    if (null == this.event_handler_pool[event_name]){
+    /*if (null == this.event_handler_pool[event_name]){
         this.event_handler_pool[event_name] = new Array();
     }
     var handlers = this.event_handler_pool[event_name];
     handlers.push(handler);
+    */
+    this.on(eventName, handler);
 };
 
 EventSystem.prototype.unregisterHandler = function(eventName, handler){
-    if (null != this.event_handler_pool[event_name]) {
+    /*if (null != this.event_handler_pool[event_name]) {
         var handlers = this.event_handler_pool[event_name];
         for (var i = 0; i < handlers.length; i++){
             if (handlers[i] == handler){
                 handlers[i] = null;
-                return true;
             }
         }
-    }
-    return false;
+    }*/
+    this.removeListener(eventName, handler);
 };
 
-EventSystem.prototype.emitEvent = function(){
+EventSystem.prototype.unregisterAllHandler = function(eventName){
+    this.removeAllListeners(eventName);
+}
 
+EventSystem.prototype.emitEvent = function(eventName, parm1, parm2, parm3, parm){
+    this.emit(eventName, parm1, parm2, parm3, parm);
 };
 
 util.inherits(EventSystem, EventEmitter);
