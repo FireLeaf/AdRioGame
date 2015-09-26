@@ -21,6 +21,8 @@ function Client(){
     this.remote_address = "";
 }
 
-Client.prototype.
+Client.prototype.refreshStatus = function(){
+    //update time stamp
+}
 
 module.exports = Customer;

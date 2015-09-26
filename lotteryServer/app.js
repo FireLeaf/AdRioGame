@@ -9,6 +9,11 @@ var controller = mysqlController.newController();
 var conf = util.parserJsonFromFile("config.json");
 console.log(conf);
 
+var a={b:90,c:88};
+for( var name in a)
+    console.log(name);
+console.log("fjdhfsahf" + 78);
+
 http.createServer(function (req, res) {
     // 设置接收数据编码格式为 UTF-8
     req.setEncoding('utf-8');

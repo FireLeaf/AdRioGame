@@ -12,6 +12,10 @@ EventSystem.prototype.delaySchedule = function(delayTime, handler){
     this.setTimeout(handler, delayTime);
 };
 
+EventSystem.prototype.removeDelaySchedule = function(handler){
+    this.clearTimeout(handler);
+}
+
 EventSystem.prototype.processNextTick = function(handler){
     process.nextTick(handler);
 };
@@ -19,6 +23,10 @@ EventSystem.prototype.processNextTick = function(handler){
 EventSystem.prototype.tickSchedule = function(tickTime, handler){
     this.setInterval(handler, tickTime);
 };
+
+EventSystem.prototype.removeTickSchedule = function(handler){
+    this.clearInterval(handler);
+}
 
 EventSystem.prototype.registerHandler = function(eventName, handler){
     /*if (null == this.event_handler_pool[event_name]){

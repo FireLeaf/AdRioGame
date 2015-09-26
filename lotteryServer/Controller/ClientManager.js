@@ -4,14 +4,19 @@
 
 var Client = require('./Client.js');
 
+var MAX_ONLINE_CLIENT = 3000;
+
 function GenerateSession(){
 
 }
 
 function ClientManager(){
-    this.UserTable = {};
+    this.UserTable = new Array(MAX_ONLINE_CLIENT);
+    this.UselessSlot = new Array(MAX_ONLINE_CLIENT);
 }
 
-ClientManager.prototype
+ClientManager.prototype.addClient = function(userID){
+
+}
 
 module.exports = new ClientManager();
