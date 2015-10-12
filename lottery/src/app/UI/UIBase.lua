@@ -17,6 +17,14 @@ function UIBase:ctor(uifile, vest)
 	end
 end
 
+function UIBase:GetUIName()
+	return self.uifile_
+end
+
+function UIBase:GetVestName()
+	return self.vest_
+end
+
 function UIBase:LoadUI()
 	-- body
 	self.ui_ = cc.uiloader:load(self.uifile_ .. ".csb")--:addTo(self)

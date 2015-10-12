@@ -6,4 +6,8 @@
 -- [uiname] = {xalign = 0, yalign = 0}
 GameUIDsb = 
 {
+	--info ui
+	["GameMain"] = {xalign = 0, yalign = 0, w = 768, h = 1024},
+	--game ui
+	["SorlarSystem/SolarSystemScene"] = {xalign = 0, yalign = 0},
 }

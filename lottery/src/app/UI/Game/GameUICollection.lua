@@ -8,6 +8,9 @@ end)
 
 import("app.UI.Game.GameDsb")
 
+local GameMainUI = import("app.ui.Game.GameMain")
+local SolarSystem = import("app.UI.Game.GameScene.SolarSystemUI")
+
 function GameUICollection:ctor()
     print("GameUICollection:ctor")
     self:OnInit()
@@ -16,7 +19,14 @@ end
 function GameUICollection:OnInit()
     self.ui_dsb_ = GameUIDsb
 
+    self:AddTemplate("GameMain", GameMainUI)
+    self:AddTemplate("SorlarSystem/SolarSystemScene", SolarSystem)
     print("Game UI Collection Init")
+
+    local gameMainUI = self:GetUI("GameMain")
+    if gameMainUI then
+    	gameMainUI:Show(true)
+    end
 end
 
-return LoginUICollection
+return GameUICollection

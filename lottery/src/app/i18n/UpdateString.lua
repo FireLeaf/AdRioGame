@@ -33,18 +33,3 @@ StringTable["PATCHER_ASSET_BROKEN"] = "资源被损坏"
 StringTable["PATCHER_NETWORK_EXCEPTION"] = "网络异常"
 StringTable["PATCHER_APPVER_ERROR"] = "请更新最新的程序包"
 StringTable["PATCHER_PATCH_ERROR"] = "下载的更新包被损坏"
-
-struct PatcherState 
-{
-	AssetVersion cur_version; //current version
-	AssetVersion target_version;// target version
-	int state;//current status
-	bool is_complete;// is complete not use
-	int total_length;// downloading currrent file total length
-	int getted_length;// dowloaded current file currrent length
-	int cur_index;// download current file index
-	int total_count; // total need download file
-	float real_speed;// current download speed
-	int apply_index; // current patch apply current index
-	int total_apply; // total patch need to be applied
-}
