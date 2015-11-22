@@ -51,3 +51,13 @@ bool XPathMon::AddPath(const char* tag, const char* full_path)
 	}
 	return false;
 }
+
+std::string XPathMon::GetPathByTag(const char* tag) const
+{
+	PathCacheMap::const_iterator iter = tag_map_path.find(tag);
+	if (iter != tag_map_path.end())
+	{
+		return iter->second;
+	}
+	return std::string("");
+}

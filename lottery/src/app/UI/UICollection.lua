@@ -102,6 +102,7 @@ end
 
 function UICollection:GetUI(uiname, vest)--ui文件名，以及创建的马甲名
     if uiname == nil or self.ui_dsb_ == nil or self.ui_dsb_[uiname] == nil then
+        print("unkonw ui : " .. uiname .. " (no register)")
         return nil
     end
     local ui = self:PeekUI(uiname, vest)
@@ -114,8 +115,8 @@ function UICollection:GetUI(uiname, vest)--ui文件名，以及创建的马甲�
 	if uiclass then
 		ui = uiclass.new(uiname, nick)
 	else
-        print("unkonw ui :", uiname)
 		ui = UIBase.new(uiname, nick)
+		print("unkonw ui :", uiname)
 	end
 
 	if ui then

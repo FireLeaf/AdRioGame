@@ -7,7 +7,7 @@
 GameUIDsb = 
 {
 	--info ui
-	["GameMain"] = {xalign = 0, yalign = 0, w = 768, h = 1024},
+	["GameMainUI"] = {xalign = 0, yalign = 0, w = 768, h = 1024},
 	--game ui
-	["SorlarSystem/SolarSystemScene"] = {xalign = 0, yalign = 0},
+	["SolarSystemUI"] = {xalign = 0, yalign = 0, w = 768, h = 1024},
 }

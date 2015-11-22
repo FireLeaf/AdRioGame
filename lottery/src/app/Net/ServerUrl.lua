@@ -6,6 +6,6 @@ function UrlGen(url)
 	return urlServerBase .. url
 end
 
-urlServerBase = "http://192.168.199.184:1338/"
+urlServerBase = "http://101.200.235.0:1338/"
 
 urlLoginRegister = "register"

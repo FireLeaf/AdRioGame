@@ -27,6 +27,7 @@ end
 
 function UIBase:LoadUI()
 	-- body
+	--cc.FileUtils:getInstance():addSearchPath("res/" .. self.uifile_ .. "/")
 	self.ui_ = cc.uiloader:load(self.uifile_ .. ".csb")--:addTo(self)
 	--print("x : " .. ui:getPositionX() .. " y : " .. ui:getPositionY())
 	if self.ui_ then
@@ -71,9 +72,9 @@ function UIBase:OnTick(dt)
 end
 
 function UIBase:SwitchToShowUI(name)
-	print("switch to :" ..  name)
 	local other = self:GetUI(name)
 	if other then
+		print("switch to :" ..  name)
 		self:Show(false)
 		other:Show(true)
 	end

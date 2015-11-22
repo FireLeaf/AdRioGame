@@ -10,7 +10,6 @@ function MyApp:ctor()
 end
 
 function MyApp:run()
-    cc.FileUtils:getInstance():addSearchPath("res/")
     import("app.Init")
     self:enterScene("UpdateScene")
 end
