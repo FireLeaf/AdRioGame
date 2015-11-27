@@ -39,6 +39,7 @@ function LoginUI:OnBtnLogin( event )
     end]]
     if event == 2 then
     	SendPacket.RegisterAccount("yangcao", "yangcao123", "yangcao@163.com")
+    	GlobalFunc.ReplaceScene("MainScene")
     end
     return true
 end

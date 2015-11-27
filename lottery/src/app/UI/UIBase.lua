@@ -17,8 +17,17 @@ function UIBase:ctor(uifile, vest)
 	end
 end
 
+function UIBase:GetUIName()
+	return self.uifile_
+end
+
+function UIBase:GetVestName()
+	return self.vest_
+end
+
 function UIBase:LoadUI()
 	-- body
+	--cc.FileUtils:getInstance():addSearchPath("res/" .. self.uifile_ .. "/")
 	self.ui_ = cc.uiloader:load(self.uifile_ .. ".csb")--:addTo(self)
 	--print("x : " .. ui:getPositionX() .. " y : " .. ui:getPositionY())
 	if self.ui_ then
@@ -63,9 +72,9 @@ function UIBase:OnTick(dt)
 end
 
 function UIBase:SwitchToShowUI(name)
-	print("switch to :" ..  name)
 	local other = self:GetUI(name)
 	if other then
+		print("switch to :" ..  name)
 		self:Show(false)
 		other:Show(true)
 	end

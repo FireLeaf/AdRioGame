@@ -19,7 +19,7 @@ function UICollection:ctor(collection_name)
 end
 
 function UICollection:AddTemplate(uiname, classname)
-	self.ui_class_tbl_[uiname] = classname
+	self.ui_class_tbl_[uiname] = classname;
     print("register " .. uiname )
 end
 
@@ -50,6 +50,17 @@ function UICollection:Tick(dt)
 	end
 end
 
+function UICollection:GetDialogSize(uiname)
+	if self.ui_dsb_ == nil or self.ui_dsb_[uiname] == nil then
+		return nil
+	end
+	local class_desc = self.ui_dsb_[uiname]
+	if class_desc then
+		return class_desc.w, class_desc.h
+	end
+	return nil
+end
+
 function UICollection:AlignUI(ui, align)
 	if ui == nil or align == nil then
 		return
@@ -57,8 +68,11 @@ function UICollection:AlignUI(ui, align)
 
 	local posx, posy = ui:getPosition()
 	local anchor = ui:getAnchorPoint()
-	local dlg_width, dlg_height = ui:GetDialogSize()
-	print(ui:getName() .. " Pos : (" .. posx .. "," .. posy .. ") Anchor : (" .. anchor.x .. "," .. anchor.y .. ") ContentSZ : (" .. dlg_width .. "," .. dlg_height .. ")")
+	local dlg_width, dlg_height = self:GetDialogSize(ui:GetUIName()) 
+	if dlg_width == nil or dlg_height == nil then
+		dlg_width , dlg_height = ui:GetDialogSize()
+	end
+	print(ui:GetUIName() .. " Pos : (" .. posx .. "," .. posy .. ") Anchor : (" .. anchor.x .. "," .. anchor.y .. ") ContentSZ : (" .. dlg_width .. "," .. dlg_height .. ")")
 
 	if align.xalign == -1 then
 	elseif align.xalign == 0 then
@@ -78,7 +92,7 @@ function UICollection:AlignUI(ui, align)
 		ui:setPositionY(offset_y)
 		local posx, posy = ui:getPosition()
 		local anchor = ui:getAnchorPoint()
-		print(ui:getName() .. " Pos : (" .. posx .. "," .. posy .. ") Anchor : (" .. anchor.x .. "," .. anchor.y .. ")")
+		print(ui:GetUIName() .. " Pos : (" .. posx .. "," .. posy .. ") Anchor : (" .. anchor.x .. "," .. anchor.y .. ")")
 	elseif align.yalign == 1 then
 
 	else
@@ -88,6 +102,7 @@ end
 
 function UICollection:GetUI(uiname, vest)--ui文件名，以及创建的马甲名
     if uiname == nil or self.ui_dsb_ == nil or self.ui_dsb_[uiname] == nil then
+        print("unkonw ui : " .. uiname .. " (no register)")
         return nil
     end
     local ui = self:PeekUI(uiname, vest)
@@ -100,8 +115,8 @@ function UICollection:GetUI(uiname, vest)--ui文件名，以及创建的马甲�
 	if uiclass then
 		ui = uiclass.new(uiname, nick)
 	else
-        print("unkonw ui :", uiname)
 		ui = UIBase.new(uiname, nick)
+		print("unkonw ui :", uiname)
 	end
 
 	if ui then

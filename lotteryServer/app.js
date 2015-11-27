@@ -4,8 +4,7 @@
 var http = require('http');
 var util= require("./Util/util.js");
 var netHandler = require("./NetHandler/NetHandler.js");
-var mysqlController = require("./MySQLController.js");
-var controller = mysqlController.newController();
+require("./test/mysql_test.js");
 var conf = util.parserJsonFromFile("config.json");
 console.log(conf);
 
@@ -13,6 +12,7 @@ var a={b:90,c:88};
 for( var name in a)
     console.log(name);
 console.log("fjdhfsahf" + 78);
+
 
 http.createServer(function (req, res) {
     // 设置接收数据编码格式为 UTF-8
@@ -43,5 +43,5 @@ http.createServer(function (req, res) {
 //        };
 //        res.end(JSON.stringify(data));
 //    });
-}).listen(1338, '192.168.199.184');
-console.log('Server running at http://192.168.199.184:1338/');
+}).listen(1338, '127.0.0.1');
+console.log('Server running at http://127.0.0.1:1338/');
