@@ -7,5 +7,5 @@
 }
 
 exports.RegisterHandler = function(registerHandler){
-    registerHandler(TS_NetCode.NC_TS_LOGINREQUEST, loginResponse);
+   // registerHandler(TS_NetCode.NC_CS_LOGINREQUEST, loginResponse);
 };

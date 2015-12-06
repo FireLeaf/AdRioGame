@@ -2,7 +2,8 @@
  * Created by Administrator on 2015/9/7.
  */
 var http = require('http');
-var util= require("./Util/util.js");
+var util= require("./Util/UtilFunc.js");
+var pathMan = require("./Util/Path.js");
 var netHandler = require("./NetHandler/NetHandler.js");
 require("./test/mysql_test.js");
 var conf = util.parserJsonFromFile("config.json");

@@ -3,11 +3,12 @@
  */
 
 require("./NetCode.js");
+var packetFactory = require("./PacketFactory.js");
 var loginHandler = require("./LoginHandler.js");
 
 var handlerPool = {};
 function registerHandler(code, responseHandler){
-    handlerPool[code] = responseHandler;
+    //handlerPool[code] = responseHandler;
 }
 
 loginHandler.RegisterHandler(registerHandler);
@@ -29,16 +30,14 @@ exports.handlerHttpPacket = function (req, res) {
         console.log('数据接收完毕');
         try{
             var params = JSON.parse(postData);//GET & POST  ////解释表单数据部分{name="zzl",email="zzl@sina.com"}
-            if(params["id"] != null && params["data"] != null)// && params["session_id"] != null)
-            {
-                if(handlerPool[params["id"]] != null)
-                {
-                    handlerPool[params["id"]](req, res, params);
+            if (params){
+                //将这些作为参数放到数据里面去
+                params.req = req;
+                params.res = res;
+                var packet = packetFactory.CreatePacket(params);
+                if (packet){
+                    packet.handlePacketImp();
                 }
-            }
-            else
-            {
-                //...
             }
         }catch(exp){
             //...
