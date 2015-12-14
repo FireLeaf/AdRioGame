@@ -17,12 +17,7 @@ GameLogic.prototype.HandlerPacket = function(res, req, packet){
             return;//当前用户已经登录
         }
     }
-    //switch() {
-    //    case NC_TS_LOGINREQUEST:
-    //
-    //        break;
-    //    default :
-    //        break;
-    //}
 };
+
+module.exports = new GameLogic();
 

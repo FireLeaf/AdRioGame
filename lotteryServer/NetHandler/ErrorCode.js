@@ -6,4 +6,5 @@ global.ErrorCode = {
     EC_UNKONW               : 1,//未知错误
     EC_LOGIN_REPEAT        : 2,//重复登录
     EC_SERVER_FULL         : 3,//服务器已满
+    EC_SERVER_EXCEPTION   : 4,//服务器行为异常
 };

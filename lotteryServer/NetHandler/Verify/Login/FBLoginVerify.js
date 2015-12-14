@@ -6,8 +6,9 @@
 function FBLoginVerify(){
 
 }
-FBLoginVerify.Verify = function(){
 
-}
+FBLoginVerify.prototype.Verify = function(){
 
-module.exports = FBLoginVerify;
+};
+
+module.exports = new FBLoginVerify();
