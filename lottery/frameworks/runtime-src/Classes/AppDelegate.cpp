@@ -63,6 +63,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 	if(!XInit::Init())
 	{
 		XLog::Get().LogOutput(true, "error", "XInit::init failed(%s)", __FUNCTION__ /*, __LINE__*/);
+        return false;
 	}
 	
 	LuaStack* stack = engine->getLuaStack();

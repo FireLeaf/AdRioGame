@@ -76,7 +76,9 @@
 //        return UIInterfaceOrientationMaskPortraitUpsideDown;
 //    }
 //#endif
-    return UIInterfaceOrientationMaskPortraitUpsideDown;
+#ifdef __IPHONE_6_0
+    return UIInterfaceOrientationMaskPortrait;//UIInterfaceOrientationMaskPortraitUpsideDown;
+#endif
 }
 
 - (BOOL) shouldAutorotate {
@@ -85,7 +87,7 @@
 //    }else{
 //        return NO;
 //    }
-    return NO;
+    return YES;
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
