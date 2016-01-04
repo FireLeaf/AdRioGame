@@ -13,6 +13,9 @@
     <Filter Include="Platform">
       <UniqueIdentifier>{b09b50a0-65ec-4337-aa9a-2902588f8ef1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{dfd27452-3119-4a5e-9cc2-701b3a86423e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h">
@@ -41,6 +44,12 @@
     <ClInclude Include="..\Classes\lua_module_register.h">
       <Filter>Classes</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\Util\AsyncCall.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Util\LuaUtil.h">
+      <Filter>Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
@@ -58,6 +67,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\lua_owl_auto.cpp">
       <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Util\AsyncCall.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Util\LuaUtil.cpp">
+      <Filter>Util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

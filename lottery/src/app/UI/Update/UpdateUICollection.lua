@@ -7,6 +7,7 @@ local UpdateUICollection = class("UpdateUICollection", function ()
 end)
 
 local UpdateUI = import("app.UI.Update.UpdateUI")
+import("app.UI.Update.UpdateDsb")
 
 function UpdateUICollection:ctor()
     print("UpdateUICollection:ctor")
@@ -14,6 +15,9 @@ function UpdateUICollection:ctor()
 end
 
 function UpdateUICollection:OnInit()
+
+	self.ui_dsb_ = UpdateUIDsb
+
     print("Login UI Collection Init")
     self:AddTemplate("UpdateUI", UpdateUI)
 

@@ -1,6 +1,6 @@
 /*
 ** Lua binding: owl
-** Generated automatically by tolua++-1.0.92 on 08/17/15 22:06:20.
+** Generated automatically by tolua++-1.0.92 on 11/18/15 23:47:21.
 */
 
 #ifndef __cplusplus
@@ -18,6 +18,7 @@ TOLUA_API int  tolua_owl_open (lua_State* tolua_S);
 #include "owl/XLog.h"
 #include "owl/XSys.h"
 #include "owl/XPatcher.h"
+#include "owl/XPathMonitor.h"
 
 /* function to release collected object via destructor */
 #ifdef __cplusplus
@@ -93,6 +94,7 @@ static void tolua_reg_types (lua_State* tolua_S)
  tolua_usertype(tolua_S,"XFile");
  tolua_usertype(tolua_S,"XThreadPool");
  tolua_usertype(tolua_S,"PatcherEvent");
+ tolua_usertype(tolua_S,"XPathMon");
  tolua_usertype(tolua_S,"XPatcher");
  tolua_usertype(tolua_S,"XLog");
  tolua_usertype(tolua_S,"pfnUploadCallback");
@@ -2997,6 +2999,364 @@ static int tolua_owl_XPatcher_Clean00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: GetInstance of class  XPathMon */
+#ifndef TOLUA_DISABLE_tolua_owl_XPathMon_GetInstance00
+static int tolua_owl_XPathMon_GetInstance00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertable(tolua_S,1,"XPathMon",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  {
+   XPathMon& tolua_ret = (XPathMon&)  XPathMon::GetInstance();
+    tolua_pushusertype(tolua_S,(void*)&tolua_ret,"XPathMon");
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'GetInstance'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: Init of class  XPathMon */
+#ifndef TOLUA_DISABLE_tolua_owl_XPathMon_Init00
+static int tolua_owl_XPathMon_Init00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"XPathMon",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,3,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  XPathMon* self = (XPathMon*)  tolua_tousertype(tolua_S,1,0);
+  const char* writable_path = ((const char*)  tolua_tostring(tolua_S,2,0));
+  const char* bundle_path = ((const char*)  tolua_tostring(tolua_S,3,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'Init'", NULL);
+#endif
+  {
+   bool tolua_ret = (bool)  self->Init(writable_path,bundle_path);
+   tolua_pushboolean(tolua_S,(bool)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'Init'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: AddPath of class  XPathMon */
+#ifndef TOLUA_DISABLE_tolua_owl_XPathMon_AddPath00
+static int tolua_owl_XPathMon_AddPath00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"XPathMon",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isstring(tolua_S,3,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,4,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  XPathMon* self = (XPathMon*)  tolua_tousertype(tolua_S,1,0);
+  const char* tag = ((const char*)  tolua_tostring(tolua_S,2,0));
+  const char* full_path = ((const char*)  tolua_tostring(tolua_S,3,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'AddPath'", NULL);
+#endif
+  {
+   bool tolua_ret = (bool)  self->AddPath(tag,full_path);
+   tolua_pushboolean(tolua_S,(bool)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'AddPath'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: GetPathByTag of class  XPathMon */
+#ifndef TOLUA_DISABLE_tolua_owl_XPathMon_GetPathByTag00
+static int tolua_owl_XPathMon_GetPathByTag00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"const XPathMon",0,&tolua_err) ||
+     !tolua_isstring(tolua_S,2,0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,3,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  const XPathMon* self = (const XPathMon*)  tolua_tousertype(tolua_S,1,0);
+  const char* tag = ((const char*)  tolua_tostring(tolua_S,2,0));
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'GetPathByTag'", NULL);
+#endif
+  {
+   std::string tolua_ret = (std::string)  self->GetPathByTag(tag);
+   tolua_pushcppstring(tolua_S,(const char*)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'GetPathByTag'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: GetWritablePath of class  XPathMon */
+#ifndef TOLUA_DISABLE_tolua_owl_XPathMon_GetWritablePath00
+static int tolua_owl_XPathMon_GetWritablePath00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"const XPathMon",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  const XPathMon* self = (const XPathMon*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'GetWritablePath'", NULL);
+#endif
+  {
+   std::string tolua_ret = (std::string)  self->GetWritablePath();
+   tolua_pushcppstring(tolua_S,(const char*)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'GetWritablePath'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: GetBundlePath of class  XPathMon */
+#ifndef TOLUA_DISABLE_tolua_owl_XPathMon_GetBundlePath00
+static int tolua_owl_XPathMon_GetBundlePath00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"const XPathMon",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  const XPathMon* self = (const XPathMon*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'GetBundlePath'", NULL);
+#endif
+  {
+   std::string tolua_ret = (std::string)  self->GetBundlePath();
+   tolua_pushcppstring(tolua_S,(const char*)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'GetBundlePath'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: GetInitAssetPath of class  XPathMon */
+#ifndef TOLUA_DISABLE_tolua_owl_XPathMon_GetInitAssetPath00
+static int tolua_owl_XPathMon_GetInitAssetPath00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"const XPathMon",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  const XPathMon* self = (const XPathMon*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'GetInitAssetPath'", NULL);
+#endif
+  {
+   std::string tolua_ret = (std::string)  self->GetInitAssetPath();
+   tolua_pushcppstring(tolua_S,(const char*)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'GetInitAssetPath'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: GetAssetUpdatePath of class  XPathMon */
+#ifndef TOLUA_DISABLE_tolua_owl_XPathMon_GetAssetUpdatePath00
+static int tolua_owl_XPathMon_GetAssetUpdatePath00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"const XPathMon",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  const XPathMon* self = (const XPathMon*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'GetAssetUpdatePath'", NULL);
+#endif
+  {
+   std::string tolua_ret = (std::string)  self->GetAssetUpdatePath();
+   tolua_pushcppstring(tolua_S,(const char*)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'GetAssetUpdatePath'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: GetTmpPath of class  XPathMon */
+#ifndef TOLUA_DISABLE_tolua_owl_XPathMon_GetTmpPath00
+static int tolua_owl_XPathMon_GetTmpPath00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"const XPathMon",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  const XPathMon* self = (const XPathMon*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'GetTmpPath'", NULL);
+#endif
+  {
+   std::string tolua_ret = (std::string)  self->GetTmpPath();
+   tolua_pushcppstring(tolua_S,(const char*)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'GetTmpPath'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: GetGameDataPath of class  XPathMon */
+#ifndef TOLUA_DISABLE_tolua_owl_XPathMon_GetGameDataPath00
+static int tolua_owl_XPathMon_GetGameDataPath00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"XPathMon",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  XPathMon* self = (XPathMon*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'GetGameDataPath'", NULL);
+#endif
+  {
+   std::string tolua_ret = (std::string)  self->GetGameDataPath();
+   tolua_pushcppstring(tolua_S,(const char*)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'GetGameDataPath'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
+/* method: GetLogPath of class  XPathMon */
+#ifndef TOLUA_DISABLE_tolua_owl_XPathMon_GetLogPath00
+static int tolua_owl_XPathMon_GetLogPath00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"const XPathMon",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  const XPathMon* self = (const XPathMon*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'GetLogPath'", NULL);
+#endif
+  {
+   std::string tolua_ret = (std::string)  self->GetLogPath();
+   tolua_pushcppstring(tolua_S,(const char*)tolua_ret);
+  }
+ }
+ return 1;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'GetLogPath'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* Open function */
 TOLUA_API int tolua_owl_open (lua_State* tolua_S)
 {
@@ -3201,6 +3561,20 @@ TOLUA_API int tolua_owl_open (lua_State* tolua_S)
    tolua_function(tolua_S,"DownloadPathCallBack",tolua_owl_XPatcher_DownloadPathCallBack00);
    tolua_function(tolua_S,"ApplyPatchCallBack",tolua_owl_XPatcher_ApplyPatchCallBack00);
    tolua_function(tolua_S,"Clean",tolua_owl_XPatcher_Clean00);
+  tolua_endmodule(tolua_S);
+  tolua_cclass(tolua_S,"XPathMon","XPathMon","",NULL);
+  tolua_beginmodule(tolua_S,"XPathMon");
+   tolua_function(tolua_S,"GetInstance",tolua_owl_XPathMon_GetInstance00);
+   tolua_function(tolua_S,"Init",tolua_owl_XPathMon_Init00);
+   tolua_function(tolua_S,"AddPath",tolua_owl_XPathMon_AddPath00);
+   tolua_function(tolua_S,"GetPathByTag",tolua_owl_XPathMon_GetPathByTag00);
+   tolua_function(tolua_S,"GetWritablePath",tolua_owl_XPathMon_GetWritablePath00);
+   tolua_function(tolua_S,"GetBundlePath",tolua_owl_XPathMon_GetBundlePath00);
+   tolua_function(tolua_S,"GetInitAssetPath",tolua_owl_XPathMon_GetInitAssetPath00);
+   tolua_function(tolua_S,"GetAssetUpdatePath",tolua_owl_XPathMon_GetAssetUpdatePath00);
+   tolua_function(tolua_S,"GetTmpPath",tolua_owl_XPathMon_GetTmpPath00);
+   tolua_function(tolua_S,"GetGameDataPath",tolua_owl_XPathMon_GetGameDataPath00);
+   tolua_function(tolua_S,"GetLogPath",tolua_owl_XPathMon_GetLogPath00);
   tolua_endmodule(tolua_S);
  tolua_endmodule(tolua_S);
  return 1;

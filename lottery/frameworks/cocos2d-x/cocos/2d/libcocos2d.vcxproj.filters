@@ -1837,7 +1837,7 @@
     <ClCompile Include="..\owl\XUtil.cpp">
       <Filter>owl</Filter>
     </ClCompile>
-    <ClCompile Include="..\owl\XInit.cpp">
+    <ClCompile Include="..\owl\XCocosInit.cpp">
       <Filter>owl</Filter>
     </ClCompile>
   </ItemGroup>

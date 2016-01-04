@@ -6,6 +6,8 @@ PacketHandler = {}
 
 import("app.Net.NetUtil")
 
+NetHandler = import("app.Net.NetHandler").new()
+
 HttpRequest = import("app.Net.HttpRequest").new()
 
 import("app.Net.NetCode")

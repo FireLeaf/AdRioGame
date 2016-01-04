@@ -10,6 +10,7 @@ function UICollection:ctor(collection_name)
 	-- body
 	self.ui_class_tbl_ = {}
 	self.ui_inst_tbl_ = {}
+	self.ui_dsb_ = nil
 	self.collection_name = collection_name
     print("ui collection ctor")
     if type(self.OnInit) == "function" then
@@ -18,7 +19,7 @@ function UICollection:ctor(collection_name)
 end
 
 function UICollection:AddTemplate(uiname, classname)
-	self.ui_class_tbl_[uiname] = classname
+	self.ui_class_tbl_[uiname] = classname;
     print("register " .. uiname )
 end
 
@@ -49,8 +50,59 @@ function UICollection:Tick(dt)
 	end
 end
 
+function UICollection:GetDialogSize(uiname)
+	if self.ui_dsb_ == nil or self.ui_dsb_[uiname] == nil then
+		return nil
+	end
+	local class_desc = self.ui_dsb_[uiname]
+	if class_desc then
+		return class_desc.w, class_desc.h
+	end
+	return nil
+end
+
+function UICollection:AlignUI(ui, align)
+	if ui == nil or align == nil then
+		return
+	end
+
+	local posx, posy = ui:getPosition()
+	local anchor = ui:getAnchorPoint()
+	local dlg_width, dlg_height = self:GetDialogSize(ui:GetUIName()) 
+	if dlg_width == nil or dlg_height == nil then
+		dlg_width , dlg_height = ui:GetDialogSize()
+	end
+	print(ui:GetUIName() .. " Pos : (" .. posx .. "," .. posy .. ") Anchor : (" .. anchor.x .. "," .. anchor.y .. ") ContentSZ : (" .. dlg_width .. "," .. dlg_height .. ")")
+
+	if align.xalign == -1 then
+	elseif align.xalign == 0 then
+	elseif align.xalign == 1 then
+	else
+	end
+
+	if align.yalign == -1 then
+
+	elseif align.yalign == 0 then
+		--ui:setAnchorPoint(cc.p(0, 0.5))
+		local logic_factor = display.height / DEFAULT_DESIGN_WIDTH
+		local align_logic_factor = 1.0 - logic_factor
+		local delta_height = (display.height - dlg_height) / 2.0
+		local pixel_factor = display.height / display.heightInPixels
+		local offset_y = delta_height --/ display.contentScaleFactor --/ pixel_factor
+		ui:setPositionY(offset_y)
+		local posx, posy = ui:getPosition()
+		local anchor = ui:getAnchorPoint()
+		print(ui:GetUIName() .. " Pos : (" .. posx .. "," .. posy .. ") Anchor : (" .. anchor.x .. "," .. anchor.y .. ")")
+	elseif align.yalign == 1 then
+
+	else
+
+	end
+end
+
 function UICollection:GetUI(uiname, vest)--ui文件名，以及创建的马甲名
-    if uiname == nil then
+    if uiname == nil or self.ui_dsb_ == nil or self.ui_dsb_[uiname] == nil then
+        print("unkonw ui : " .. uiname .. " (no register)")
         return nil
     end
     local ui = self:PeekUI(uiname, vest)
@@ -63,16 +115,20 @@ function UICollection:GetUI(uiname, vest)--ui文件名，以及创建的马甲�
 	if uiclass then
 		ui = uiclass.new(uiname, nick)
 	else
-        print("unkonw ui :", uiname)
 		ui = UIBase.new(uiname, nick)
+		print("unkonw ui :", uiname)
 	end
 
 	if ui then
+		if type(ui.OnInit) == "function" then
+			ui:OnInit()
+		end
 		self.ui_inst_tbl_[uiname] = self.ui_inst_tbl_[uiname] or {}
 		self.ui_inst_tbl_[uiname][nick] = ui
 		ui:SetCollection(self)
 		self:addChild(ui)
-		ui:Show(false)
+		self:AlignUI(ui, self.ui_dsb_[uiname])
+		ui:setVisible(false)
 	end
 
 	return ui

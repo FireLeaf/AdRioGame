@@ -132,7 +132,7 @@ public:
 	~XPatcher();
 
 	static XPatcher* GetInstance();
-	bool Init(const char* writable_path, const char* bundle_path);
+	bool Init();
 
 	void TrigEvent(const PatcherEvent& pe){}
 

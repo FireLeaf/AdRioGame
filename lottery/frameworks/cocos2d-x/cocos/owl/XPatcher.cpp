@@ -31,12 +31,8 @@ XPatcher::~XPatcher()
 	}
 }
 
-bool XPatcher::Init(const char* writable_path, const char* bundle_path)
+bool XPatcher::Init()
 {
-	if (!XPathMon::GetInstance().Init(writable_path, bundle_path))
-	{
-		return false;
-	}
 	//XLog::Get().LogOutput(true, "debug", "writeable path: %s; bundle_path: %s", writable_path, bundle_path);
 	return true;
 }

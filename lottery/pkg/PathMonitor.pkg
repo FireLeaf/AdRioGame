@@ -1,0 +1,20 @@
+$#include "owl/XPathMonitor.h"
+class XPathMon
+{
+public:
+	typedef std::map<std::string, std::string> PathCacheMap;
+
+	static XPathMon& GetInstance();
+public:
+	bool Init(const char* writable_path, const char* bundle_path);
+	bool AddPath(const char* tag, const char* full_path);
+	
+	std::string GetPathByTag(const char* tag) const;
+	std::string GetWritablePath() const;
+	std::string GetBundlePath() const;
+	std::string GetInitAssetPath() const;
+	std::string GetAssetUpdatePath() const;
+	std::string GetTmpPath() const;
+	std::string GetGameDataPath();
+	std::string GetLogPath() const;
+}

@@ -8,6 +8,7 @@ end)
 
 local LoginUI = import("app.UI.Login.LoginUI")
 local LoginRegUI = import("app.UI.Login.LoginRegUI")
+import("app.UI.Login.LoginDsb")
 
 function LoginUICollection:ctor()
     print("LoginUICollection:ctor")
@@ -15,9 +16,16 @@ function LoginUICollection:ctor()
 end
 
 function LoginUICollection:OnInit()
+    self.ui_dsb_ = LoginUIDsb
+
     print("Login UI Collection Init")
     self:AddTemplate("LoginUI", LoginUI)
 	self:AddTemplate("LoginRegUI", LoginRegUI)
+
+	local loginUI = self:GetUI("LoginUI")
+    if loginUI then
+    	loginUI:Show(true)
+    end
 end
 
 return LoginUICollection

@@ -22,7 +22,6 @@ enum PLATFORM_TYPE
 
 class OGPlatform
 {
-	
 public:
 	static OGPlatform* GetInstance();
 public:

@@ -8,16 +8,40 @@ end)
 
 function LoginUI:ctor()
 	print("LoginUI ctor")
-	self:OnInit()
+
+	self.btn_login_ = nil
+	self.btn_fblogin_ = nil
+
 end
 
 function LoginUI:OnInit()
 	-- body
-	local btnLogin = self.ui_:getChildByName("Button_Login")
-	local btnRegister = self:GetControl("Button_Register")
-	btnRegister:addTouchEventListener(function ( event )
+	self.btn_login_ = self:GetControl("Button_Login")
+	self.btn_fblogin_ = self:GetControl("Button_FBLogin")
+	--[[btnRegister:addTouchEventListener(function ( event )
 		self:OnBtnRegister(event)
+	end)]]
+	self.btn_login_:addTouchEventListener(function ( sender, eventType )
+		return self:OnBtnLogin(eventType)
 	end)
+end
+
+function LoginUI:OnBtnLogin( event )
+	--local x, y, prevX, prevY = event.x, event.y, event.prevX, event.prevY
+	print(event)
+	--[[print(event.name)
+    if event.name == "began" then
+         print("layer began")
+    elseif event.name == "moved" then
+        print("layer moved")
+    elseif event.name == "ended" then
+         print("layer ended")
+    end]]
+    if event == 2 then
+    	SendPacket.RegisterAccount("yangcao", "yangcao123", "yangcao@163.com")
+    	GlobalFunc.ReplaceScene("MainScene")
+    end
+    return true
 end
 
 function LoginUI:OnBtnRegister( event )

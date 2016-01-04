@@ -3,6 +3,23 @@ local MainScene = class("MainScene", function()
     return display.newScene("MainScene")
 end)
 
+local GameUICollection = import("app.UI.Game.GameUICollection")
+
+function MainScene:ctor()
+	self.uicollection = GameUICollection.new("GameUICollection")
+	self:addChild(self.uicollection)
+
+	self:scheduleUpdate()  
+	self:addNodeEventListener(cc.NODE_ENTER_FRAME_EVENT, function(dt)  
+       return self:Tick(dt)
+   end) 
+end
+
+function MainScene:Tick(dt)
+	
+end
+
+--[[
 function drawCircleNode(radius, params)
 	local circle = display.newDrawNode()
 	circle:drawCircle(radius, params)
@@ -60,7 +77,7 @@ function MainScene:onTouchEvent( event )
 	self.rtt:endToLua()
 	return true
 end
-
+]]
 function MainScene:onEnter()
 end
 
