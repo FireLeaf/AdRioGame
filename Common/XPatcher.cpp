@@ -184,7 +184,7 @@ void _ApplyPatchCallBack(int cur_apply, int total_apply)
 void XPatcher::DownloadPathCallBack(void* data, int downloaded, int total, int speed)
 {
 	XWrapMutex mtx(status_mutex);
-	patch_state.real_speed = speed;
+	patch_state.real_speed = (float)speed;
 	patch_state.total_length = total;
 	patch_state.getted_length = downloaded;
 }

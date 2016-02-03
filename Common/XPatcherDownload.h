@@ -15,7 +15,7 @@
 #include <vector>
 #include "XSys.h"
 
-typedef void (*pfnCallBack)(const void* buffer, int length);
+//typedef void (*pfnCallBack)(const void* buffer, int length);
 typedef void (*pfnDownloadProgress)(void* data, int downloaded, int total, int speed);
 
 enum 

@@ -9,6 +9,8 @@
 #ifndef __XPREDEFINE__H
 #define __XPREDEFINE__H
 
+#pragma warning( disable : 4068 4996 4251)
+
 #if defined(CC_STATIC)
 	#define X_DLL
 #else

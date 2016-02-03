@@ -14,7 +14,7 @@
 #include "XFilePackage.h"
 #include <string>
 
-#define FPK_COUNT 2
+#define MAX_PACKNAME_PATH 64
 class X_DLL XFilePackManage
 {
 public:
@@ -27,6 +27,11 @@ public:
 	XFilePackManage();
 public:
 	static XFilePackManage& Get();
+
+	static void SetPackNames(const char name_array[][MAX_PACKNAME_PATH], int count){
+		pack_names.clear();
+		for (int i = 0; i < count; i++){pack_names.push_back(name_array[i]);}
+	}
 public:
 	bool InitPackMan(const char* asset_path);
 	bool AddPack(const char* pack_path, const char* pack_dir);//增加一个包
@@ -40,6 +45,7 @@ public:
 	bool SaveAll();
 protected:
 	std::vector<FilePackItem*> file_pack_items;
+	static std::vector<std::string> pack_names;
 };
 
 #endif

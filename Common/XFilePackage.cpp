@@ -449,8 +449,8 @@ bool XFilePackageEasy::ReadFileContent(const XEasyPackageRecord* record, void** 
 	{
 		return false;
 	}
-	xulong file_len = Length();
-	if (record->offset < 0 || record->offset > file_len || record->buf_len < 0 || record->offset + record->buf_len > file_len)
+	int file_len = (int)Length();
+	if (record->offset < 0 || record->offset > file_len || record->buf_len < 0 || (record->offset + record->buf_len > file_len ) )
 	{
 		return false;
 	}

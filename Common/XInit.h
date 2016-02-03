@@ -14,7 +14,7 @@
 class X_DLL XInit
 {
 public:
-	static bool Init();
+	static bool Init(const char* szWriteablePath, const char* szBundlePath);
 };
 
 #endif // XInit

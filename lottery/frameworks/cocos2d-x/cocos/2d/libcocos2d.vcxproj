@@ -184,6 +184,21 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\release-lib\*.*
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\Common\XC11Sys.cpp" />
+    <ClCompile Include="..\..\..\..\..\Common\XC11SysThread.cpp" />
+    <ClCompile Include="..\..\..\..\..\Common\XFile.cpp" />
+    <ClCompile Include="..\..\..\..\..\Common\XFileGroup.cpp" />
+    <ClCompile Include="..\..\..\..\..\Common\XFileMapping.cpp" />
+    <ClCompile Include="..\..\..\..\..\Common\XFilePackage.cpp" />
+    <ClCompile Include="..\..\..\..\..\Common\XFilePackManager.cpp" />
+    <ClCompile Include="..\..\..\..\..\Common\XLog.cpp" />
+    <ClCompile Include="..\..\..\..\..\Common\XMD5.cpp" />
+    <ClCompile Include="..\..\..\..\..\Common\XPatcher.cpp" />
+    <ClCompile Include="..\..\..\..\..\Common\XPatcherDownload.cpp" />
+    <ClCompile Include="..\..\..\..\..\Common\XPathcherFile.cpp" />
+    <ClCompile Include="..\..\..\..\..\Common\XPathMonitor.cpp" />
+    <ClCompile Include="..\..\..\..\..\Common\XSys.cpp" />
+    <ClCompile Include="..\..\..\..\..\Common\XUtil.cpp" />
     <ClCompile Include="..\..\extensions\assets-manager\AssetsManager.cpp" />
     <ClCompile Include="..\..\extensions\assets-manager\AssetsManagerEx.cpp" />
     <ClCompile Include="..\..\extensions\assets-manager\CCEventAssetsManagerEx.cpp" />
@@ -559,22 +574,7 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\release-lib\*.*
     <ClCompile Include="..\network\HttpClient.cpp" />
     <ClCompile Include="..\network\SocketIO.cpp" />
     <ClCompile Include="..\network\WebSocket.cpp" />
-    <ClCompile Include="..\owl\XC11Sys.cpp" />
-    <ClCompile Include="..\owl\XC11SysThread.cpp" />
-    <ClCompile Include="..\owl\XFile.cpp" />
-    <ClCompile Include="..\owl\XFileGroup.cpp" />
-    <ClCompile Include="..\owl\XFileMapping.cpp" />
-    <ClCompile Include="..\owl\XFilePackage.cpp" />
-    <ClCompile Include="..\owl\XFilePackManager.cpp" />
     <ClCompile Include="..\owl\XCocosInit.cpp" />
-    <ClCompile Include="..\owl\XLog.cpp" />
-    <ClCompile Include="..\owl\XMD5.cpp" />
-    <ClCompile Include="..\owl\XPatcher.cpp" />
-    <ClCompile Include="..\owl\XPatcherDownload.cpp" />
-    <ClCompile Include="..\owl\XPathcherFile.cpp" />
-    <ClCompile Include="..\owl\XPathMonitor.cpp" />
-    <ClCompile Include="..\owl\XSys.cpp" />
-    <ClCompile Include="..\owl\XUtil.cpp" />
     <ClCompile Include="..\physics\CCPhysicsBody.cpp" />
     <ClCompile Include="..\physics\CCPhysicsContact.cpp" />
     <ClCompile Include="..\physics\CCPhysicsJoint.cpp" />
@@ -713,6 +713,25 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\release-lib\*.*
     <ClCompile Include="CCTweenFunction.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\Common\XBufferStream.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XFile.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XFileFunc.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XFileGroup.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XFileMapping.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XFilePackage.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XFilePackManager.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XInit.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XLog.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XMD5.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XPatcher.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XPatcherDownload.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XPatcherFile.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XPathMonitor.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XPreDefine.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XSys.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XTemplate.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XType.h" />
+    <ClInclude Include="..\..\..\..\..\Common\XUtil.h" />
     <ClInclude Include="..\..\extensions\assets-manager\AssetsManager.h" />
     <ClInclude Include="..\..\extensions\assets-manager\AssetsManagerEx.h" />
     <ClInclude Include="..\..\extensions\assets-manager\CCEventAssetsManagerEx.h" />
@@ -1139,25 +1158,6 @@ xcopy /Y /Q "$(ProjectDir)..\..\external\chipmunk\prebuilt\win32\release-lib\*.*
     <ClInclude Include="..\network\HttpResponse.h" />
     <ClInclude Include="..\network\SocketIO.h" />
     <ClInclude Include="..\network\WebSocket.h" />
-    <ClInclude Include="..\owl\XBufferStream.h" />
-    <ClInclude Include="..\owl\XFile.h" />
-    <ClInclude Include="..\owl\XFileFunc.h" />
-    <ClInclude Include="..\owl\XFileGroup.h" />
-    <ClInclude Include="..\owl\XFileMapping.h" />
-    <ClInclude Include="..\owl\XFilePackage.h" />
-    <ClInclude Include="..\owl\XFilePackManager.h" />
-    <ClInclude Include="..\owl\XInit.h" />
-    <ClInclude Include="..\owl\XLog.h" />
-    <ClInclude Include="..\owl\XMD5.h" />
-    <ClInclude Include="..\owl\XPatcher.h" />
-    <ClInclude Include="..\owl\XPatcherDownload.h" />
-    <ClInclude Include="..\owl\XPatcherFile.h" />
-    <ClInclude Include="..\owl\XPathMonitor.h" />
-    <ClInclude Include="..\owl\XPreDefine.h" />
-    <ClInclude Include="..\owl\XSys.h" />
-    <ClInclude Include="..\owl\XTemplate.h" />
-    <ClInclude Include="..\owl\XType.h" />
-    <ClInclude Include="..\owl\XUtil.h" />
     <ClInclude Include="..\physics\CCPhysicsBody.h" />
     <ClInclude Include="..\physics\CCPhysicsContact.h" />
     <ClInclude Include="..\physics\CCPhysicsHelper.h" />

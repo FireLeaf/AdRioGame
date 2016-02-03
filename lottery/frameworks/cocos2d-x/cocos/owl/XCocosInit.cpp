@@ -18,11 +18,14 @@ using namespace std;
 using namespace cocos2d;
 using namespace XSys;
 
-extern const char* g_FpkName[64];
+const char l_FpkName[][64] = {"src", "res",};
+const char** g_FpkName = (const char**)l_FpkName;
 
-bool XInit::Init()
+bool XInit::Init(const char* szWriteablePath, const char* szBundlePath)
 {
-	if (!XPathMon::GetInstance().Init(FileUtils::getInstance()->getWritablePath().c_str(), FileUtils::getInstance()->getBundlePath().c_str()))
+	XFilePackManage::s_pack_count = sizeof(l_FpkName) / sizeof(l_FpkName[0]);
+
+	if (!XPathMon::GetInstance().Init(szWriteablePath, szBundlePath))
 	{
 		return false;
 	}
@@ -44,7 +47,7 @@ bool XInit::Init()
 		XLog::Get().LogOutput(true, "debug", "init bundle package man failed!");
 		return false;
 	}
-	for (int i = 0; i < FPK_COUNT; i++)
+	for (int i = 0; i < XFilePackManage::s_pack_count; i++)
 	{
 		FileUtils::getInstance()->addSearchPath(XPathMon::GetInstance().GetBundlePath() + std::string(g_FpkName[i]) + "/");
 	}
@@ -55,7 +58,7 @@ bool XInit::Init()
 		XLog::Get().LogOutput(true, "debug", "init update package man failed!");
 		return false;
 	}
-	for (int i = 0; i < FPK_COUNT; i++)
+	for (int i = 0; i < XFilePackManage::s_pack_count; i++)
 	{
 		FileUtils::getInstance()->addSearchPath(XPathMon::GetInstance().GetAssetUpdatePath() + std::string(g_FpkName[i]) + "/");
 		FileUtils::getInstance()->addSearchPath(XPathMon::GetInstance().GetInitAssetPath() + std::string(g_FpkName[i]) + "/");

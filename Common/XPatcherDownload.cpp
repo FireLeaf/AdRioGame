@@ -53,7 +53,7 @@ bool XPatcherDownload::GetFileSize(const char* url, xint64& file_size, int& resp
 		return false;
 	}
 	curl_easy_cleanup(curl);
-	file_size = size;
+	file_size = (xint64)size;
 	return true;
 
 // 	CURL* http_handle = curl_easy_init();
@@ -307,7 +307,7 @@ bool XHttpDownload::InitDownload()
 	{
 		return false;
 	}
-	XSys::XSetFileSize(local_path.c_str(), file_size);
+	XSys::XSetFileSize(local_path.c_str(), (long)file_size);
 	for (int i = 0; i < thread_num; i++)
 	{
 		FILE* fp = fopen(local_path.c_str(), "r+b");
@@ -315,7 +315,7 @@ bool XHttpDownload::InitDownload()
 		{
 			return false;
 		}
-		fseek(fp, i * each_size, SEEK_SET);
+		fseek(fp, (long)(i * each_size), SEEK_SET);
 		HttpTask* http_task = new HttpTask;
 		http_task->fp = fp;
 		http_task->begin = i * each_size;
@@ -468,7 +468,7 @@ bool XHttpDownload::Run(pfnDownloadProgress cb/* = nullptr*/, void* data/* = nul
 	
 	while(running)
 	{
-		if(cb) cb(data, cur_size, file_size, 0);
+		if(cb) cb(data, (int)cur_size, (int)file_size, 0);
 		UpdateDownload();
 	}
 

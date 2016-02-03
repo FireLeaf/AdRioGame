@@ -12,7 +12,7 @@
 #include "XLog.h"
 #include "XSys.h"
 
-const char* g_FpkName[64] = {"src", "res",};
+std::vector<std::string> XFilePackManage::pack_names = std::vector<std::string>();
 
 XFilePackManage::XFilePackManage()
 {
@@ -32,7 +32,7 @@ XFilePackageEasy* XFilePackManage::FindPack(const char* pack_name)
 		return NULL;
 	}
 
-	for (int i = 0; i < file_pack_items.size(); i++)
+	for (int i = 0; i < (int)file_pack_items.size(); i++)
 	{
 		if (0 == strcmp(pack_name, file_pack_items[i]->pack_name.c_str()))
 		{
@@ -49,13 +49,13 @@ const char* XFilePackManage::FindPackByFilePath(const char* path, std::string& p
 	if (find_pos != std::string::npos)
 	{
 		std::string predir = str_path.substr(0, find_pos);
-		for (int i = 0; i < FPK_COUNT; i++)
+		for (int i = 0; i < (int)pack_names.size(); i++)
 		{
-			if (strcmp(predir.c_str(), g_FpkName[i]) == 0)
+			if (strcmp(predir.c_str(), pack_names[i].c_str()) == 0)
 			{
 				//pathrecord = "/";
 				pathrecord += str_path[find_pos];
-				return g_FpkName[i];
+				return pack_names[i].c_str();
 			}
 		}
 	}
@@ -64,7 +64,7 @@ const char* XFilePackManage::FindPackByFilePath(const char* path, std::string& p
 
 bool XFilePackManage::SaveAll()
 {
-	for (int i = 0; i < file_pack_items.size(); i++)
+	for (int i = 0; i < (int)file_pack_items.size(); i++)
 	{
 		FilePackItem* pPackItem = file_pack_items[i];
 		if (pPackItem && pPackItem->file_pack_easy)
@@ -78,23 +78,23 @@ bool XFilePackManage::SaveAll()
 
 bool XFilePackManage::InitPackMan(const char* asset_path)
 {
-	for (int i = 0; i < FPK_COUNT; i++)
+	for (int i = 0; i < (int)pack_names.size(); i++)
 	{
-		std::string pck_path = std::string(asset_path) + g_FpkName[i];
+		std::string pck_path = std::string(asset_path) + pack_names[i];
 		pck_path += ".fpk";
 		if (!XSys::XIsFileExist(pck_path.c_str()))
 		{
 			XFilePackageEasy fpe;
 			if (!fpe.CreatePackage(pck_path.c_str()))
 			{
-				XLog::Get().LogOutput(true, "debug", "CreatePackage %s.fpk failed in directory %s!", g_FpkName, asset_path);
+				XLog::Get().LogOutput(true, "debug", "CreatePackage %s.fpk failed in directory %s!", pack_names[i], asset_path);
 				return false;
 			}
 			fpe.SavePackageRecords();
 			fpe.CloseFile();
 		}
 
-		if( !AddPack(g_FpkName[i], asset_path))
+		if( !AddPack(pack_names[i].c_str(), asset_path))
 		{
 			XLog::Get().LogOutput(true, "debug", "AddPack %s to package failed! directory is asset_path");
 			return false;

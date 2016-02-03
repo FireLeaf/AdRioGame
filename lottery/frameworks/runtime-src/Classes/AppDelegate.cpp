@@ -60,7 +60,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 	register_owl_module(L);
     register_all_packages();
 	
-	if(!XInit::Init())
+	if(!XInit::Init(FileUtils::getInstance()->getWritablePath().c_str(), FileUtils::getInstance()->getBundlePath().c_str()))
 	{
 		XLog::Get().LogOutput(true, "error", "XInit::init failed(%s)", __FUNCTION__ /*, __LINE__*/);
 		return false;

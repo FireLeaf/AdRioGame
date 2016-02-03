@@ -10,7 +10,7 @@
 #include<thread>
 #include <mutex>
 #include<stdio.h>
-#include "cocos2d.h"
+
 #ifdef _WIN32
 #include<io.h>
 #else
@@ -18,8 +18,12 @@
 #endif
 
 using namespace std;
+
+#ifndef _UNITY_OWLGAME_
+#include "cocos2d.h"
 using namespace cocos2d;
 //using namespace cocos2d::extension;
+#endif
 
 class XC11Mutex : public XMutex
 {
@@ -37,11 +41,22 @@ namespace XSys
 	XThreadPool* XCreateThreadPool(int thread_count){return NULL;}
 	void XReleaseThreadPool(XThreadPool*){}
 	bool XDeleteFile(const char* path){return true;}
-	bool XDeleteDirectory(const char* path, bool bIsSubDelAll){return  FileUtils::getInstance()->removeDirectory(path);}
+	bool XDeleteDirectory(const char* path, bool bIsSubDelAll)
+	{
+#ifndef _UNITY_OWLGAME_
+		return  FileUtils::getInstance()->removeDirectory(path);
+#else
+		return false;
+#endif
+	}
 
 	void XLogOutput(const char* log)
 	{
+#ifndef _UNITY_OWLGAME_
 		CCLog(log);
+#else
+
+#endif
 	}
 
 	XMutex* XCreateMutex()
@@ -62,13 +77,21 @@ namespace XSys
 	
 	bool XCreateDirectory(const char* path)
 	{
-		//return (TRUE == CreateDirectoryA(path, NULL));
-		return FileUtils::getInstance()->createDirectory(path);
+		#ifndef _UNITY_OWLGAME_
+			//return (TRUE == CreateDirectoryA(path, NULL));
+			return FileUtils::getInstance()->createDirectory(path);
+		#else
+			return false;//ÏÈ½ûÓÃ
+		#endif
 	}
 
 	bool XIsFileExist(const char* file_path)
 	{
-        return FileUtils::getInstance()->isFileExist(file_path);//( (_access( file_path , 0 )) != -1 );
+		#ifndef _UNITY_OWLGAME_
+			return FileUtils::getInstance()->isFileExist(file_path);//( (_access( file_path , 0 )) != -1 );
+		#else
+			return ( (_access( file_path , 0 )) != -1 );
+		#endif
 	}
 
 	bool XIsDirectory(const char* path)
