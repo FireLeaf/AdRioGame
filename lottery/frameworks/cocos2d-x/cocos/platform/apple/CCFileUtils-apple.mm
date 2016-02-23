@@ -338,6 +338,7 @@ std::string FileUtilsApple::getBundlePath() const
 {
     NSString* path = [[NSBundle mainBundle] resourcePath];
     std::string ret = [path UTF8String];
+    ret += "/";
     return ret;
 }
 
