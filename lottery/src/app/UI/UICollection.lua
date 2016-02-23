@@ -52,13 +52,13 @@ end
 
 function UICollection:GetDialogSize(uiname)
 	if self.ui_dsb_ == nil or self.ui_dsb_[uiname] == nil then
-		return nil
+		return nil, nil
 	end
 	local class_desc = self.ui_dsb_[uiname]
 	if class_desc then
 		return class_desc.w, class_desc.h
 	end
-	return nil
+	return nil, nil
 end
 
 function UICollection:AlignUI(ui, align)
@@ -73,15 +73,24 @@ function UICollection:AlignUI(ui, align)
 		dlg_width , dlg_height = ui:GetDialogSize()
 	end
 	print(ui:GetUIName() .. " Pos : (" .. posx .. "," .. posy .. ") Anchor : (" .. anchor.x .. "," .. anchor.y .. ") ContentSZ : (" .. dlg_width .. "," .. dlg_height .. ")")
+	ui:setAnchorPoint(cc.p(1, 1))
 
 	if align.xalign == -1 then
+		local offset_x = 0
+		ui:setPositionX(offset_x)
 	elseif align.xalign == 0 then
+		local delta_width = (display.width - dlg_width) / 2.0
+		local offset_x = delta_width --/ display.contentScaleFactor --/ pixel_factor
+		ui:setPositionX(offset_x)
 	elseif align.xalign == 1 then
+		local offset_x = display.width - dlg_width
+		ui:setPositionX(offset_x)
 	else
 	end
 
 	if align.yalign == -1 then
-
+		local offset_y = display.height - dlg_height
+		ui:setPositionY(offset_y)
 	elseif align.yalign == 0 then
 		--ui:setAnchorPoint(cc.p(0, 0.5))
 		local logic_factor = display.height / DEFAULT_DESIGN_WIDTH
@@ -90,13 +99,23 @@ function UICollection:AlignUI(ui, align)
 		local pixel_factor = display.height / display.heightInPixels
 		local offset_y = delta_height --/ display.contentScaleFactor --/ pixel_factor
 		ui:setPositionY(offset_y)
-		local posx, posy = ui:getPosition()
-		local anchor = ui:getAnchorPoint()
-		print(ui:GetUIName() .. " Pos : (" .. posx .. "," .. posy .. ") Anchor : (" .. anchor.x .. "," .. anchor.y .. ")")
+		
 	elseif align.yalign == 1 then
-
+		local offset_y = 0
+		ui:setPositionY(offset_y)
 	else
+		--error()
+	end
 
+	local posx, posy = ui:getPosition()
+	local anchor = ui:getAnchorPoint()
+	print(ui:GetUIName() .. " Pos : (" .. posx .. "," .. posy .. ") Anchor : (" .. anchor.x .. "," .. anchor.y .. ")")
+end
+
+function UICollection:ShowDialog(uiname)
+	local ui = self:GetUI(uiname)
+	if ui then
+		ui:Show(true)
 	end
 end
 

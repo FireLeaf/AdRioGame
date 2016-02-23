@@ -19,6 +19,10 @@ end
 function SolarSystemUI:OnInit()
 	self:base_init()
 
+	
+end
+
+function SolarSystemUI:OnShow( )
 	local sprite_mask = self:GetControl("Sprite_Mask")
 	local mx, my = sprite_mask:getPosition()
 	local sz = sprite_mask:getContentSize()
@@ -36,6 +40,10 @@ function SolarSystemUI:OnInit()
 	for i = 1, #key_poses do
 		self:pos_retexture(key_poses[i], official_content[i].texture)
 	end
+end
+
+function SolarSystemUI:OnHide( )
+	-- body
 end
 
 return SolarSystemUI

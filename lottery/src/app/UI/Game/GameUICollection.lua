@@ -23,10 +23,14 @@ function GameUICollection:OnInit()
     self:AddTemplate("SolarSystemUI", SolarSystemUI)
     print("Game UI Collection Init")
 
-    local gameMainUI = self:GetUI("GameMainUI")
+    --[[local gameMainUI = self:GetUI("GameMainUI")
     if gameMainUI then
     	gameMainUI:Show(true)
-    end
+    end]]
+    --[[self:ShowDialog("AltarSceneUI")
+    self:ShowDialog("MainMenuUI")
+    self:ShowDialog("PlayerStatsUI")]]
+    self:ShowDialog("MainMenu3UI")
 end
 
 return GameUICollection

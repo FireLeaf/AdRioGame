@@ -8,6 +8,11 @@ GameUIDsb =
 {
 	--info ui
 	["GameMainUI"] = {xalign = 0, yalign = 0, w = 768, h = 1024},
+	["PlayerStatsUI"] = {xalign = 0, yalign = -1},
+	["MainMenuUI"] = {xalign = 0, yalign = 1},
+	["AltarSceneUI"] = {xalign = 0, yalign = 0, w = 640, h = 832},
+	["MainMenu2UI"] = {xalign = 0, yalign = 0, w = 768, h = 1024},
+	["MainMenu3UI"] = {xalign = 0, yalign = 0, w = 768, h = 1024},
 	--game ui
 	["SolarSystemUI"] = {xalign = 0, yalign = 0, w = 768, h = 1024},
 }

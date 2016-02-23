@@ -12,7 +12,9 @@ function MainScene:ctor()
 	self:scheduleUpdate()  
 	self:addNodeEventListener(cc.NODE_ENTER_FRAME_EVENT, function(dt)  
        return self:Tick(dt)
-   end) 
+	end)
+
+	AudioEngine.playMusic("game_back.mp3")
 end
 
 function MainScene:Tick(dt)
