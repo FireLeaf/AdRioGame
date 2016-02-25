@@ -2,6 +2,9 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using System.Runtime.InteropServices;
+using System.Security;
 
 public class Dota2Player : MonoBehaviour {
 	public Camera mainCamera;
@@ -15,6 +18,12 @@ public class Dota2Player : MonoBehaviour {
 		OwlGame.og_initModule ("D:/Hello/", "D:/OK/");
 		navAgent = GetComponent<NavMeshAgent> ();
 		mainCamera = GameObject.Find ("Main Camera").camera;
+
+		System.IntPtr luastate = LuaLib.luaL_newstate();
+		UnityLua ul = new UnityLua();
+		ul.BindLuaFunction(luastate);
+		LuaLib.luaL_dostring(luastate, "print(\"Hello World\")");
+
 		//TextureFormat
 		//texture = new Texture2D ();
 		//texture.

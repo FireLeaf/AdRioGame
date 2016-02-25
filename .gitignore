@@ -148,3 +148,13 @@
 /lottery/frameworks/runtime-src/proj.win32/*.suo
 /lottery/frameworks/runtime-src/proj.win32/*.opensdf
 /lottery/Log/*.log
+/OwlUnity/3rd/curl/build/Win32/VC11/DLL Debug/lib/*.obj
+/OwlUnity/3rd/7zlib/Debug/*.obj
+/OwlUnity/3rd/7zlib/Debug/*.tlog
+/OwlUnity/3rd/7zlib/Debug
+/OwlUnity/3rd/curl/build/Win32/VC11/DLL Debug/lib
+/OwlUnity/3rd/curl/build/Win32/VC11/DLL Debug
+/OwlUnity/3rd/curl/build/Win32/VC11/LIB Debug/lib
+/OwlUnity/3rd/curl/build/Win32/VC11/LIB Debug
+/OwlUnity/3rd/lualib/*.user
+/OwlUnity/3rd/lualib/*.filters
