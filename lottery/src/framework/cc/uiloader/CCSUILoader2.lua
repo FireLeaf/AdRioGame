@@ -60,6 +60,7 @@ end
 -- generate a ui node and invoke self to generate child ui node
 function CCSUILoader:generateUINode(jsonNode, parent)
 	local clsName = string.sub(jsonNode.ctype, 1, -11)
+	print("create control:" .. clsName)
 	local uiNode = self:createUINode(clsName, jsonNode, parent)
 	if not uiNode then
 		return
@@ -182,6 +183,8 @@ function CCSUILoader:createUINode(clsName, options, parent)
 		node = self:createPageView(options)
 	elseif clsName == "ProjectNode" then
 		node = self:createProjectNode(options)
+	elseif clsName == "Particle" then
+		node = self:creatteParticle(options)
 	else
 		printInfo("CCSUILoader not support node:" .. clsName)
 	end
@@ -341,10 +344,14 @@ function CCSUILoader:createNode(options)
 	if options.Size then
 		node:setContentSize(cc.size(options.Size.X or 0, options.Size.Y or 0))
 	end
-	node:setPositionX(options.Position.X or 0)
-	node:setPositionY(options.Position.Y or 0)
-	node:setAnchorPoint(
-		cc.p(options.AnchorPoint.ScaleX or 0, options.AnchorPoint.ScaleY or 0))
+	if options.Position then
+		node:setPositionX(options.Position.X or 0)
+		node:setPositionY(options.Position.Y or 0)
+	end
+	if options.AnchorPoint then
+		node:setAnchorPoint(
+			cc.p(options.AnchorPoint.ScaleX or 0, options.AnchorPoint.ScaleY or 0))
+	end
 
 	return node
 end
@@ -768,6 +775,11 @@ function CCSUILoader:createProjectNode(options)
 	node:setPosition(cc.p(options.Position.X, options.Position.Y))
 
 	return node
+end
+
+function CCSUILoader:createParticle(options)
+	local jsonFile = options.FileData.Path
+
 end
 
 function CCSUILoader:prettyJson(json)

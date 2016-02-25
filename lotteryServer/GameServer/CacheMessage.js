@@ -24,6 +24,4 @@ function CacheMessage(){
 
 }
 
-CacheMessage
-
 module.exports = new CacheMessage();

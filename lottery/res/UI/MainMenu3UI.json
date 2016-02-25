@@ -1,0 +1,586 @@
+{
+  "ID": "a2ee0952-26b5-49ae-8bf9-4f1d6279b798",
+  "Version": "2.3.3.0",
+  "Name": "MainScene",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Children": [
+          {
+            "FileData": {
+              "Type": "PlistSubImage",
+              "Path": "MM10.png",
+              "Plist": "MainMenu.plist"
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 322.6083,
+              "Y": 865.9211
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5041,
+              "Y": 0.902
+            },
+            "PreSize": {
+              "X": 0.9937,
+              "Y": 0.1729
+            },
+            "LeftMargin": 4.6083,
+            "RightMargin": -0.6083,
+            "TopMargin": 11.0789,
+            "BottomMargin": 782.9211,
+            "Tag": 107,
+            "ActionTag": -778332878,
+            "Size": {
+              "X": 636.0,
+              "Y": 166.0
+            },
+            "Name": "MM10_1",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "PlistSubImage",
+              "Path": "MM09.png",
+              "Plist": "MainMenu.plist"
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 94.1506,
+              "Y": 869.3503
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.1471,
+              "Y": 0.9056
+            },
+            "PreSize": {
+              "X": 0.1594,
+              "Y": 0.1208
+            },
+            "LeftMargin": 43.1506,
+            "RightMargin": 494.8494,
+            "TopMargin": 32.6497,
+            "BottomMargin": 811.3503,
+            "Tag": 108,
+            "ActionTag": 1958322881,
+            "Size": {
+              "X": 102.0,
+              "Y": 116.0
+            },
+            "Name": "MM09_2",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "PlistSubImage",
+              "Path": "MM08.png",
+              "Plist": "MainMenu.plist"
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 229.9204,
+              "Y": 855.4521
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.3593,
+              "Y": 0.8911
+            },
+            "PreSize": {
+              "X": 0.1594,
+              "Y": 0.1208
+            },
+            "LeftMargin": 178.9204,
+            "RightMargin": 359.0796,
+            "TopMargin": 46.5479,
+            "BottomMargin": 797.4521,
+            "Tag": 109,
+            "ActionTag": 899384333,
+            "Size": {
+              "X": 102.0,
+              "Y": 116.0
+            },
+            "Name": "MM08_3",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "PlistSubImage",
+              "Path": "MM04.png",
+              "Plist": "MainMenu.plist"
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 41.2266,
+              "Y": 738.9366
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.0644,
+              "Y": 0.7697
+            },
+            "PreSize": {
+              "X": 0.0953,
+              "Y": 0.0615
+            },
+            "LeftMargin": 10.7266,
+            "RightMargin": 568.2734,
+            "TopMargin": 191.5634,
+            "BottomMargin": 709.4366,
+            "Tag": 110,
+            "ActionTag": 1351327782,
+            "Size": {
+              "X": 61.0,
+              "Y": 59.0
+            },
+            "Name": "MM04_4",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "PlistSubImage",
+              "Path": "MM15.png",
+              "Plist": "MainMenu.plist"
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 336.0695,
+              "Y": 869.3466
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5251,
+              "Y": 0.9056
+            },
+            "PreSize": {
+              "X": 0.1594,
+              "Y": 0.1208
+            },
+            "LeftMargin": 285.0695,
+            "RightMargin": 252.9305,
+            "TopMargin": 32.6534,
+            "BottomMargin": 811.3466,
+            "Tag": 111,
+            "ActionTag": 1997474739,
+            "Size": {
+              "X": 102.0,
+              "Y": 116.0
+            },
+            "Name": "MM15_5",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "PlistSubImage",
+              "Path": "MM20.png",
+              "Plist": "MainMenu.plist"
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 559.0903,
+              "Y": 875.0162
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.8736,
+              "Y": 0.9115
+            },
+            "PreSize": {
+              "X": 0.1594,
+              "Y": 0.1208
+            },
+            "LeftMargin": 508.0903,
+            "RightMargin": 29.9097,
+            "TopMargin": 26.9838,
+            "BottomMargin": 817.0162,
+            "Tag": 113,
+            "ActionTag": 614098005,
+            "Size": {
+              "X": 102.0,
+              "Y": 116.0
+            },
+            "Name": "MM20_7",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FontSize": 14,
+            "ButtonText": "Button",
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
+            "DisabledFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Disable.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Press.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Normal.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 11,
+            "Scale9Width": 16,
+            "Scale9Height": 14,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "G": 127,
+              "B": 80
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 166.7554,
+              "Y": 411.7482
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 0.9086
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.2606,
+              "Y": 0.4289
+            },
+            "PreSize": {
+              "X": 0.0719,
+              "Y": 0.0375
+            },
+            "LeftMargin": 143.7554,
+            "RightMargin": 450.2446,
+            "TopMargin": 530.2518,
+            "BottomMargin": 393.7482,
+            "Tag": 114,
+            "Children": [
+              {
+                "FileData": {
+                  "Type": "PlistSubImage",
+                  "Path": "MM16.png",
+                  "Plist": "MainMenu.plist"
+                },
+                "BlendFunc": {
+                  "Src": 1,
+                  "Dst": 771
+                },
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": -58.3176,
+                  "Y": 190.9861
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {},
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": -1.2678,
+                  "Y": 5.3052
+                },
+                "PreSize": {
+                  "X": 2.2174,
+                  "Y": 3.2222
+                },
+                "LeftMargin": -109.3176,
+                "RightMargin": 53.3176,
+                "TopMargin": -212.9861,
+                "BottomMargin": 132.9861,
+                "Tag": 112,
+                "ActionTag": -1438591728,
+                "Size": {
+                  "X": 102.0,
+                  "Y": 116.0
+                },
+                "Name": "MM16_6",
+                "ctype": "SpriteObjectData"
+              }
+            ],
+            "ActionTag": -728728046,
+            "Size": {
+              "X": 46.0,
+              "Y": 36.0
+            },
+            "Name": "Button_1",
+            "ctype": "ButtonObjectData"
+          },
+          {
+            "FontSize": 14,
+            "ButtonText": "Button",
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
+            "DisabledFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Disable.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Press.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Default",
+              "Path": "Default/Button_Normal.png",
+              "Plist": ""
+            },
+            "Scale9OriginX": 13,
+            "Scale9OriginY": 4,
+            "Scale9Width": 20,
+            "Scale9Height": 28,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "G": 127,
+              "B": 80
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 234.0406,
+              "Y": 596.3083
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.3657,
+              "Y": 0.6212
+            },
+            "PreSize": {
+              "X": 0.0719,
+              "Y": 0.0375
+            },
+            "LeftMargin": 211.0406,
+            "RightMargin": 382.9594,
+            "TopMargin": 345.6917,
+            "BottomMargin": 578.3083,
+            "Tag": 117,
+            "ActionTag": -57103935,
+            "Size": {
+              "X": 46.0,
+              "Y": 36.0
+            },
+            "Name": "Button_2",
+            "ctype": "ButtonObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Default",
+              "Path": "Default/defaultParticle.plist",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 775,
+              "Dst": 1
+            },
+            "AnchorPoint": {},
+            "Position": {
+              "X": 99.8901,
+              "Y": 870.7043
+            },
+            "Scale": {
+              "ScaleX": 1.9115,
+              "ScaleY": 1.8681
+            },
+            "CColor": {},
+            "IconVisible": true,
+            "PrePosition": {
+              "X": 0.1561,
+              "Y": 0.907
+            },
+            "PreSize": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "LeftMargin": 99.8901,
+            "RightMargin": 540.1099,
+            "TopMargin": 89.2957,
+            "BottomMargin": 870.7043,
+            "Tag": 119,
+            "ActionTag": -1169222308,
+            "Size": {
+              "X": 0.0,
+              "Y": 0.0
+            },
+            "Name": "Particle_1",
+            "ctype": "ParticleObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "MainMenu.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 623.0413,
+              "Y": 480.3228
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.9735,
+              "Y": 0.5003
+            },
+            "PreSize": {
+              "X": 1.6,
+              "Y": 1.0667
+            },
+            "LeftMargin": 111.0413,
+            "RightMargin": -495.0413,
+            "TopMargin": -32.3228,
+            "BottomMargin": -31.6772,
+            "Tag": 120,
+            "ActionTag": 739612613,
+            "Size": {
+              "X": 1024.0,
+              "Y": 1024.0
+            },
+            "Name": "MainMenu_9",
+            "ctype": "SpriteObjectData"
+          }
+        ],
+        "Size": {
+          "X": 640.0,
+          "Y": 960.0
+        },
+        "Name": "Scene",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "Default/Button_Disable.png",
+        "Default/Button_Normal.png",
+        "Default/Button_Press.png",
+        "Default/defaultParticle.plist",
+        "MainMenu.plist",
+        "MainMenu.png"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Scene"
+}

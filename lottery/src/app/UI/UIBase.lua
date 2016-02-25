@@ -28,13 +28,30 @@ end
 function UIBase:LoadUI()
 	-- body
 	--cc.FileUtils:getInstance():addSearchPath("res/" .. self.uifile_ .. "/")
-	self.ui_ = cc.uiloader:load(self.uifile_ .. ".csb")--:addTo(self)
-	--print("x : " .. ui:getPositionX() .. " y : " .. ui:getPositionY())
-	if self.ui_ then
-		print("load" .. self.uifile_ .. ".csb" .. " successful")
-	else
-		print("load" .. self.uifile_ .. ".csb" .. " failed")
+	local csbfile = self.uifile_ .. ".csb"
+	local jsonfile = self.uifile_ .. ".json"
+	local uifile
+	if cc.FileUtils:getInstance():isFileExist(csbfile) then
+		uifile = csbfile
+	elseif cc.FileUtils:getInstance():isFileExist(jsonfile) then
+		uifile = jsonfile
 	end
+	if uifile then
+		self.ui_ = cc.uiloader:load(uifile)--:addTo(self)
+		if self.ui_ then
+			print("load" .. uifile .. " successful")
+			local sz = self.ui_:getContentSize()
+			print("sz.x:" .. sz.width .. ",sz.y" .. sz.height)
+		else
+			print("load" .. uifile .. " failed")
+		end
+	else
+		print("cannot find ui: " .. self.uifile_)
+	end
+	
+	--print("x : " .. ui:getPositionX() .. " y : " .. ui:getPositionY())
+	
+
 	self:addChild(self.ui_)
 end
 
@@ -48,7 +65,8 @@ function UIBase:GetDialogSize()
 		local sz = dialog_frame:getContentSize()
 		return sz.width, sz.height
 	end
-	return 0, 0
+	local sz = self.ui_:getContentSize()
+	return sz.width, sz.height
 end
 
 function UIBase:Show(show_ui)
