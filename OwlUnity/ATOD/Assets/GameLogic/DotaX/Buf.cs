@@ -4,7 +4,14 @@ using System.Collections;
 public class Buf {
 
 
-	float life_cycle_;//
+	float life_cycle_
+	{
+		get { return life_cycle_; }
+		set
+		{
+			life_cycle_ = value / 8;
+		}
+	}
 	bool is_attack_effect_;//
 	bool is_orb;//
 

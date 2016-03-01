@@ -7,6 +7,13 @@ using System;
 
 public partial class LuaLib {
 
+	[AttributeUsage(AttributeTargets.Method)]
+	public class MonoPInvokeCallbackAttribute : Attribute
+	{
+		public MonoPInvokeCallbackAttribute(Type type)
+		{
+		}
+	}
 
     /* extra error code for `luaL_load' */
     public static readonly String LUA_FILEHANDLE = "FILE*";

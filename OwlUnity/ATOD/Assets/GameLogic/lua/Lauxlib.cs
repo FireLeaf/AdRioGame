@@ -56,7 +56,11 @@ public partial class LuaLib {
     public static extern void luaL_where(IntPtr L, int lvl);
 
     //[DllImport(OwlGameModule, CallingConvention = CallingConvention.Cdecl)]
-    //public static extern void luaL_error(IntPtr L, );
+	public static int luaL_error(IntPtr L, String err)
+	{
+		lua_pushstring(L, err);
+		return lua_error(L);
+	}
 
     [DllImport(OwlGameModule, CallingConvention = CallingConvention.Cdecl)]
     public static extern int luaL_ref(IntPtr L, int t);

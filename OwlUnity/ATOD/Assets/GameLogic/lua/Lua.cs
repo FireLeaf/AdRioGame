@@ -136,6 +136,9 @@ public partial class LuaLib {
 	[DllImport(OwlGameModule, CallingConvention = CallingConvention.Cdecl)]
 	public static extern int lua_toboolean (IntPtr L, int idx);
 
+	[DllImport(OwlGameModule, CallingConvention = CallingConvention.Cdecl)]
+	public static extern String lua_tolstring(IntPtr L, int idx, out int len);
+
     [DllImport(OwlGameModule, CallingConvention = CallingConvention.Cdecl)]
     public static extern uint lua_objlen(IntPtr L, int idx);
 
@@ -298,7 +301,7 @@ public partial class LuaLib {
     public static void lua_setglobal(IntPtr L, String s) { lua_setfield(L, LUA_GLOBALSINDEX, s); }
     public static void lua_getglobal(IntPtr L, String s) { lua_getfield(L, LUA_GLOBALSINDEX, s); }
 
-    //public static void lua_tostring(IntPtr L, int i) { lua_tolstring};
+	public static String lua_tostring(IntPtr L, int i) { return lua_tolstring(L, i, (IntPtr)0); }
 
     public static IntPtr lua_open() { return luaL_newstate(); }
 

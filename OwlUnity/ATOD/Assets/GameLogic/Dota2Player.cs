@@ -20,10 +20,12 @@ public class Dota2Player : MonoBehaviour {
 		mainCamera = GameObject.Find ("Main Camera").camera;
 
 		System.IntPtr luastate = LuaLib.luaL_newstate();
+		LuaLib.luaL_openlibs(luastate);
 		UnityLua ul = new UnityLua();
 		ul.BindLuaFunction(luastate);
 		LuaLib.luaL_dostring(luastate, "print(\"Hello World\")");
-
+		LuaLib.luaL_dostring(luastate, "require \"com.yc.hello\" ");
+		LuaLib.luaL_dostring(luastate, "p()");
 		//TextureFormat
 		//texture = new Texture2D ();
 		//texture.
